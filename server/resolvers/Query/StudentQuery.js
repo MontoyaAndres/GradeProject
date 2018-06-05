@@ -64,8 +64,25 @@ async function StudentByParams(_, { Variable, Situacion, CodigoPrograma, TipoSem
   }
 }
 
+async function StudentDistinct(_, { Param }, ctx) {
+  const userId = authenticate(ctx);
+
+  try {
+    const user = await UserModel.findOne({ _id: userId }).lean();
+    let values = {};
+
+    if (user) {
+      const distinct = await StudentModel.find().distinct(Param).lean();
+      return { values: distinct };
+    }
+  } catch (err) {
+    throw new Error(err);
+  }
+}
+
 module.exports = {
   allStudents,
   Student,
-  StudentByParams
+  StudentByParams,
+  StudentDistinct
 }

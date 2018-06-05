@@ -1,4 +1,5 @@
 scalar Upload
+scalar JSON
 
 type AuthPayload {
   token: String!
@@ -53,10 +54,15 @@ type Student {
   Variable: String
 }
 
+type Distinct {
+  values: JSON
+}
+
 type Query {
   allStudents: [Student!]!
   Student(_id: ID!): Student
   StudentByParams(Variable: String, Situacion: String, CodigoPrograma: String, TipoSemestre: String): [Student]
+  StudentDistinct(Param: String!): Distinct
 }
 
 type Mutation {
