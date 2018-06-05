@@ -1,3 +1,6 @@
+# Public files
+server/public/**/*
+
 # Logs
 logs
 *.log
