@@ -17,7 +17,7 @@ async function allStudents(_, _, ctx) {
   }
 }
 
-async function Student (_, { _id }, ctx) {
+async function Student(_, { _id }, ctx) {
   const userId = authenticate(ctx);
 
   try {
@@ -37,7 +37,35 @@ async function Student (_, { _id }, ctx) {
   }
 }
 
+async function StudentByParams(_, { Variable, Situacion, CodigoPrograma, TipoSemestre }, ctx) {
+  let data = '';
+  const userId = authenticate(ctx);
+
+  try {
+    const user = await UserModel.findOne({ _id: userId }).lean();
+
+    if (user) {
+      if (Variable === 'TODO' && Situacion === 'TODO' && TipoSemestre) {
+        data = await StudentModel.find({ CodigoPrograma, TipoSemestre });
+      } else if (Variable !== 'TODO' && Situacion === 'TODO' && TipoSemestre) {
+        data = await StudentModel.find({ CodigoPrograma, Variable, TipoSemestre });
+      } else {
+        data = await StudentModel.find({
+          CodigoPrograma,
+          TipoSemestre,
+          Situacion,
+          Variable
+        });
+      }
+      return data;
+    }
+  } catch (err) {
+    throw new Error(err);
+  }
+}
+
 module.exports = {
   allStudents,
-  Student
+  Student,
+  StudentByParams
 }
