@@ -1,0 +1,32 @@
+{
+  "name": "server",
+  "version": "0.0.1",
+  "description": "Software de remisión (Excepción de ausentismo) para la Uniminuto de Girardot, Colombia.",
+  "main": "index.js",
+  "scripts": {
+    "kill": "fuser -k 8080/tcp &>/dev/null",
+    "dev": "NODE_ENV=development nodemon index.js",
+    "start": "NODE_ENV=production node index.js"
+  },
+  "keywords": [
+    "uniminuto",
+    "server",
+    "ausentismo",
+    "desercion"
+  ],
+  "author": "Andrés Mauricio Montoya Sánchez",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "compression": "^1.7.2",
+    "graphql-yoga": "^1.14.6",
+    "helmet": "^3.12.1",
+    "jsonwebtoken": "^8.2.2",
+    "moment": "^2.22.2",
+    "mongoose": "^5.1.4"
+  },
+  "devDependencies": {
+    "dotenv": "^6.0.0",
+    "nodemon": "^1.17.5"
+  }
+}

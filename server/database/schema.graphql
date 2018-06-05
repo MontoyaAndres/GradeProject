@@ -1,0 +1,146 @@
+scalar Upload
+
+type AuthPayload {
+  token: String!
+  user: User
+}
+
+type User {
+  _id: ID!
+  email: String!
+  students: [Student!]
+}
+
+type Student {
+  _id: ID!
+  CodigoBanner: Int,
+  TipoSemestre: String,
+  Nombres: String,
+  Apellidos: String,
+  Genero: String,
+  Edad: Int,
+  NumeroIdentificacion: Int,
+  TipoDocIdentidad: String,
+  NivelFormacion: String,
+  CodigoPrograma: String,
+  DescripcionPrograma: String,
+  Jornada: String,
+  AreaConocimiento: String,
+  NucleoBasicoConocimiento: String,
+  IES: Int,
+  Snies: Int,
+  Rectoria: String,
+  CodigoSede: String,
+  Sede: String,
+  CentroRegional: String,
+  CodigoPeriodoAcademico: Int,
+  PeriodoAcademicoInscripcion: Int,
+  DescripcionMetodologia: String,
+  TipoEstudianteAgrupado: String,
+  LugarResidencia: Int,
+  TelCel: String,
+  FechaCel: String,
+  TelRe: String,
+  CorreoEstudiante1: String,
+  CorreoEstudiante2: String,
+  FechaCorreo: String,
+  Direccion: String,
+  Departamento: String,
+  Ciudad: String,
+  Estado: String,
+  Comentario: String,
+  Situacion: String,
+  Variable: String
+}
+
+type Query {
+  allStudents: [Student!]!
+  Student(_id: ID!): Student
+}
+
+type Mutation {
+  signup(email: String!, password: String!, name: String!): AuthPayload
+  login(email: String!, password: String!): AuthPayload
+  createStudent(
+    CodigoBanner: Int,
+    TipoSemestre: String,
+    Nombres: String,
+    Apellidos: String,
+    Genero: String,
+    Edad: Int,
+    NumeroIdentificacion: Int,
+    TipoDocIdentidad: String,
+    NivelFormacion: String,
+    CodigoPrograma: String,
+    DescripcionPrograma: String,
+    Jornada: String,
+    AreaConocimiento: String,
+    NucleoBasicoConocimiento: String,
+    IES: Int,
+    Snies: Int,
+    Rectoria: String,
+    CodigoSede: String,
+    Sede: String,
+    CentroRegional: String,
+    CodigoPeriodoAcademico: Int,
+    PeriodoAcademicoInscripcion: Int,
+    DescripcionMetodologia: String,
+    TipoEstudianteAgrupado: String,
+    LugarResidencia: Int,
+    TelCel: String,
+    FechaCel: String,
+    TelRe: String,
+    CorreoEstudiante1: String,
+    CorreoEstudiante2: String,
+    FechaCorreo: String,
+    Direccion: String,
+    Departamento: String,
+    Ciudad: String,
+    Estado: String,
+    Comentario: String,
+    Situacion: String,
+    Variable: String
+  ): Student!
+  updateStudent(
+    _id: ID!,
+    CodigoBanner: Int,
+    Nombres: String,
+    Apellidos: String,
+    Genero: String,
+    Edad: Int,
+    NumeroIdentificacion: Int,
+    TipoDocIdentidad: String,
+    NivelFormacion: String,
+    CodigoPrograma: String,
+    DescripcionPrograma: String,
+    Jornada: String,
+    AreaConocimiento: String,
+    NucleoBasicoConocimiento: String,
+    IES: Int,
+    Snies: Int,
+    Rectoria: String,
+    CodigoSede: String,
+    Sede: String,
+    CentroRegional: String,
+    CodigoPeriodoAcademico: Int,
+    PeriodoAcademicoInscripcion: Int,
+    DescripcionMetodologia: String,
+    TipoEstudianteAgrupado: String,
+    LugarResidencia: Int,
+    TelCel: String,
+    FechaCel: String,
+    TelRe: String,
+    CorreoEstudiante1: String,
+    CorreoEstudiante2: String,
+    FechaCorreo: String,
+    Direccion: String,
+    Departamento: String,
+    Ciudad: String,
+    Estado: String,
+    Comentario: String,
+    Situacion: String,
+    Variable: String
+  ): Student!
+  deleteStudent(_id: ID!): Student!
+  uploadFile(file: Upload!): Boolean
+}
