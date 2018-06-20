@@ -10,9 +10,6 @@ module.exports = {
   "parserOptions": {
     "sourceType": "module",
     "allowImportExportEverywhere": false,
-    "ecmaFeatures": {
-      "jsx": true
-    },
     "codeFrame": false
   },
   "env": {
@@ -147,7 +144,6 @@ module.exports = {
     "import/extensions": 0,
     "no-underscore-dangle": 0,
     "consistent-return": 0,
-    "react/display-name": 0,
     "import/no-extraneous-dependencies": 0,
     "radix": 0,
     "no-shadow": [
