@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const moment = require('moment');
+import mongoose from 'mongoose';
+import moment from 'moment';
 
 function replaceFecha(value) {
   const date = JSON.stringify(value);
@@ -165,4 +165,4 @@ const studentSchema = new mongoose.Schema({
 
 const Student = mongoose.model('student', studentSchema);
 
-module.exports = Student;
+export default Student;

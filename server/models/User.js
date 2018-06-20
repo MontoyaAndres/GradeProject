@@ -1,4 +1,5 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
+import bcrypt from 'bcrypt';
 
 const userSchema = new mongoose.Schema({
   email: {
@@ -6,12 +7,25 @@ const userSchema = new mongoose.Schema({
     unique: true
   },
   password: {
-    type: String,
-    select: false
+    type: String
   },
-  name: {
+  username: {
     type: String
   }
 });
 
-module.exports = mongoose.model('user', userSchema);
+// eslint-disable-next-line
+userSchema.pre('save', async function (next) {
+  try {
+    const salt = await bcrypt.genSalt(10);
+    const passwordHash = await bcrypt.hash(this.password, salt);
+    this.password = passwordHash;
+    return next();
+  } catch (err) {
+    return next(err);
+  }
+});
+
+const User = mongoose.model('user', userSchema);
+
+export default User;
