@@ -1,0 +1,50 @@
+{
+  "name": "client",
+  "version": "0.0.1",
+  "description": "Software de remisión (Excepción de ausentismo) para la Uniminuto de Girardot, Colombia.",
+  "main": "index.jsx",
+  "scripts": {
+    "kill": "fuser -k 3000/tcp",
+    "start": "NODE_ENV=development react-scripts start",
+    "build": "react-scripts build",
+    "eject": "react-scripts eject"
+  },
+  "keywords": [
+    "uniminuto",
+    "server",
+    "ausentismo",
+    "desercion"
+  ],
+  "author": "Andrés Mauricio Montoya Sánchez",
+  "license": "MIT",
+  "dependencies": {
+    "@material-ui/core": "^1.2.3",
+    "@material-ui/icons": "^1.1.0",
+    "apollo-cache-inmemory": "^1.2.5",
+    "apollo-client": "^2.3.5",
+    "apollo-link": "^1.2.2",
+    "apollo-link-context": "^1.0.8",
+    "apollo-link-http": "^1.5.4",
+    "formik": "^0.11.11",
+    "graphql": "^0.13.2",
+    "graphql-tag": "^2.9.2",
+    "jwt-decode": "^2.2.0",
+    "react": "^16.4.1",
+    "react-apollo": "^2.1.6",
+    "react-dom": "^16.4.1",
+    "react-router-dom": "^4.3.1",
+    "yup": "^0.25.1"
+  },
+  "devDependencies": {
+    "babel-eslint": "latest",
+    "eslint": "latest",
+    "eslint-config-airbnb": "latest",
+    "eslint-config-prettier": "latest",
+    "eslint-plugin-import": "latest",
+    "eslint-plugin-jsx-a11y": "latest",
+    "eslint-plugin-prettier": "latest",
+    "eslint-plugin-react": "latest",
+    "prettier": "latest",
+    "react-scripts": "1.1.4"
+  }
+}

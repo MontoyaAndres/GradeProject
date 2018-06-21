@@ -1,0 +1,192 @@
+{
+  "TipoDocIdentidad": [
+    "CC-Cédula de Ciudadania",
+    "TI-Tarjeta de Identidad",
+    "SIN DOCUMENTO"
+  ],
+  "NivelFormacion": [
+    "Especialización",
+    "Técnico Profesional",
+    "Licenciatura",
+    "Pregrado",
+    "Tecnología",
+    "SIN NIVEL FORMACIÓN"
+  ],
+  "Genero": [
+    "MASCULINO",
+    "FEMENINO",
+    "SIN GENERO"
+  ],
+  "CodigoPrograma": [
+    "ADFU",
+    "ADM",
+    "AEMD",
+    "ASOD",
+    "COPD",
+    "CSOC",
+    "ICIV",
+    "ISUM",
+    "LCNT",
+    "LPID",
+    "PSID",
+    "TAIN",
+    "TCEE",
+    "TCGE",
+    "TINF",
+    "TLEC",
+    "TRSO",
+    "SIN CÓDIGO PROGRAMA"
+  ],
+  "DescripcionPrograma": [
+    "Administración Salud Ocupacional",
+    "Administración de Empresas",
+    "Administración Financiera Dist",
+    "Prof Administración Financiera",
+    "Comunicación Social Periodismo",
+    "Contaduría Publica",
+    "Ing de Sistemas Uniminuto",
+    "Ingeniería Civil",
+    "LI Pedagogía-D",
+    "Lic Pedagogia infantil",
+    "TC en Informática",
+    "Trabajo Social",
+    "Tec Prof Constru Elem Estru Y",
+    "Lic Ciencias Naturales",
+    "Tecnología en Electrónica",
+    "Tec en Automatización Industri",
+    "Teclg Gest d Const Edificacion",
+    "Tecnología en Electrónica",
+    "SIN DESCRIPCIÓN"
+  ],
+  "Jornada": [
+    "Distancia",
+    "Mañana",
+    "Noche",
+    "SIN JORNADA"
+  ],
+  "AreaConocimiento": [
+    "CIENCIAS DE LA EDUCACIÓN",
+    "CIENCIAS SOCIALES Y HUMANAS",
+    "ECONOMIA, ADMINISTRACIÓN, CONTADURÍA Y AFINES",
+    "INGENIERíA, ARQUITECTURA, URBANISMO Y AFINES",
+    "NO ESPECIFICA",
+    "SIN ÁREA CONOCIMIENTO"
+  ],
+  "NucleoBasicoConocimiento": [
+    "ADMINISTRACIÓN",
+    "COMUNICACIÓN SOCIAL, PERIODISMO Y AFINES",
+    "CONTADURÍA PUBLICA",
+    "EDUCACIÓN",
+    "INGENIERíA DE SISTEMAS, TELEMÁTICA Y AFINES",
+    "NO ESPECÍFICA",
+    "PSICOLOGÍA",
+    "SOCIOLOGÍA TRABAJO SOCIAL Y AFINES",
+    "SIN NÚCLEO BÁSICO"
+  ],
+  "IES": [
+    2829,
+    0
+  ],
+  "Rectoria": [
+    "R CUNDINAMARCA"
+  ],
+  "CodigoSede": [
+    "APU",
+    "GIR",
+    "MES",
+    "PAN",
+    "SIL",
+    "MEL",
+    "SIN CÓDIGO DE SEDE"
+  ],
+  "Sede": [
+    "SUMAPAZ (PANDI)",
+    "GIRARDOT",
+    "APULO",
+    "LA MESA",
+    "SILVANA",
+    "MELGAR",
+    "SIN SEDE"
+  ],
+  "CentroRegional": [
+    "GIRARDOT",
+    "SIN CENTRO REGIONAL"
+  ],
+  "DescripcionMetodologia": [
+    "Distancia (Tradicional)",
+    "Presencial",
+    "SIN DESCRIPCIÓN"
+  ],
+  "TipoEstudianteAgrupado": [
+    "Continuo",
+    "Primera Vez",
+    "NINGUNO"
+  ],
+  "Estado": [
+    "Ausentismo",
+    "Deserción",
+    "SIN ESTADO"
+  ],
+  "VariableSituacion": {
+    "NO VARIABLE": [
+      "NO SITUACIÓN"
+    ],
+    "ACADÉMICO": [
+      "CAMBIO DE SEDE",
+      "ASIGNATURAS PENDIENTE",
+      "DIFICULTADES CON MODALIDAD VIRTUAL",
+      "RETIRO PÉRDIDA ACADÉMICA",
+      "PROBLEMA CON DOCENTE",
+      "FALTA DISCIPLINARIA",
+      "CAMBIO DE UNIVERSIDAD",
+      "PÉRDIDA ACADÉMICA",
+      "PROBLEMA CON EL SERVICIO ACADÉMICO"
+    ],
+    "FINANCIERA": [
+      "PROBLEMAS DE TRÁMITE O RETENCIÓN CON LA COOPERATIVA UNIMINUTO",
+      "APLAZO DE SEMESTRE POR RECURSOS ECONÓMICOS",
+      "PROBLEMAS ECONÓMICOS"
+    ],
+    "NO CONTACTO": [
+      "BUZON",
+      "NO SE ENCUENTRA INFORMACIÓN DEL ESTUDIANTE"
+    ],
+    "NO PERTENECE A LA MATRIZ": [
+      "ESTUDIANTE MATRICULADO",
+      "NO HA ESTUDIADO EN UNIMINUTO",
+      "PENDIENTE GRADO",
+      "TÉRMINO DE ASIGNATURAS - PENDIENTE GRADO"
+    ],
+    "NO SE REALIZÓ GESTIÓN POR PARTE DEL PROGRAMA": [
+      "NO SE REALIZÓ GESTIÓN"
+    ],
+    "PSICOSOCIAL": [
+      "MOTIVOS PERSONALES",
+      "CAMBIO DE CIUDAD",
+      "CAMBIO DE DOMICILIO",
+      "CAMBIO DE PROGRAMA",
+      "CAMBIO DE UNIVERSIDAD",
+      "LICENCIA DE MATERNIDAD",
+      "PROBLEMAS DE SALUD"
+    ]
+  },
+  "Carreras": [
+    "ADFU",
+    "ADM",
+    "AEMD",
+    "ASOD",
+    "COPD",
+    "CSOC",
+    "ICIV",
+    "ISUM",
+    "LCNT",
+    "LPID",
+    "PSID",
+    "TAIN",
+    "TCEE",
+    "TCGE",
+    "TINF",
+    "TLEC",
+    "TRSO"
+  ]
+}

@@ -69,7 +69,7 @@ export const tryLogin = async (email, password, models, SECRET, SECRET2) => {
     // user with provided email not found
     return {
       ok: false,
-      errors: [{ path: 'email', message: 'Wrong email' }]
+      errors: [{ path: 'email', message: 'Correo incorrecto.' }]
     };
   }
 
@@ -78,7 +78,7 @@ export const tryLogin = async (email, password, models, SECRET, SECRET2) => {
     // bad password
     return {
       ok: false,
-      errors: [{ path: 'password', message: 'Wrong password' }]
+      errors: [{ path: 'password', message: 'Contraseña incorrecta.' }]
     };
   }
 

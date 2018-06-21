@@ -1,7 +1,8 @@
 import pick from 'lodash.pick';
 
 export default (e, models) => {
-  if (e instanceof models.sequelize.ValidationError) {
+  console.log(e);
+  if (e instanceof models.mongoose.ValidationError) {
     return e.errors.map(x => pick(x, ['path', 'message']));
   }
   return [{ path: 'name', message: 'something went wrong' }];
