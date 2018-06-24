@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import Menu from './Menu';
+import Menu from './Menu/index';
 
 const Layout = ({ children, path }) => (
   <Fragment>

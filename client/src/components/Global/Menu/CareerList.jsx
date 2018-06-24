@@ -6,7 +6,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import StarBorder from '@material-ui/icons/StarBorder';
 
-import SelectData from '../../utils/SelectData';
+import SelectData from '../../../utils/SelectData';
 
 const styles = theme => ({
   nested: {
@@ -17,12 +17,7 @@ const styles = theme => ({
 const CareerList = ({ classes, onHandleClose }) => (
   <Fragment>
     {SelectData.Carreras.map(element => (
-      <Link
-        to={`/carrera/${element}`}
-        key={SelectData.Carreras.indexOf(element)}
-        style={{ textDecoration: 'none' }}
-        replace
-      >
+      <Link to={`/carrera/${element}`} key={SelectData.Carreras.indexOf(element)} style={{ textDecoration: 'none' }}>
         <div>
           <ListItem button className={classes.nested} onClick={onHandleClose}>
             <ListItemIcon>

@@ -1,16 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { ApolloClient } from 'apollo-client';
-import { createHttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ApolloProvider } from 'react-apollo';
 import { setContext } from 'apollo-link-context';
 import { ApolloLink } from 'apollo-link';
+import { createUploadLink } from 'apollo-upload-client';
 
 import Routes from './routes';
 import registerServiceWorker from './registerServiceWorker';
 
-const httpLink = createHttpLink({ uri: 'http://localhost:8080/graphql' });
+const httpLink = createUploadLink({ uri: 'http://localhost:8080/graphql' });
 
 const middlewareLink = setContext(() => ({
   headers: {
