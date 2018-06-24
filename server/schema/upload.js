@@ -3,7 +3,6 @@ export default `
 
   type uploadResponse {
     ok: Boolean!
-    period: String
     values: [String]
     errors: [Error]
   }

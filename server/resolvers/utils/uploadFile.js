@@ -74,8 +74,7 @@ async function uploadFile(data, period, models) {
       // insert data to data base
       await models.Student.insertMany(information);
       return {
-        ok: true,
-        period
+        ok: true
       };
     }
 

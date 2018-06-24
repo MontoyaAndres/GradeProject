@@ -28,7 +28,6 @@ const uploadFileMutation = gql`
   mutation($file: Upload!, $period: String!) {
     uploadFile(file: $file, period: $period) {
       ok
-      period
       values
       errors {
         path
