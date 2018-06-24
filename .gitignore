@@ -1,3 +1,5 @@
+server/upload/**/*
+
 # Public files
 server/public/**/*
 
