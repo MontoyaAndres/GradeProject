@@ -17,6 +17,9 @@ import CloseIcon from '@material-ui/icons/Close';
 import Loading from '../Global/Loading';
 import normalizeErrors from '../../normalizeErrors';
 
+// query
+import { studentDistinct } from '../../graphql/query';
+
 function getFileExtension(filename) {
   return filename.slice(((filename.lastIndexOf('.') - 1) >>> 0) + 2);
 }
@@ -152,7 +155,7 @@ class uploadFile extends Component {
     const { errorClient, errorServer, errorTitle, errorMessage, period } = this.state;
 
     return (
-      <Mutation asyncMode mutation={uploadFileMutation}>
+      <Mutation asyncMode mutation={uploadFileMutation} refetchQueries={[{ query: studentDistinct }]}>
         {(mutate, { data }) => {
           if (errorServer && data && data.uploadFile.errors) {
             // show server errors

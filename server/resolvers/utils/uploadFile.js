@@ -58,10 +58,10 @@ async function uploadFile(data, period, models) {
   });
 
   if (values.length <= 0) {
-    // To see if the semestre was uploaded
-    const semestreExists = await models.Student.findOne({ TipoSemestre: period });
+    // To see if the period was uploaded
+    const periodExists = await models.Student.findOne({ TipoSemestre: period });
 
-    if (!semestreExists) {
+    if (!periodExists) {
       // delete the first column, because is the header
       delete firstSheet[0];
 
