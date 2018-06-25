@@ -21,6 +21,7 @@ import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import Hidden from '@material-ui/core/Hidden';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -50,10 +51,15 @@ const styles = theme => ({
     width: '100%',
     backgroundColor: theme.palette.background.paper
   },
-  title: {
+  titleDesktop: {
     padding: theme.spacing.unit * 3,
     fontWeight: 'bold',
     fontSize: '150%'
+  },
+  titleMobile: {
+    padding: theme.spacing.unit,
+    fontWeight: 'bold',
+    fontSize: '100%'
   },
   button: {
     margin: '10%'
@@ -104,34 +110,52 @@ const Compare = ({ classes, selected, Career }) => (
       if (compareStudents.ok) {
         return (
           <div className={classes.root}>
-            <Paper className={classes.warning}>
-              <Grid container wrap="nowrap">
-                <Grid item>
-                  <ErrorIcon />
+            <Hidden xlUp smDown>
+              <Paper className={classes.warning}>
+                <Grid container wrap="nowrap">
+                  <Grid item>
+                    <ErrorIcon />
+                  </Grid>
+                  <Grid item xs zeroMinWidth>
+                    {`Dando click en descargar, los datos de ${selected[0]} serán descargados. Si quiere tener los de ${
+                      selected[1]
+                    }, seleccione ${selected[1]} antes de ${selected[0]}.`}
+                  </Grid>
                 </Grid>
-                <Grid item xs zeroMinWidth>
-                  {`Dando click en descargar, los datos de ${selected[0]} serán descargados. Si quiere tener los de ${
-                    selected[1]
-                  }, seleccione ${selected[1]} antes de ${selected[0]}.`}
-                </Grid>
-              </Grid>
-            </Paper>
+              </Paper>
+            </Hidden>
 
             <List component="nav">
               <Grid container>
                 <Grid item xs={12}>
                   <Grid container justify="space-around">
-                    <div className={classes.title}>{`Carrera ${Career} ${selected[0]} - ${selected[1]}`}</div>
-                    <div>
+                    {/* Desktop version */}
+                    <Hidden xlUp smDown>
+                      <div className={classes.titleDesktop}>{`Carrera ${Career} ${selected[0]} - ${selected[1]}`}</div>
+                      <div>
+                        <Button
+                          variant="fab"
+                          aria-label="Download"
+                          className={classes.button}
+                          onClick={() => downloadFileCompared(selected[0], selected[1], Career)}
+                        >
+                          <FileDownload />
+                        </Button>
+                      </div>
+                    </Hidden>
+
+                    {/* Mobile version */}
+                    <Hidden mdUp>
+                      <div className={classes.titleMobile}>{`Carrera ${Career} ${selected[0]} - ${selected[1]}`}</div>
                       <Button
-                        variant="fab"
-                        aria-label="Download"
-                        className={classes.button}
+                        color="primary"
+                        styles={{ padding: 100 }}
                         onClick={() => downloadFileCompared(selected[0], selected[1], Career)}
                       >
                         <FileDownload />
+                        Descargar comparación
                       </Button>
-                    </div>
+                    </Hidden>
                   </Grid>
                 </Grid>
               </Grid>
