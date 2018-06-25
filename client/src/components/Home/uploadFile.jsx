@@ -48,7 +48,7 @@ class uploadFile extends Component {
   };
 
   handleHide = () => {
-    this.setState({ hide: !this.state.hide });
+    this.setState({ hide: false });
   };
 
   handleErrorClient = () => {

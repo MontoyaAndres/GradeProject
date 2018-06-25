@@ -11,10 +11,10 @@ import IconButton from '@material-ui/core/IconButton';
 import FileDownload from '@material-ui/icons/FileDownload';
 
 import Loading from '../Global/Loading';
-import { downloadFile } from '../../utils/api';
+import { downloadFilePeriod } from '../../utils/api';
 import SelectData from '../../utils/SelectData';
 
-// query
+// Query
 import { studentDistinct } from '../../graphql/query';
 
 const styles = theme => ({
@@ -36,33 +36,50 @@ class PeriodList extends Component {
     selected: []
   };
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.career !== this.state.career) {
+      // If the checkbox was changed and then the career will be change
+      // so, the function "onHandleSelectedAndCareer" needs to update!
+      this.props.onHandleSelectedAndCareer(this.state.selected, this.state.career);
+    }
+  }
+
   handleChange = e => {
     const { value, name } = e.target;
+
     this.setState({ [name]: value });
   };
 
-  handleToggle = (value, compare) => () => {
-    const { checked, selected } = this.state;
-    const { onHandleSelected } = this.props;
+  handleToggle = (index, compare) => () => {
+    const { checked, selected, career } = this.state;
+    const { onHandleSelectedAndCareer } = this.props;
 
-    const currentIndex = checked.indexOf(value);
+    const currentIndex = checked.indexOf(index);
     const newChecked = [...checked];
     const newSelected = [...selected];
 
     if (currentIndex === -1) {
-      newChecked.push(value);
+      newChecked.push(index);
       newSelected.push(compare);
     } else {
       newChecked.splice(currentIndex, 1);
       newSelected.splice(compare, 1);
     }
 
-    this.setState({
-      checked: newChecked,
-      selected: newSelected
-    });
+    // When someone click a lot the checkbox, the "newSelect" has the same value.
+    // So, this "newSelect" and "newChecked" will be formated and same way the state too.
+    if (newSelected[0] === newSelected[1]) {
+      this.setState({ checked: [], selected: [] });
+      newChecked.splice(currentIndex, 1);
+      newSelected.splice(compare, 1);
+    } else {
+      this.setState({
+        checked: newChecked,
+        selected: newSelected
+      });
+    }
 
-    onHandleSelected(newSelected);
+    onHandleSelectedAndCareer(newSelected, career);
   };
 
   render() {
@@ -99,7 +116,7 @@ class PeriodList extends Component {
                           </option>
                         ))}
                       </Select>
-                      <IconButton aria-label="Download File" onClick={() => downloadFile(career, value)}>
+                      <IconButton aria-label="Download File" onClick={() => downloadFilePeriod(career, value)}>
                         <FileDownload style={{ fontSize: 30 }} />
                       </IconButton>
                     </ListItemSecondaryAction>

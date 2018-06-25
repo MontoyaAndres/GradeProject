@@ -34,13 +34,13 @@ const styles = theme => ({
     whiteSpace: 'pre'
   },
   floatButton: {
-    position: 'absolute',
+    position: 'fixed',
     bottom: theme.spacing.unit * 2,
     right: theme.spacing.unit * 2,
     padding: theme.spacing.unit * 2
   },
   floatButtonSecondary: {
-    position: 'absolute',
+    position: 'fixed',
     bottom: theme.spacing.unit * 2,
     left: theme.spacing.unit * 2,
     padding: theme.spacing.unit * 2
@@ -51,6 +51,7 @@ class Home extends Component {
   state = {
     hide: false,
     selected: [],
+    Career: '',
     hasDataSelected: false
   };
 
@@ -58,17 +59,21 @@ class Home extends Component {
     this.setState({ hide: !this.state.hide });
   };
 
-  handleSelected = selected => {
-    this.setState({ selected });
+  handleSelectedAndCareer = (selected, Career) => {
+    this.setState({ selected, Career });
   };
 
   handleHasDataSelected = () => {
     this.setState({ hasDataSelected: !this.state.hasDataSelected });
   };
 
+  handleShowHasDataSelected = () => {
+    this.setState({ hasDataSelected: !this.state.hasDataSelected, selected: [] });
+  };
+
   render() {
     const { classes } = this.props;
-    const { hide, selected, hasDataSelected } = this.state;
+    const { hide, selected, Career, hasDataSelected } = this.state;
 
     return (
       <Grid item xs={12}>
@@ -83,25 +88,34 @@ class Home extends Component {
               <Hidden xlUp smDown>
                 {hide ? (
                   <Fragment>
-                    {/* <Button variant="fab" color="secondary" aria-label="add" onClick={this.handleHasDataSelected}>
-                      <Done />
-                    </Button> */}
                     <Button variant="fab" color="secondary" aria-label="add" onClick={this.handleHideElement}>
                       <LocalOffer />
                     </Button>
                   </Fragment>
                 ) : (
                   <Fragment>
-                    <Button
-                      variant="fab"
-                      color="secondary"
-                      aria-label="add"
-                      style={{ marginRight: 50 }}
-                      disabled={selected.length !== 2}
-                      onClick={this.handleHasDataSelected}
-                    >
-                      <FindReplace />
-                    </Button>
+                    {hasDataSelected ? (
+                      <Button
+                        variant="fab"
+                        style={{ marginRight: 50 }}
+                        color="secondary"
+                        aria-label="add"
+                        onClick={this.handleShowHasDataSelected}
+                      >
+                        <Done />
+                      </Button>
+                    ) : (
+                      <Button
+                        variant="fab"
+                        color="secondary"
+                        aria-label="add"
+                        style={{ marginRight: 50 }}
+                        disabled={selected.length !== 2}
+                        onClick={this.handleHasDataSelected}
+                      >
+                        <FindReplace />
+                      </Button>
+                    )}
                     <Button variant="fab" color="secondary" aria-label="add" onClick={this.handleHideElement}>
                       <AddIcon />
                     </Button>
@@ -131,16 +145,28 @@ class Home extends Component {
                     </Fragment>
                   ) : (
                     <Fragment>
-                      <Button
-                        variant="fab"
-                        className={classes.floatButtonSecondary}
-                        color="secondary"
-                        aria-label="add"
-                        disabled={selected.length !== 2}
-                        onClick={this.handleHasDataSelected}
-                      >
-                        <FindReplace />
-                      </Button>
+                      {hasDataSelected ? (
+                        <Button
+                          variant="fab"
+                          className={classes.floatButtonSecondary}
+                          color="secondary"
+                          aria-label="add"
+                          onClick={this.handleShowHasDataSelected}
+                        >
+                          <Done />
+                        </Button>
+                      ) : (
+                        <Button
+                          variant="fab"
+                          className={classes.floatButtonSecondary}
+                          color="secondary"
+                          aria-label="add"
+                          disabled={selected.length !== 2}
+                          onClick={this.handleHasDataSelected}
+                        >
+                          <FindReplace />
+                        </Button>
+                      )}
                       <Button
                         className={classes.floatButton}
                         variant="fab"
@@ -158,9 +184,9 @@ class Home extends Component {
           {hide ? (
             <UploadFile />
           ) : hasDataSelected ? (
-            <Compare selected={selected} />
+            <Compare selected={selected} Career={Career} />
           ) : (
-            <PeriodList onHandleSelected={this.handleSelected} />
+            <PeriodList onHandleSelectedAndCareer={this.handleSelectedAndCareer} />
           )}
         </Paper>
       </Grid>
