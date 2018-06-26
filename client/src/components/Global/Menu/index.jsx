@@ -45,9 +45,16 @@ class Menu extends Component {
   };
 
   handleMenuName = () => {
-    const { classes, path } = this.props;
-    if (path === '/') {
+    const { classes, url } = this.props;
+    // Get an array of the url
+    const urlName = url.split('/');
+
+    if (url === '/') {
       return <span className={classes.title}>Inicio</span>;
+    }
+
+    if (urlName[1] === 'carrera') {
+      return <span className={classes.title}>{urlName[2]}</span>;
     }
   };
 

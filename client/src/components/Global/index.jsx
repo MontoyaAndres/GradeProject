@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
 import Menu from './Menu/index';
 
-const Layout = ({ children, path }) => (
+const Layout = ({ children, url }) => (
   <Fragment>
-    <Menu path={path} />
+    <Menu url={url} />
     {children}
   </Fragment>
 );

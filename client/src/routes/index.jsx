@@ -4,10 +4,14 @@ import decode from 'jwt-decode';
 
 import withRoot from '../utils/withRoot';
 import Home from './Home';
+import Career from './Career';
 import Register from './Register';
 import Login from './Login';
+import Error404 from './Error404';
 
-const isAuthenticated = () => {
+import SelectData from '../utils/SelectData';
+
+function isAuthenticated() {
   const token = localStorage.getItem('token');
   const refreshToken = localStorage.getItem('refreshToken');
   try {
@@ -17,7 +21,17 @@ const isAuthenticated = () => {
     return false;
   }
   return true;
-};
+}
+
+function isExactCareer(url) {
+  const URL = url.split('/')[2];
+  const findURL = SelectData.Carreras.find(carrera => carrera === URL);
+  // To see if the url exists in the array
+  if (findURL === URL) {
+    return true;
+  }
+  return false;
+}
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
@@ -39,12 +53,21 @@ const IsLogin = ({ component: Component, ...rest }) => (
   />
 );
 
+const ExactCareer = ({ ...rest }) => (
+  <Route
+    {...rest}
+    render={props => (isExactCareer(props.match.url) ? <PrivateRoute {...props} component={Career} /> : <Error404 />)}
+  />
+);
+
 const Router = () => (
   <BrowserRouter>
     <Switch>
-      <PrivateRoute path="/" exact component={Home} />
-      <IsLogin path="/registrar" exact component={Register} />
-      <IsLogin path="/login" exact component={Login} />
+      <PrivateRoute exact path="/" component={Home} />
+      <ExactCareer exact path="/carrera/:Career" />
+      <IsLogin exact path="/registrar" component={Register} />
+      <IsLogin exact path="/login" component={Login} />
+      <Route component={Error404} />
     </Switch>
   </BrowserRouter>
 );
