@@ -25,7 +25,7 @@ const studentSchema = new mongoose.Schema({
   },
   Genero: {
     type: String,
-    default: 'SIN GENERO'
+    default: 'NO GENERO'
   },
   Edad: {
     type: Number,
@@ -37,31 +37,31 @@ const studentSchema = new mongoose.Schema({
   },
   TipoDocIdentidad: {
     type: String,
-    default: 'SIN DOCUMENTO'
+    default: 'NO DOCUMENTO'
   },
   NivelFormacion: {
     type: String,
-    default: 'SIN NIVEL DE FORMACIÓN'
+    default: 'NO NIVEL DE FORMACIÓN'
   },
   CodigoPrograma: {
     type: String,
-    default: 'SIN CÓDIGO PROGRAMA'
+    default: 'NO CÓDIGO PROGRAMA'
   },
   DescripcionPrograma: {
     type: String,
-    default: 'SIN DESCRIPCIÓN'
+    default: 'NO DESCRIPCIÓN'
   },
   Jornada: {
     type: String,
-    default: 'SIN JORNADA'
+    default: 'NO JORNADA'
   },
   AreaConocimiento: {
     type: String,
-    default: 'SIN ÁREA CONOCIMIENTO'
+    default: 'NO ÁREA CONOCIMIENTO'
   },
   NucleoBasicoConocimiento: {
     type: String,
-    default: 'SIN NÚCLEO BÁSICO'
+    default: 'NO NÚCLEO BÁSICO'
   },
   IES: {
     type: Number,
@@ -77,15 +77,15 @@ const studentSchema = new mongoose.Schema({
   },
   CodigoSede: {
     type: String,
-    default: 'SIN CÓDIGO DE SEDE'
+    default: 'NO CÓDIGO DE SEDE'
   },
   Sede: {
     type: String,
-    default: 'SIN SEDE'
+    default: 'NO SEDE'
   },
   CentroRegional: {
     type: String,
-    default: 'SIN CENTRO REGIONAL'
+    default: 'NO CENTRO REGIONAL'
   },
   CodigoPeriodoAcademico: {
     type: Number,
@@ -97,7 +97,7 @@ const studentSchema = new mongoose.Schema({
   },
   DescripcionMetodologia: {
     type: String,
-    default: 'SIN DESCRIPCIÓN'
+    default: 'NO DESCRIPCIÓN'
   },
   TipoEstudianteAgrupado: {
     type: String,
@@ -135,7 +135,7 @@ const studentSchema = new mongoose.Schema({
   },
   Direccion: {
     type: String,
-    default: 'SIN DIRECCION'
+    default: 'NO DIRECCION'
   },
   Departamento: {
     type: String,
@@ -143,11 +143,11 @@ const studentSchema = new mongoose.Schema({
   },
   Ciudad: {
     type: String,
-    default: 'SIN CIUDAD'
+    default: 'NO CIUDAD'
   },
   Estado: {
     type: String,
-    default: 'SIN ESTADO'
+    default: 'NO ESTADO'
   },
   Comentario: {
     type: String,
@@ -155,7 +155,7 @@ const studentSchema = new mongoose.Schema({
   },
   Situacion: {
     type: String,
-    default: 'NO SITUACION'
+    default: 'NO SITUACIÓN'
   },
   Variable: {
     type: String,

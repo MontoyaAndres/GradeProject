@@ -154,7 +154,11 @@ class uploadFile extends Component {
     const { errorClient, errorServer, errorTitle, errorMessage, period } = this.state;
 
     return (
-      <Mutation asyncMode mutation={uploadFileMutation} refetchQueries={[{ query: studentDistinct }]}>
+      <Mutation
+        asyncMode
+        mutation={uploadFileMutation}
+        refetchQueries={[{ query: studentDistinct, variables: { param: 'TipoSemestre' } }]}
+      >
         {(mutate, { data }) => {
           if (errorServer && data && data.uploadFile.errors) {
             // show server errors

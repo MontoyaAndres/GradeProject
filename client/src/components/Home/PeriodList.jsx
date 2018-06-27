@@ -87,7 +87,7 @@ class PeriodList extends Component {
     const { career, checked } = this.state;
 
     return (
-      <Query query={studentDistinct}>
+      <Query query={studentDistinct} variables={{ param: 'TipoSemestre' }}>
         {({ loading, data: { StudentDistinct } }) => {
           if (loading) {
             return <Loading />;

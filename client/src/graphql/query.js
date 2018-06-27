@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 const studentDistinct = gql`
-  {
-    StudentDistinct(Param: "TipoSemestre")
+  query StudentDistinct($param: String!) {
+    StudentDistinct(Param: $param)
   }
 `;
 

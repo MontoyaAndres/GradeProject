@@ -2,7 +2,7 @@
   "TipoDocIdentidad": [
     "CC-Cédula de Ciudadania",
     "TI-Tarjeta de Identidad",
-    "SIN DOCUMENTO"
+    "NO DOCUMENTO"
   ],
   "NivelFormacion": [
     "Especialización",
@@ -10,12 +10,12 @@
     "Licenciatura",
     "Pregrado",
     "Tecnología",
-    "SIN NIVEL FORMACIÓN"
+    "NO NIVEL FORMACIÓN"
   ],
   "Genero": [
     "MASCULINO",
     "FEMENINO",
-    "SIN GENERO"
+    "NO GENERO"
   ],
   "CodigoPrograma": [
     "ADFU",
@@ -35,7 +35,7 @@
     "TINF",
     "TLEC",
     "TRSO",
-    "SIN CÓDIGO PROGRAMA"
+    "NO CÓDIGO PROGRAMA"
   ],
   "DescripcionPrograma": [
     "Administración Salud Ocupacional",
@@ -56,13 +56,13 @@
     "Tec en Automatización Industri",
     "Teclg Gest d Const Edificacion",
     "Tecnología en Electrónica",
-    "SIN DESCRIPCIÓN"
+    "NO DESCRIPCIÓN"
   ],
   "Jornada": [
     "Distancia",
     "Mañana",
     "Noche",
-    "SIN JORNADA"
+    "NO JORNADA"
   ],
   "AreaConocimiento": [
     "CIENCIAS DE LA EDUCACIÓN",
@@ -70,7 +70,7 @@
     "ECONOMIA, ADMINISTRACIÓN, CONTADURÍA Y AFINES",
     "INGENIERíA, ARQUITECTURA, URBANISMO Y AFINES",
     "NO ESPECIFICA",
-    "SIN ÁREA CONOCIMIENTO"
+    "NO ÁREA CONOCIMIENTO"
   ],
   "NucleoBasicoConocimiento": [
     "ADMINISTRACIÓN",
@@ -81,7 +81,7 @@
     "NO ESPECÍFICA",
     "PSICOLOGÍA",
     "SOCIOLOGÍA TRABAJO SOCIAL Y AFINES",
-    "SIN NÚCLEO BÁSICO"
+    "NO NÚCLEO BÁSICO"
   ],
   "IES": [
     2829,
@@ -97,7 +97,7 @@
     "PAN",
     "SIL",
     "MEL",
-    "SIN CÓDIGO DE SEDE"
+    "NO CÓDIGO DE SEDE"
   ],
   "Sede": [
     "SUMAPAZ (PANDI)",
@@ -106,16 +106,16 @@
     "LA MESA",
     "SILVANA",
     "MELGAR",
-    "SIN SEDE"
+    "NO SEDE"
   ],
   "CentroRegional": [
     "GIRARDOT",
-    "SIN CENTRO REGIONAL"
+    "NO CENTRO REGIONAL"
   ],
   "DescripcionMetodologia": [
     "Distancia (Tradicional)",
     "Presencial",
-    "SIN DESCRIPCIÓN"
+    "NO DESCRIPCIÓN"
   ],
   "TipoEstudianteAgrupado": [
     "Continuo",
@@ -125,12 +125,9 @@
   "Estado": [
     "Ausentismo",
     "Deserción",
-    "SIN ESTADO"
+    "NO ESTADO"
   ],
   "VariableSituacion": {
-    "NO VARIABLE": [
-      "NO SITUACIÓN"
-    ],
     "ACADÉMICO": [
       "CAMBIO DE SEDE",
       "ASIGNATURAS PENDIENTE",
@@ -168,6 +165,9 @@
       "CAMBIO DE UNIVERSIDAD",
       "LICENCIA DE MATERNIDAD",
       "PROBLEMAS DE SALUD"
+    ],
+    "NO VARIABLE": [
+      "NO SITUACIÓN"
     ]
   },
   "Carreras": [

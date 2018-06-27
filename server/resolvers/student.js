@@ -6,18 +6,19 @@ export default {
     allStudents: requiresAuth.createResolver((parent, args, { models }) => models.Student.find().lean()),
     Student: requiresAuth.createResolver((parent, { _id }, { models }) => models.Student.findOne({ _id }).lean()),
     StudentByParams: requiresAuth.createResolver(
-      (parent, { Variable, Situacion, CodigoPrograma, TipoSemestre }, { models }) => {
+      (parent, { Variable, Situacion, CodigoPrograma, Estado, TipoSemestre }, { models }) => {
         let student = '';
-        if (Variable === 'TODO' && Situacion === 'TODO' && TipoSemestre) {
-          student = models.Student.find({ CodigoPrograma, TipoSemestre });
-        } else if (Variable !== 'TODO' && Situacion === 'TODO' && TipoSemestre) {
-          student = models.Student.find({ CodigoPrograma, Variable, TipoSemestre });
+        if (Variable === 'TODO' && Situacion === 'TODO' && Estado && TipoSemestre) {
+          student = models.Student.find({ CodigoPrograma, Estado, TipoSemestre });
+        } else if (Variable !== 'TODO' && Situacion === 'TODO' && Estado && TipoSemestre) {
+          student = models.Student.find({ CodigoPrograma, Variable, Estado, TipoSemestre });
         } else {
           student = models.Student.find({
             CodigoPrograma,
             TipoSemestre,
             Situacion,
-            Variable
+            Variable,
+            Estado
           });
         }
         return student;
