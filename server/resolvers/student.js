@@ -146,14 +146,17 @@ export default {
     deleteStudent: requiresAuth.createResolver(async (parent, { _id }, { models }) => {
       try {
         await models.Student.findByIdAndRemove({ _id });
-        return {
-          ok: true
-        };
+        return true;
       } catch (err) {
-        return {
-          ok: false,
-          errors: formatErrors(err, models)
-        };
+        return false;
+      }
+    }),
+    deleteTipoSemestre: requiresAuth.createResolver(async (parent, { TipoSemestre }, { models }) => {
+      try {
+        await models.Student.deleteMany({ TipoSemestre });
+        return true;
+      } catch (err) {
+        return false;
       }
     })
   }

@@ -56,6 +56,10 @@ class Menu extends Component {
     if (urlName[1] === 'carrera') {
       return <span className={classes.title}>{urlName[2]}</span>;
     }
+
+    if (urlName[1] === 'estudiante') {
+      return <span className={classes.title}>Información de estudiante</span>;
+    }
   };
 
   render() {

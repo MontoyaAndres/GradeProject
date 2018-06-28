@@ -10,7 +10,7 @@ import { createUploadLink } from 'apollo-upload-client';
 import Routes from './routes';
 import registerServiceWorker from './registerServiceWorker';
 
-const httpLink = createUploadLink({ uri: 'http://localhost:8080/graphql' });
+const httpLink = createUploadLink({ uri: 'http://181.51.3.153:8080/graphql' });
 
 const middlewareLink = setContext(() => ({
   headers: {

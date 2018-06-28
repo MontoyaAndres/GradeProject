@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { graphql, Query } from 'react-apollo';
-import gql from 'graphql-tag';
+import { graphql } from 'react-apollo';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
@@ -10,7 +9,6 @@ import Select from '@material-ui/core/Select';
 import Hidden from '@material-ui/core/Hidden';
 
 import Layout from '../components/Global';
-import Loading from '../components/Global/Loading';
 import CareerMobile from '../components/CareerMobile';
 import CareerDesktop from '../components/CareerDesktop';
 
@@ -26,32 +24,6 @@ const styles = theme => ({
     padding: theme.spacing.unit * 3
   }
 });
-
-const StudentByParams = gql`
-  query StudentByParams(
-    $Variable: String!
-    $Situacion: String!
-    $CodigoPrograma: String!
-    $Estado: String!
-    $TipoSemestre: String!
-  ) {
-    StudentByParams(
-      Variable: $Variable
-      Situacion: $Situacion
-      CodigoPrograma: $CodigoPrograma
-      Estado: $Estado
-      TipoSemestre: $TipoSemestre
-    ) {
-      _id
-      CodigoBanner
-      Nombres
-      Apellidos
-      Comentario
-      Situacion
-      Variable
-    }
-  }
-`;
 
 class Career extends Component {
   state = {
@@ -189,15 +161,14 @@ class Career extends Component {
               </Grid>
             </Grid>
           </Paper>
-          <Query query={StudentByParams} variables={{ Variable, Situacion, CodigoPrograma, Estado, TipoSemestre }}>
-            {({ loading, data }) => {
-              if (loading) {
-                return <Loading />;
-              }
-
-              return <CareerDesktop data={data.StudentByParams} history={history} />;
-            }}
-          </Query>
+          <CareerDesktop
+            Variable={Variable}
+            Situacion={Situacion}
+            CodigoPrograma={CodigoPrograma}
+            Estado={Estado}
+            TipoSemestre={TipoSemestre}
+            history={history}
+          />
         </Hidden>
 
         <Hidden mdUp>

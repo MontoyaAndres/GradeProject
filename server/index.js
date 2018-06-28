@@ -29,7 +29,7 @@ const schema = makeExecutableSchema({
 
 const app = express();
 const corsOptions = {
-  origin: 'http://localhost:3000',
+  origin: 'http://181.51.3.153:3000',
   optionsSuccessStatus: 200
 };
 

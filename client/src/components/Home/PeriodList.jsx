@@ -1,14 +1,23 @@
 import React, { Component } from 'react';
-import { Query } from 'react-apollo';
+import { Query, graphql } from 'react-apollo';
+import gql from 'graphql-tag';
 import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
-import Checkbox from '@material-ui/core/Checkbox';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Button from '@material-ui/core/Button';
 import Select from '@material-ui/core/Select';
+import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
 import FileDownload from '@material-ui/icons/FileDownload';
+import ViewHeadline from '@material-ui/icons/ViewHeadline';
 
 import Loading from '../Global/Loading';
 import { downloadFilePeriod } from '../../utils/api';
@@ -29,11 +38,20 @@ const styles = theme => ({
   }
 });
 
+const deletePeriod = gql`
+  mutation($period: String!) {
+    deleteTipoSemestre(TipoSemestre: $period)
+  }
+`;
+
 class PeriodList extends Component {
   state = {
     career: 'ADFU',
     checked: [],
-    selected: []
+    selected: [],
+    openDialog: false,
+    deleted: false,
+    valueDeleleted: ''
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -43,6 +61,89 @@ class PeriodList extends Component {
       this.props.onHandleSelectedAndCareer(this.state.selected, this.state.career);
     }
   }
+
+  // Show one dialog which will show if the user want to download or delete one period
+  displayDialog = () => {
+    const { openDialog, career, valueDeleleted } = this.state;
+    return (
+      <Dialog
+        open={openDialog}
+        onClose={this.handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">¿Qué desea hacer?</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            <Button
+              variant="contained"
+              onClick={() => downloadFilePeriod(career, valueDeleleted)}
+              style={{ marginRight: 10, color: 'white', backgroundColor: 'blue' }}
+            >
+              Descargar periodo
+              <FileDownload />
+            </Button>
+            <Button
+              variant="contained"
+              color="secondary"
+              style={{ color: 'white', backgroundColor: 'red' }}
+              onClick={() => this.setState({ deleted: true })}
+            >
+              Eliminar periodo
+              <DeleteIcon />
+            </Button>
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => this.handleClose()} color="primary" autoFocus>
+            Cancelar
+          </Button>
+        </DialogActions>
+      </Dialog>
+    );
+  };
+
+  // It'll show one alert which will ask if the user wants to delete the period
+  displayAlert = () => {
+    const { deleted } = this.state;
+    return (
+      <div>
+        <Dialog
+          open={deleted}
+          onClose={this.handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">Eliminar periodo</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              Si da click en si, el periodo será eliminado. ¿Esta seguro?
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => this.handleDeletePeriod()} color="primary">
+              Sí
+            </Button>
+            <Button onClick={() => this.handleClose()} color="primary" autoFocus>
+              No
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </div>
+    );
+  };
+
+  // Close displayAlert and displayDialog dialog
+  handleClose = () => {
+    this.setState({ deleted: false, openDialog: false });
+  };
+
+  handleDeletePeriod = () => {
+    const { valueDeleleted } = this.state;
+    // delete the period and refresh the query "StudentDistinct"
+    this.props.mutate({ variables: { period: valueDeleleted }, refetchQueries: ['StudentDistinct'] });
+    this.setState({ deleted: false, openDialog: false });
+  };
 
   handleChange = e => {
     const { value, name } = e.target;
@@ -84,7 +185,7 @@ class PeriodList extends Component {
 
   render() {
     const { classes } = this.props;
-    const { career, checked } = this.state;
+    const { career, checked, deleted, openDialog } = this.state;
 
     return (
       <Query query={studentDistinct} variables={{ param: 'TipoSemestre' }}>
@@ -95,6 +196,9 @@ class PeriodList extends Component {
 
           return (
             <div className={classes.root}>
+              {openDialog ? this.displayDialog() : null}
+              {deleted ? this.displayAlert() : null}
+
               <List>
                 {StudentDistinct.map((value, index) => (
                   <ListItem key={index} dense button>
@@ -116,8 +220,11 @@ class PeriodList extends Component {
                           </option>
                         ))}
                       </Select>
-                      <IconButton aria-label="Download File" onClick={() => downloadFilePeriod(career, value)}>
-                        <FileDownload style={{ fontSize: 30 }} />
+                      <IconButton
+                        aria-label="Open"
+                        onClick={() => this.setState({ openDialog: true, valueDeleleted: value })}
+                      >
+                        <ViewHeadline />
                       </IconButton>
                     </ListItemSecondaryAction>
                   </ListItem>
@@ -131,4 +238,4 @@ class PeriodList extends Component {
   }
 }
 
-export default withStyles(styles)(PeriodList);
+export default graphql(deletePeriod)(withStyles(styles)(PeriodList));

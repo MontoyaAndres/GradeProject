@@ -37,13 +37,15 @@ const styles = theme => ({
     position: 'fixed',
     bottom: theme.spacing.unit * 2,
     right: theme.spacing.unit * 2,
-    padding: theme.spacing.unit * 2
+    padding: theme.spacing.unit * 2,
+    zIndex: 1
   },
   floatButtonSecondary: {
     position: 'fixed',
     bottom: theme.spacing.unit * 2,
     left: theme.spacing.unit * 2,
-    padding: theme.spacing.unit * 2
+    padding: theme.spacing.unit * 2,
+    zIndex: 1
   }
 });
 

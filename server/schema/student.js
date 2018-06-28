@@ -140,6 +140,7 @@ export default `
       Situacion: String,
       Variable: String
     ): AvoidResponse!
-    deleteStudent(_id: ID!): AvoidResponse!
+    deleteStudent(_id: ID!): Boolean!,
+    deleteTipoSemestre(TipoSemestre: String!): Boolean!
   }
 `;

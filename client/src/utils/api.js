@@ -1,4 +1,4 @@
-const API = 'http://localhost:8080';
+const API = 'http://181.51.3.153:8080';
 
 function simulateClick(response) {
   // create new element <a> to "download" the file

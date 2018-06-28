@@ -18,7 +18,7 @@
   "author": "Andrés Mauricio Montoya Sánchez",
   "license": "MIT",
   "dependencies": {
-    "@material-ui/core": "^1.2.3",
+    "@material-ui/core": "^1.3.0",
     "@material-ui/icons": "^1.1.0",
     "apollo-cache-inmemory": "^1.2.5",
     "apollo-client": "^2.3.5",

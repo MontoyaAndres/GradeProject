@@ -5,6 +5,7 @@ import decode from 'jwt-decode';
 import withRoot from '../utils/withRoot';
 import Home from './Home';
 import Career from './Career';
+import StudentInformation from './StudentInformation';
 import Register from './Register';
 import Login from './Login';
 import Error404 from './Error404';
@@ -65,6 +66,7 @@ const Router = () => (
     <Switch>
       <PrivateRoute exact path="/" component={Home} />
       <ExactCareer exact path="/carrera/:Career" />
+      <PrivateRoute exact path="/estudiante/:_id" component={StudentInformation} />
       <IsLogin exact path="/registrar" component={Register} />
       <IsLogin exact path="/login" component={Login} />
       <Route component={Error404} />
