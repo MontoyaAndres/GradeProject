@@ -78,7 +78,7 @@ class PeriodList extends Component {
             <Button
               variant="contained"
               onClick={() => downloadFilePeriod(career, valueDeleleted)}
-              style={{ marginRight: 10, color: 'white', backgroundColor: 'blue' }}
+              style={{ margin: 5, color: 'white', backgroundColor: 'blue' }}
             >
               Descargar periodo
               <FileDownload />
@@ -86,7 +86,7 @@ class PeriodList extends Component {
             <Button
               variant="contained"
               color="secondary"
-              style={{ color: 'white', backgroundColor: 'red' }}
+              style={{ margin: 5, color: 'white', backgroundColor: 'red' }}
               onClick={() => this.setState({ deleted: true })}
             >
               Eliminar periodo

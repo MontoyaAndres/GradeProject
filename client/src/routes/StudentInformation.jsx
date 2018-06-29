@@ -86,15 +86,15 @@ const StudentInformation = ({ classes, match: { url, params } }) => (
                 {Headers.map((header, index) => (
                   <Fragment key={index}>
                     {index === 19 ? (
-                      <Grid item xs={6}>
+                      <Grid item xs={12} sm={6}>
                         <div>
-                          <FormLabel className={classes.FormLabel}>{header}:</FormLabel> {values[index]}
+                          <FormLabel className={classes.FormLabel}>{header}:</FormLabel> <span>{values[index]}</span>
                         </div>
                       </Grid>
                     ) : (
-                      <Grid item xs={6}>
+                      <Grid item xs={12} sm={6}>
                         <div>
-                          <FormLabel className={classes.FormLabel}>{header}:</FormLabel> {values[index]}
+                          <FormLabel className={classes.FormLabel}>{header}:</FormLabel> <span>{values[index]}</span>
                         </div>
                       </Grid>
                     )}
