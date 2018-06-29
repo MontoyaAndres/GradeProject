@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Query, graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import { withStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
@@ -20,6 +21,7 @@ import FileDownload from '@material-ui/icons/FileDownload';
 import ViewHeadline from '@material-ui/icons/ViewHeadline';
 
 import Loading from '../Global/Loading';
+import Successfully from '../Global/Successfully';
 import { downloadFilePeriod } from '../../utils/api';
 import SelectData from '../../utils/SelectData';
 
@@ -51,6 +53,7 @@ class PeriodList extends Component {
     selected: [],
     openDialog: false,
     deleted: false,
+    successDeleted: false,
     valueDeleleted: ''
   };
 
@@ -74,25 +77,33 @@ class PeriodList extends Component {
       >
         <DialogTitle id="alert-dialog-title">¿Qué desea hacer?</DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            <Button
-              variant="contained"
-              onClick={() => downloadFilePeriod(career, valueDeleleted)}
-              style={{ margin: 5, color: 'white', backgroundColor: 'blue' }}
-            >
-              Descargar periodo
-              <FileDownload />
-            </Button>
-            <Button
-              variant="contained"
-              color="secondary"
-              style={{ margin: 5, color: 'white', backgroundColor: 'red' }}
-              onClick={() => this.setState({ deleted: true })}
-            >
-              Eliminar periodo
-              <DeleteIcon />
-            </Button>
-          </DialogContentText>
+          <Grid container>
+            <Grid item xs={12}>
+              <Grid container wrap="wrap" justify="center" alignItems="center">
+                <div>
+                  <Button
+                    variant="contained"
+                    onClick={() => downloadFilePeriod(career, valueDeleleted)}
+                    style={{ margin: 5, color: 'white', backgroundColor: 'blue' }}
+                  >
+                    Descargar periodo
+                    <FileDownload />
+                  </Button>
+                </div>
+                <div>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    style={{ margin: 5, color: 'white', backgroundColor: 'red' }}
+                    onClick={() => this.setState({ deleted: true })}
+                  >
+                    Eliminar periodo
+                    <DeleteIcon />
+                  </Button>
+                </div>
+              </Grid>
+            </Grid>
+          </Grid>
         </DialogContent>
         <DialogActions>
           <Button onClick={() => this.handleClose()} color="primary" autoFocus>
@@ -142,7 +153,7 @@ class PeriodList extends Component {
     const { valueDeleleted } = this.state;
     // delete the period and refresh the query "StudentDistinct"
     this.props.mutate({ variables: { period: valueDeleleted }, refetchQueries: ['StudentDistinct'] });
-    this.setState({ deleted: false, openDialog: false });
+    this.setState({ deleted: false, openDialog: false, successDeleted: true });
   };
 
   handleChange = e => {
@@ -185,7 +196,7 @@ class PeriodList extends Component {
 
   render() {
     const { classes } = this.props;
-    const { career, checked, deleted, openDialog } = this.state;
+    const { career, checked, deleted, openDialog, successDeleted } = this.state;
 
     return (
       <Query query={studentDistinct} variables={{ param: 'TipoSemestre' }}>
@@ -196,8 +207,14 @@ class PeriodList extends Component {
 
           return (
             <div className={classes.root}>
+              {/* To ask if the user want to download or remove the period */}
               {openDialog ? this.displayDialog() : null}
+
+              {/* To ask if the user want to remove the period */}
               {deleted ? this.displayAlert() : null}
+
+              {/* Show alert when the period was deleted */}
+              {successDeleted ? <Successfully message="Periodo eliminado con exito!" /> : null}
 
               <List>
                 {StudentDistinct.map((value, index) => (

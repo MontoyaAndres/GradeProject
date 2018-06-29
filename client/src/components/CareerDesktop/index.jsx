@@ -19,7 +19,8 @@ import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 
-import Loading from '../../components/Global/Loading';
+import Successfully from '../Global/Successfully';
+import Loading from '../Global/Loading';
 
 const styles = theme => ({
   root: {
@@ -88,7 +89,8 @@ class index extends Component {
     page: 0,
     rowsPerPage: 10,
     deleted: false,
-    studenIdDelete: 0
+    studenIdDelete: 0,
+    successDeleted: false
   };
 
   // It'll show one alert which will ask if the user wants to delete the student
@@ -159,12 +161,12 @@ class index extends Component {
       }
     });
 
-    this.setState({ deleted: false, studenIdDelete: 0 });
+    this.setState({ deleted: false, studenIdDelete: 0, successDeleted: true });
   };
 
   render() {
     const { classes, Variable, Situacion, CodigoPrograma, Estado, TipoSemestre } = this.props;
-    const { rowsPerPage, page, deleted } = this.state;
+    const { rowsPerPage, page, deleted, successDeleted } = this.state;
 
     return (
       <Query query={StudentByParams} variables={{ Variable, Situacion, CodigoPrograma, Estado, TipoSemestre }}>
@@ -175,7 +177,12 @@ class index extends Component {
 
           return (
             <Grid item xs={12}>
+              {/* To ask if the user want to delete the student */}
               {deleted ? this.displayAlert() : null}
+
+              {/* To show one alert which will show a message */}
+              {successDeleted ? <Successfully message="Estudiante eliminado con exito!" /> : null}
+
               <Paper className={classes.root}>
                 <div className={classes.tableWrapper}>
                   <Table className={classes.table}>

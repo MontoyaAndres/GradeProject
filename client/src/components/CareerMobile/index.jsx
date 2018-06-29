@@ -21,6 +21,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import Autorenew from '@material-ui/icons/Autorenew';
 import Info from '@material-ui/icons/Info';
 
+import Successfully from '../Global/Successfully';
 import Loading from '../../components/Global/Loading';
 
 const styles = theme => ({
@@ -83,7 +84,8 @@ const deleteStudentMutation = gql`
 class index extends Component {
   state = {
     deleted: false,
-    studenIdDelete: 0
+    studenIdDelete: 0,
+    successDeleted: false
   };
 
   // It'll show one alert which will ask if the user wants to delete the student
@@ -142,7 +144,7 @@ class index extends Component {
       }
     });
 
-    this.setState({ deleted: false, studenIdDelete: 0 });
+    this.setState({ deleted: false, studenIdDelete: 0, successDeleted: true });
   };
 
   handleRedirect = link => {
@@ -152,11 +154,15 @@ class index extends Component {
 
   render() {
     const { classes, Variable, Situacion, CodigoPrograma, Estado, TipoSemestre } = this.props;
-    const { deleted } = this.state;
+    const { deleted, successDeleted } = this.state;
 
     return (
       <div className={classes.root}>
+        {/* To ask if the user want to delete the student */}
         {deleted ? this.displayAlert() : null}
+
+        {/* To show one alert which will show a message */}
+        {successDeleted ? <Successfully message="Estudiante eliminado con exito!" /> : null}
 
         <Query query={StudentByParams} variables={{ Variable, Situacion, CodigoPrograma, Estado, TipoSemestre }}>
           {({ loading, data }) => {

@@ -3,8 +3,6 @@ import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import Dropzone from 'react-dropzone';
 import Grid from '@material-ui/core/Grid';
-import Snackbar from '@material-ui/core/Snackbar';
-import IconButton from '@material-ui/core/IconButton';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -12,9 +10,9 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import Button from '@material-ui/core/Button';
-import CloseIcon from '@material-ui/icons/Close';
 
 import Loading from '../Global/Loading';
+import Successfully from '../Global/Successfully';
 import normalizeErrors from '../../normalizeErrors';
 
 // query
@@ -39,16 +37,11 @@ const uploadFileMutation = gql`
 
 class uploadFile extends Component {
   state = {
-    hide: false,
     period: '',
     errorClient: false,
     errorServer: true,
     errorTitle: '',
     errorMessage: ''
-  };
-
-  handleHide = () => {
-    this.setState({ hide: false });
   };
 
   handleErrorClient = () => {
@@ -62,33 +55,6 @@ class uploadFile extends Component {
   handleChange = e => {
     const { value, name } = e.target;
     this.setState({ [name]: value });
-  };
-
-  successfully = () => {
-    const { hide } = this.state;
-
-    return (
-      <div>
-        <Snackbar
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'left'
-          }}
-          open={hide}
-          autoHideDuration={4000}
-          onClose={this.handleHide}
-          ContentProps={{
-            'aria-describedby': 'message-id'
-          }}
-          message={<span id="message-id">Archivo subido con exito!</span>}
-          action={[
-            <IconButton key="close" aria-label="Close" color="inherit" onClick={this.handleHide}>
-              <CloseIcon />
-            </IconButton>
-          ]}
-        />
-      </div>
-    );
   };
 
   displayClientError = () => {
@@ -184,7 +150,7 @@ class uploadFile extends Component {
 
           return (
             <div>
-              {data && data.uploadFile.ok ? this.successfully() : null}
+              {data && data.uploadFile.ok ? <Successfully message="Period subido con exito!" /> : null}
               <Grid item xs={12}>
                 <Grid
                   container
@@ -202,7 +168,6 @@ class uploadFile extends Component {
                           const isTipoSemestre = new RegExp(/^\d{4}-[1-2]$/);
                           if (isTipoSemestre.test(period)) {
                             mutate({ variables: { file, period } });
-                            this.setState({ hide: true });
                           } else {
                             this.setState({
                               errorClient: true,
