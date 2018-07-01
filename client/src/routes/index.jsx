@@ -7,6 +7,7 @@ import Home from './Home';
 import Career from './Career';
 import StudentInformation from './StudentInformation';
 import Register from './Register';
+import UpdateStudent from './UpdateStudent';
 import Login from './Login';
 import Error404 from './Error404';
 
@@ -26,6 +27,7 @@ function isAuthenticated() {
 
 function isExactCareer(url) {
   const URL = url.split('/')[2];
+  console.log(URL);
   const findURL = SelectData.Carreras.find(carrera => carrera === URL);
   // To see if the url exists in the array
   if (findURL === URL) {
@@ -54,10 +56,12 @@ const IsLogin = ({ component: Component, ...rest }) => (
   />
 );
 
-const ExactCareer = ({ ...rest }) => (
+const ExactCareer = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
-    render={props => (isExactCareer(props.match.url) ? <PrivateRoute {...props} component={Career} /> : <Error404 />)}
+    render={props =>
+      isExactCareer(props.match.url) ? <PrivateRoute {...props} component={Component} /> : <Error404 />
+    }
   />
 );
 
@@ -65,8 +69,9 @@ const Router = () => (
   <BrowserRouter>
     <Switch>
       <PrivateRoute exact path="/" component={Home} />
-      <ExactCareer exact path="/carrera/:Career" />
+      <ExactCareer exact path="/carrera/:Career" component={Career} />
       <PrivateRoute exact path="/estudiante/:_id" component={StudentInformation} />
+      <PrivateRoute exact path="/editar/:_id" component={UpdateStudent} />
       <IsLogin exact path="/registrar" component={Register} />
       <IsLogin exact path="/login" component={Login} />
       <Route component={Error404} />

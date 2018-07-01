@@ -47,11 +47,6 @@ export default `
     errors: [Error]
   }
 
-  type AvoidResponse {
-    ok: Boolean!
-    errors: [Error]
-  }
-
   type Query {
     allStudents: [Student!]!
     Student(_id: ID!): Student
@@ -100,14 +95,16 @@ export default `
       Situacion: String,
       Variable: String
     ): StudentResponse!
+
     updateStudent(
       _id: ID!,
-      CodigoBanner: Int,
+      CodigoBanner: String,
+      TipoSemestre: String,
       Nombres: String,
       Apellidos: String,
       Genero: String,
-      Edad: Int,
-      NumeroIdentificacion: Int,
+      Edad: String,
+      NumeroIdentificacion: String,
       TipoDocIdentidad: String,
       NivelFormacion: String,
       CodigoPrograma: String,
@@ -115,17 +112,17 @@ export default `
       Jornada: String,
       AreaConocimiento: String,
       NucleoBasicoConocimiento: String,
-      IES: Int,
-      Snies: Int,
+      IES: String,
+      Snies: String,
       Rectoria: String,
       CodigoSede: String,
       Sede: String,
       CentroRegional: String,
-      CodigoPeriodoAcademico: Int,
-      PeriodoAcademicoInscripcion: Int,
+      CodigoPeriodoAcademico: String,
+      PeriodoAcademicoInscripcion: String,
       DescripcionMetodologia: String,
       TipoEstudianteAgrupado: String,
-      LugarResidencia: Int,
+      LugarResidencia: String,
       TelCel: String,
       FechaCel: String,
       TelRe: String,
@@ -139,7 +136,7 @@ export default `
       Comentario: String,
       Situacion: String,
       Variable: String
-    ): AvoidResponse!
+    ): Boolean!
     deleteStudent(_id: ID!): Boolean!,
     deleteTipoSemestre(TipoSemestre: String!): Boolean!
   }

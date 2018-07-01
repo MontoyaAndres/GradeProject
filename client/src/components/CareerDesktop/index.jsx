@@ -21,6 +21,7 @@ import EditIcon from '@material-ui/icons/Edit';
 
 import Successfully from '../Global/Successfully';
 import Loading from '../Global/Loading';
+import { StudentByParams } from '../../graphql/mutation';
 
 const styles = theme => ({
   root: {
@@ -51,32 +52,6 @@ const styles = theme => ({
     }
   }
 });
-
-const StudentByParams = gql`
-  query StudentByParams(
-    $Variable: String!
-    $Situacion: String!
-    $CodigoPrograma: String!
-    $Estado: String!
-    $TipoSemestre: String!
-  ) {
-    StudentByParams(
-      Variable: $Variable
-      Situacion: $Situacion
-      CodigoPrograma: $CodigoPrograma
-      Estado: $Estado
-      TipoSemestre: $TipoSemestre
-    ) {
-      _id
-      CodigoBanner
-      Nombres
-      Apellidos
-      Comentario
-      Situacion
-      Variable
-    }
-  }
-`;
 
 const deleteStudentMutation = gql`
   mutation($id: ID!) {
@@ -228,7 +203,7 @@ class index extends Component {
                                 variant="fab"
                                 className={classes.editButton}
                                 color="secondary"
-                                onClick={() => this.handleRedirect(`/estudiante/editar/${student._id}`)}
+                                onClick={() => this.handleRedirect(`/editar/${student._id}`)}
                               >
                                 <EditIcon />
                               </Button>

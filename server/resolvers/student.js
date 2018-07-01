@@ -132,14 +132,9 @@ export default {
             Situacion,
             Variable
           });
-          return {
-            ok: true
-          };
+          return true;
         } catch (err) {
-          return {
-            ok: false,
-            errors: formatErrors(err, models)
-          };
+          return false;
         }
       }
     ),

@@ -23,6 +23,7 @@ import Info from '@material-ui/icons/Info';
 
 import Successfully from '../Global/Successfully';
 import Loading from '../../components/Global/Loading';
+import { StudentByParams } from '../../graphql/mutation';
 
 const styles = theme => ({
   root: {
@@ -48,32 +49,6 @@ const styles = theme => ({
     fontSize: 18
   }
 });
-
-const StudentByParams = gql`
-  query StudentByParams(
-    $Variable: String!
-    $Situacion: String!
-    $CodigoPrograma: String!
-    $Estado: String!
-    $TipoSemestre: String!
-  ) {
-    StudentByParams(
-      Variable: $Variable
-      Situacion: $Situacion
-      CodigoPrograma: $CodigoPrograma
-      Estado: $Estado
-      TipoSemestre: $TipoSemestre
-    ) {
-      _id
-      CodigoBanner
-      Nombres
-      Apellidos
-      Comentario
-      Situacion
-      Variable
-    }
-  }
-`;
 
 const deleteStudentMutation = gql`
   mutation($id: ID!) {
@@ -228,7 +203,7 @@ class index extends Component {
                             </IconButton>
                             <IconButton
                               aria-label="Update"
-                              onClick={() => this.handleRedirect(`/estudiante/editar/${student._id}`)}
+                              onClick={() => this.handleRedirect(`/editar/${student._id}`)}
                             >
                               <Autorenew />
                             </IconButton>
