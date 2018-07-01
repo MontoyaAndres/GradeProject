@@ -27,7 +27,6 @@ function isAuthenticated() {
 
 function isExactCareer(url) {
   const URL = url.split('/')[2];
-  console.log(URL);
   const findURL = SelectData.Carreras.find(carrera => carrera === URL);
   // To see if the url exists in the array
   if (findURL === URL) {

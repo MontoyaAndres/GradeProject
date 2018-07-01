@@ -5,7 +5,8 @@
   "main": "index.jsx",
   "scripts": {
     "kill": "fuser -k 3000/tcp",
-    "start": "NODE_ENV=development react-scripts start",
+    "dev": "NODE_ENV=development react-scripts start",
+    "start": "node index.js",
     "build": "react-scripts build",
     "eject": "react-scripts eject"
   },
