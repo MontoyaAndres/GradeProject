@@ -9,7 +9,7 @@ export const createTokens = async (user, secret, secret2) => {
     },
     secret,
     {
-      expiresIn: '1d'
+      expiresIn: '1h'
     }
   );
 
@@ -30,9 +30,10 @@ export const refreshTokens = async (token, refreshToken, models, SECRET, SECRET2
   let userId = 0;
   try {
     const {
-      user: { id }
+      user: { _id }
     } = jwt.decode(refreshToken);
-    userId = id;
+
+    userId = _id;
   } catch (err) {
     return {};
   }
@@ -55,7 +56,7 @@ export const refreshTokens = async (token, refreshToken, models, SECRET, SECRET2
     return {};
   }
 
-  const [newToken, newRefreshToken] = await createTokens(user, SECRET, user.refreshSecret);
+  const [newToken, newRefreshToken] = await createTokens(user, SECRET, refreshSecret);
   return {
     token: newToken,
     refreshToken: newRefreshToken,
