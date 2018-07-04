@@ -5,8 +5,12 @@ import CloseIcon from '@material-ui/icons/Close';
 
 class Successfully extends PureComponent {
   state = {
-    hide: true
+    hide: false
   };
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({ hide: nextProps.hide });
+  }
 
   handleHide = () => {
     this.setState({ hide: false });

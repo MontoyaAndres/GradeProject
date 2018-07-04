@@ -63,6 +63,11 @@ class PeriodList extends Component {
       // so, the function "onHandleSelectedAndCareer" needs to update!
       this.props.onHandleSelectedAndCareer(this.state.selected, this.state.career);
     }
+
+    if (prevState.successDeleted) {
+      // if the period was deleted, this will format the state successDeleted
+      this.setState({ successDeleted: false });
+    }
   }
 
   // Show one dialog which will show if the user want to download or delete one period
@@ -151,8 +156,11 @@ class PeriodList extends Component {
 
   handleDeletePeriod = () => {
     const { valueDeleleted } = this.state;
-    // delete the period and refresh the query "StudentDistinct"
-    this.props.mutate({ variables: { period: valueDeleleted }, refetchQueries: ['StudentDistinct'] });
+    // delete the period and refetch the query "studentDistinct"
+    this.props.mutate({
+      variables: { period: valueDeleleted },
+      refetchQueries: [{ query: studentDistinct, variables: { param: 'TipoSemestre' } }]
+    });
     this.setState({ deleted: false, openDialog: false, successDeleted: true });
   };
 
@@ -214,7 +222,7 @@ class PeriodList extends Component {
               {deleted ? this.displayAlert() : null}
 
               {/* Show alert when the period was deleted */}
-              {successDeleted ? <Successfully message="Periodo eliminado con exito!" /> : null}
+              <Successfully message="Periodo eliminado con exito!" hide={successDeleted} />
 
               <List>
                 {StudentDistinct.map((value, index) => (

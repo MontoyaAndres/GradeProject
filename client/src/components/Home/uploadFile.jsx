@@ -121,7 +121,6 @@ class uploadFile extends Component {
 
     return (
       <Mutation
-        asyncMode
         mutation={uploadFileMutation}
         refetchQueries={[{ query: studentDistinct, variables: { param: 'TipoSemestre' } }]}
       >
@@ -150,7 +149,7 @@ class uploadFile extends Component {
 
           return (
             <div>
-              {data && data.uploadFile.ok ? <Successfully message="Period subido con exito!" /> : null}
+              <Successfully hide={!!(data && data.uploadFile.ok)} message="Periodo subido con exito!" />
               <Grid item xs={12}>
                 <Grid
                   container

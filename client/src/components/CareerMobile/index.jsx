@@ -63,6 +63,13 @@ class index extends Component {
     successDeleted: false
   };
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.successDeleted) {
+      // if the student was deleted, this will format the state successDeleted
+      this.setState({ successDeleted: false });
+    }
+  }
+
   // It'll show one alert which will ask if the user wants to delete the student
   displayAlert = () => {
     const { deleted } = this.state;
@@ -137,7 +144,7 @@ class index extends Component {
         {deleted ? this.displayAlert() : null}
 
         {/* To show one alert which will show a message */}
-        {successDeleted ? <Successfully message="Estudiante eliminado con exito!" /> : null}
+        <Successfully hide={successDeleted} message="Estudiante eliminado con exito!" />
 
         <Query query={StudentByParams} variables={{ Variable, Situacion, CodigoPrograma, Estado, TipoSemestre }}>
           {({ loading, data }) => {
