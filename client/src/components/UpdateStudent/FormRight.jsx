@@ -144,6 +144,7 @@ class FormRight extends Component {
                   <InputLabel htmlFor="Snies">Snies</InputLabel>
                   <Input
                     id="Snies"
+                    type="number"
                     name="Student.Snies"
                     value={values.Student.Snies}
                     onChange={handleChange}
@@ -178,6 +179,7 @@ class FormRight extends Component {
                   <InputLabel htmlFor="CodigoPeriodoAcademico">Código de periodo academico</InputLabel>
                   <Input
                     id="CodigoPeriodoAcademico"
+                    type="number"
                     name="Student.CodigoPeriodoAcademico"
                     value={values.Student.CodigoPeriodoAcademico}
                     onChange={handleChange}
@@ -236,6 +238,7 @@ class FormRight extends Component {
                   <InputLabel htmlFor="PeriodoAcademicoInscripcion">Perido academico inscripción</InputLabel>
                   <Input
                     id="PeriodoAcademicoInscripcion"
+                    type="number"
                     name="Student.PeriodoAcademicoInscripcion"
                     value={values.Student.PeriodoAcademicoInscripcion}
                     onChange={handleChange}
@@ -291,6 +294,7 @@ class FormRight extends Component {
                   <InputLabel htmlFor="LugarResidencia">Lugar de residencia</InputLabel>
                   <Input
                     id="LugarResidencia"
+                    type="number"
                     name="Student.LugarResidencia"
                     value={values.Student.LugarResidencia}
                     onChange={handleChange}

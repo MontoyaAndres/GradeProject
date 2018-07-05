@@ -96,7 +96,7 @@ class FormLeft extends Component {
                   <InputLabel htmlFor="Edad">Edad</InputLabel>
                   <Input
                     id="Edad"
-                    type="text"
+                    type="number"
                     name="Student.Edad"
                     value={values.Student.Edad}
                     onChange={handleChange}
@@ -131,7 +131,7 @@ class FormLeft extends Component {
                   <InputLabel htmlFor="NumeroIdentificacion">Número de identificación</InputLabel>
                   <Input
                     id="NumeroIdentificacion"
-                    type="text"
+                    type="number"
                     name="Student.NumeroIdentificacion"
                     value={values.Student.NumeroIdentificacion}
                     onChange={handleChange}
@@ -144,8 +144,8 @@ class FormLeft extends Component {
                 <FormControl className={classes.textField}>
                   <InputLabel htmlFor="TelCel">Teléfono</InputLabel>
                   <Input
-                    type="text"
                     id="TelCel"
+                    type="tel"
                     name="Student.TelCel"
                     value={values.Student.TelCel}
                     onChange={handleChange}
@@ -208,6 +208,7 @@ class FormLeft extends Component {
                   <InputLabel htmlFor="TelRe">Teléfono de residencia</InputLabel>
                   <Input
                     id="TelRe"
+                    type="tel"
                     name="Student.TelRe"
                     value={values.Student.TelRe}
                     onChange={handleChange}

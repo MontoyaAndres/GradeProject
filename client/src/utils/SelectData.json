@@ -1,15 +1,15 @@
 {
   "TipoDocIdentidad": [
-    "CC-Cédula de Ciudadania",
-    "TI-Tarjeta de Identidad",
+    "CC-CÉDULA DE CIUDADANIA",
+    "TI-TARJETA DE IDENTIDAD",
     "NO DOCUMENTO"
   ],
   "NivelFormacion": [
-    "Especialización",
-    "Técnico Profesional",
-    "Licenciatura",
-    "Pregrado",
-    "Tecnología",
+    "ESPECIALIZACIÓN",
+    "TÉCNICO PROFESIONAL",
+    "LICENCIATURA",
+    "PREGRADO",
+    "TECNOLOGÍA",
     "NO NIVEL FORMACIÓN"
   ],
   "Genero": [
@@ -38,30 +38,30 @@
     "NO CÓDIGO PROGRAMA"
   ],
   "DescripcionPrograma": [
-    "Administración Salud Ocupacional",
-    "Administración de Empresas",
-    "Administración Financiera Dist",
-    "Prof Administración Financiera",
-    "Comunicación Social Periodismo",
-    "Contaduría Publica",
-    "Ing de Sistemas Uniminuto",
-    "Ingeniería Civil",
-    "LI Pedagogía-D",
-    "Lic Pedagogia infantil",
-    "TC en Informática",
-    "Trabajo Social",
-    "Tec Prof Constru Elem Estru Y",
-    "Lic Ciencias Naturales",
-    "Tecnología en Electrónica",
-    "Tec en Automatización Industri",
-    "Teclg Gest d Const Edificacion",
-    "Tecnología en Electrónica",
+    "ADMINISTRACIÓN SALUD OCUPACIONAL",
+    "ADMINISTRACIÓN DE EMPRESAS",
+    "ADMINISTRACIÓN FINANCIERA DIST",
+    "PROF ADMINISTRACIÓN FINANCIERA",
+    "COMUNICACIÓN SOCIAL PERIODISMO",
+    "CONTADURÍA PUBLICA",
+    "ING DE SISTEMAS UNIMINUTO",
+    "INGENIERÍA CIVIL",
+    "LI PEDAGOGÍA-D",
+    "LIC PEDAGOGÍA INFANTIL",
+    "TC EN INFORMÁTICA",
+    "TRABAJO SOCIAL",
+    "TEC PROF CONSTRU ELEM ESTRU Y",
+    "LIC CIENCIAS NATURALES",
+    "TECNOLOGÍA EN ELECTRÓNICA",
+    "TEC EN AUTOMATIZACIÓN INDUSTRI",
+    "TECLG GEST D CONST EDIFICACION",
+    "TECNOLOGÍA EN ELECTRÓNICA",
     "NO DESCRIPCIÓN"
   ],
   "Jornada": [
-    "Distancia",
-    "Mañana",
-    "Noche",
+    "DISTANCIA",
+    "MAÑANA",
+    "NOCHE",
     "NO JORNADA"
   ],
   "AreaConocimiento": [
@@ -113,18 +113,19 @@
     "NO CENTRO REGIONAL"
   ],
   "DescripcionMetodologia": [
-    "Distancia (Tradicional)",
-    "Presencial",
+    "DISTANCIA (TRADICIONAL)",
+    "DISTANCIA",
+    "PRESENCIAL",
     "NO DESCRIPCIÓN"
   ],
   "TipoEstudianteAgrupado": [
-    "Continuo",
-    "Primera Vez",
+    "CONTINUO",
+    "PRIMERA VEZ",
     "NINGUNO"
   ],
   "Estado": [
-    "Ausentismo",
-    "Deserción",
+    "AUSENTISMO",
+    "DESERCIÓN",
     "NO ESTADO"
   ],
   "VariableSituacion": {

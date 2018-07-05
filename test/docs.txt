@@ -1,5 +1,28 @@
 https://github.com/zeit/next-plugins/tree/master/packages/next-preact
 
-https://stackoverflow.com/questions/37981269/how-to-search-string-values-in-graphql
 
-https://github.com/jaydenseric/apollo-upload-server/issues/18
+Género
+
+Edad
+
+Tipo Doc Identidad
+
+Nivel Formación
+
+Jornada
+
+Snies
+
+Código Sede
+
+Descripción Metodología
+
+Tipo Estudiante Agrupado
+
+Ciudad
+
+Estado
+
+Situacion
+
+Variable
