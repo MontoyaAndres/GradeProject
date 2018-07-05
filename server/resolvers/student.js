@@ -3,7 +3,6 @@ import requiresAuth from '../utils/permissions';
 
 export default {
   Query: {
-    allStudents: requiresAuth.createResolver((parent, args, { models }) => models.Student.find().lean()),
     Student: requiresAuth.createResolver((parent, { _id }, { models }) => models.Student.findOne({ _id }).lean()),
     StudentByParams: requiresAuth.createResolver(
       (parent, { Search, Variable, Situacion, CodigoPrograma, Estado, TipoSemestre }, { models }) => {

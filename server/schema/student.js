@@ -48,7 +48,6 @@ export default `
   }
 
   type Query {
-    allStudents: [Student!]!
     Student(_id: ID!): Student
     StudentByParams(Search: String, Variable: String, Situacion: String, CodigoPrograma: String, Estado: String, TipoSemestre: String): [Student]
     StudentDistinct(Param: String!): [String]
