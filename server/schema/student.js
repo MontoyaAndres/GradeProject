@@ -1,7 +1,7 @@
 export default `
   type Student {
     _id: ID!
-    CodigoBanner: Int,
+    CodigoBanner: String,
     TipoSemestre: String,
     Nombres: String,
     Apellidos: String,
@@ -50,13 +50,13 @@ export default `
   type Query {
     allStudents: [Student!]!
     Student(_id: ID!): Student
-    StudentByParams(Variable: String, Situacion: String, CodigoPrograma: String, Estado: String, TipoSemestre: String): [Student]
+    StudentByParams(Search: String, Variable: String, Situacion: String, CodigoPrograma: String, Estado: String, TipoSemestre: String): [Student]
     StudentDistinct(Param: String!): [String]
   }
 
   type Mutation {
     createStudent(
-      CodigoBanner: Int,
+      CodigoBanner: String,
       TipoSemestre: String,
       Nombres: String,
       Apellidos: String,

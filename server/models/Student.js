@@ -8,7 +8,7 @@ function replaceFecha(value) {
 
 const studentSchema = new mongoose.Schema({
   CodigoBanner: {
-    type: Number,
+    type: String,
     default: 0
   },
   TipoSemestre: {

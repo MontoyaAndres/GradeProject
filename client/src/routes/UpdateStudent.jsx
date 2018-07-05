@@ -141,6 +141,7 @@ const UpdateStudent = ({ classes, mutate, history, match: { url, params } }) => 
                   {
                     query: StudentByParams,
                     variables: {
+                      Search: '',
                       Variable: values.Student.Variable,
                       Situacion: values.Student.Situacion,
                       CodigoPrograma: values.Student.CodigoPrograma,

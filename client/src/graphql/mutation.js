@@ -2,6 +2,7 @@ import gql from 'graphql-tag';
 
 const StudentByParams = gql`
   query StudentByParams(
+    $Search: String!
     $Variable: String!
     $Situacion: String!
     $CodigoPrograma: String!
@@ -9,6 +10,7 @@ const StudentByParams = gql`
     $TipoSemestre: String!
   ) {
     StudentByParams(
+      Search: $Search
       Variable: $Variable
       Situacion: $Situacion
       CodigoPrograma: $CodigoPrograma

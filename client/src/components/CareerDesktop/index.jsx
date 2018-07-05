@@ -21,6 +21,7 @@ import EditIcon from '@material-ui/icons/Edit';
 
 import Successfully from '../Global/Successfully';
 import Loading from '../Global/Loading';
+import Seacher from './Searcher';
 import { StudentByParams } from '../../graphql/mutation';
 
 const styles = theme => ({
@@ -65,7 +66,8 @@ class index extends Component {
     rowsPerPage: 10,
     deleted: false,
     studenIdDelete: 0,
-    successDeleted: false
+    successDeleted: false,
+    searchStudent: ''
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -123,7 +125,7 @@ class index extends Component {
   };
 
   handleDeleteStudent = async () => {
-    const { studenIdDelete } = this.state;
+    const { studenIdDelete, searchStudent } = this.state;
     const { Variable, Situacion, CodigoPrograma, Estado, TipoSemestre } = this.props;
 
     await this.props.mutate({
@@ -132,26 +134,34 @@ class index extends Component {
         if (deleteStudent) {
           const data = store.readQuery({
             query: StudentByParams,
-            variables: { Variable, Situacion, CodigoPrograma, Estado, TipoSemestre }
+            variables: { Search: searchStudent, Variable, Situacion, CodigoPrograma, Estado, TipoSemestre }
           });
           store.writeQuery({
             query: StudentByParams,
-            variables: { Variable, Situacion, CodigoPrograma, Estado, TipoSemestre },
+            variables: { Search: searchStudent, Variable, Situacion, CodigoPrograma, Estado, TipoSemestre },
             data: { StudentByParams: data.StudentByParams.filter(item => item._id !== studenIdDelete) }
           });
         }
       }
     });
 
-    this.setState({ deleted: false, studenIdDelete: 0, successDeleted: true });
+    this.setState({ searchStudent: '', deleted: false, studenIdDelete: 0, successDeleted: true });
+  };
+
+  handleSearchStudent = search => {
+    this.setState({ searchStudent: search });
   };
 
   render() {
     const { classes, Variable, Situacion, CodigoPrograma, Estado, TipoSemestre } = this.props;
-    const { rowsPerPage, page, deleted, successDeleted } = this.state;
+    const { rowsPerPage, page, deleted, successDeleted, searchStudent } = this.state;
 
     return (
-      <Query query={StudentByParams} variables={{ Variable, Situacion, CodigoPrograma, Estado, TipoSemestre }}>
+      <Query
+        query={StudentByParams}
+        variables={{ Search: searchStudent, Variable, Situacion, CodigoPrograma, Estado, TipoSemestre }}
+        fetchPolicy="network-only"
+      >
         {({ loading, data }) => {
           if (loading) {
             return <Loading />;
@@ -176,7 +186,9 @@ class index extends Component {
                         <TableCell padding="none">Comentario</TableCell>
                         <TableCell padding="none">Situación</TableCell>
                         <TableCell padding="none">Variable</TableCell>
-                        <TableCell padding="none">&nbsp;</TableCell>
+                        <TableCell padding="none">
+                          <Seacher onHandleSearchStudent={this.handleSearchStudent} />
+                        </TableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>

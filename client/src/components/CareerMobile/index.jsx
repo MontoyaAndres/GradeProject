@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Query, graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import { withStyles } from '@material-ui/core/styles';
@@ -23,6 +23,7 @@ import Info from '@material-ui/icons/Info';
 
 import Successfully from '../Global/Successfully';
 import Loading from '../../components/Global/Loading';
+import Seacher from './Searcher';
 import { StudentByParams } from '../../graphql/mutation';
 
 const styles = theme => ({
@@ -60,7 +61,8 @@ class index extends Component {
   state = {
     deleted: false,
     studenIdDelete: 0,
-    successDeleted: false
+    successDeleted: false,
+    searchStudent: ''
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -106,7 +108,7 @@ class index extends Component {
   };
 
   handleDeleteStudent = async () => {
-    const { studenIdDelete } = this.state;
+    const { studenIdDelete, searchStudent } = this.state;
     const { Variable, Situacion, CodigoPrograma, Estado, TipoSemestre } = this.props;
 
     await this.props.mutate({
@@ -115,18 +117,22 @@ class index extends Component {
         if (deleteStudent) {
           const data = store.readQuery({
             query: StudentByParams,
-            variables: { Variable, Situacion, CodigoPrograma, Estado, TipoSemestre }
+            variables: { Search: searchStudent, Variable, Situacion, CodigoPrograma, Estado, TipoSemestre }
           });
           store.writeQuery({
             query: StudentByParams,
-            variables: { Variable, Situacion, CodigoPrograma, Estado, TipoSemestre },
+            variables: { Search: searchStudent, Variable, Situacion, CodigoPrograma, Estado, TipoSemestre },
             data: { StudentByParams: data.StudentByParams.filter(item => item._id !== studenIdDelete) }
           });
         }
       }
     });
 
-    this.setState({ deleted: false, studenIdDelete: 0, successDeleted: true });
+    this.setState({ searchStudent: '', deleted: false, studenIdDelete: 0, successDeleted: true });
+  };
+
+  handleSearchStudent = search => {
+    this.setState({ searchStudent: search });
   };
 
   handleRedirect = link => {
@@ -136,101 +142,102 @@ class index extends Component {
 
   render() {
     const { classes, Variable, Situacion, CodigoPrograma, Estado, TipoSemestre } = this.props;
-    const { deleted, successDeleted } = this.state;
+    const { deleted, successDeleted, searchStudent } = this.state;
 
     return (
-      <div className={classes.root}>
-        {/* To ask if the user want to delete the student */}
-        {deleted ? this.displayAlert() : null}
+      <Query
+        query={StudentByParams}
+        variables={{ Search: searchStudent, Variable, Situacion, CodigoPrograma, Estado, TipoSemestre }}
+        fetchPolicy="network-only"
+      >
+        {({ loading, data }) => {
+          if (loading) {
+            return <Loading />;
+          }
 
-        {/* To show one alert which will show a message */}
-        <Successfully hide={successDeleted} message="Estudiante eliminado con exito!" />
-
-        <Query query={StudentByParams} variables={{ Variable, Situacion, CodigoPrograma, Estado, TipoSemestre }}>
-          {({ loading, data }) => {
-            if (loading) {
-              return <Loading />;
-            }
-
-            if (data.StudentByParams.length === 0) {
-              return (
-                <Paper className={classes.error}>
-                  <Grid container wrap="nowrap">
-                    <Grid item>
-                      <ErrorIcon />
-                    </Grid>
-                    <Grid item xs zeroMinWidth>
-                      No se encontraron datos.
-                    </Grid>
-                  </Grid>
-                </Paper>
-              );
-            }
-
+          if (data.StudentByParams.length === 0) {
             return (
-              <Fragment>
-                {data.StudentByParams.map((student, i) => (
-                  <ExpansionPanel key={i}>
-                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                      <span className={classes.heading}>{student.Apellidos}</span>
-                      <span className={classes.secondaryHeading}>{`${student.CodigoBanner}`}</span>
-                    </ExpansionPanelSummary>
-                    <ExpansionPanelDetails>
-                      <Grid container>
-                        <Grid item xs={12}>
-                          <Grid container wrap="nowrap" direction="column" justify="center" alignItems="center">
-                            <Grid item xs>
-                              <div>
-                                <FormLabel className={classes.FormLabel}>Código Banner:</FormLabel>{' '}
-                                {student.CodigoBanner}
-                              </div>
-                              <div>
-                                <FormLabel className={classes.FormLabel}>Nombre:</FormLabel> {student.Nombres}
-                              </div>
-                              <div>
-                                <FormLabel className={classes.FormLabel}>Apellidos:</FormLabel> {student.Apellidos}
-                              </div>
-                              <div>
-                                <FormLabel className={classes.FormLabel}>Comentario:</FormLabel> {student.Comentario}
-                              </div>
-                              <div>
-                                <FormLabel className={classes.FormLabel}>Situación:</FormLabel> {student.Situacion}
-                              </div>
-                              <div>
-                                <FormLabel className={classes.FormLabel}>Variable:</FormLabel> {student.Variable}
-                              </div>
-                            </Grid>
-                          </Grid>
-                          <div style={{ textAlign: 'center' }}>
-                            <IconButton
-                              aria-label="Delete"
-                              onClick={() => this.setState({ deleted: true, studenIdDelete: student._id })}
-                            >
-                              <DeleteIcon />
-                            </IconButton>
-                            <IconButton
-                              aria-label="Update"
-                              onClick={() => this.handleRedirect(`/editar/${student._id}`)}
-                            >
-                              <Autorenew />
-                            </IconButton>
-                            <IconButton
-                              aria-label="Information"
-                              onClick={() => this.handleRedirect(`/estudiante/${student._id}`)}
-                            >
-                              <Info />
-                            </IconButton>
-                          </div>
-                        </Grid>
-                      </Grid>
-                    </ExpansionPanelDetails>
-                  </ExpansionPanel>
-                ))}
-              </Fragment>
+              <Paper className={classes.error}>
+                <Grid container wrap="nowrap">
+                  <Grid item>
+                    <ErrorIcon />
+                  </Grid>
+                  <Grid item xs zeroMinWidth>
+                    No se encontraron datos.
+                  </Grid>
+                </Grid>
+              </Paper>
             );
-          }}
-        </Query>
-      </div>
+          }
+
+          return (
+            <div className={classes.root}>
+              {/* To ask if the user want to delete the student */}
+              {deleted ? this.displayAlert() : null}
+
+              {/* To show one alert which will show a message */}
+              <Successfully hide={successDeleted} message="Estudiante eliminado con exito!" />
+
+              {/* Button to find students */}
+              <Seacher onHandleSearchStudent={this.handleSearchStudent} />
+
+              {data.StudentByParams.map((student, i) => (
+                <ExpansionPanel key={i}>
+                  <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                    <span className={classes.heading}>{student.Apellidos}</span>
+                    <span className={classes.secondaryHeading}>{`${student.CodigoBanner}`}</span>
+                  </ExpansionPanelSummary>
+                  <ExpansionPanelDetails>
+                    <Grid container>
+                      <Grid item xs={12}>
+                        <Grid container wrap="nowrap" direction="column" justify="center" alignItems="center">
+                          <Grid item xs>
+                            <div>
+                              <FormLabel className={classes.FormLabel}>Código Banner:</FormLabel> {student.CodigoBanner}
+                            </div>
+                            <div>
+                              <FormLabel className={classes.FormLabel}>Nombre:</FormLabel> {student.Nombres}
+                            </div>
+                            <div>
+                              <FormLabel className={classes.FormLabel}>Apellidos:</FormLabel> {student.Apellidos}
+                            </div>
+                            <div>
+                              <FormLabel className={classes.FormLabel}>Comentario:</FormLabel> {student.Comentario}
+                            </div>
+                            <div>
+                              <FormLabel className={classes.FormLabel}>Situación:</FormLabel> {student.Situacion}
+                            </div>
+                            <div>
+                              <FormLabel className={classes.FormLabel}>Variable:</FormLabel> {student.Variable}
+                            </div>
+                          </Grid>
+                        </Grid>
+                        <div style={{ textAlign: 'center' }}>
+                          <IconButton
+                            aria-label="Delete"
+                            onClick={() => this.setState({ deleted: true, studenIdDelete: student._id })}
+                          >
+                            <DeleteIcon />
+                          </IconButton>
+                          <IconButton aria-label="Update" onClick={() => this.handleRedirect(`/editar/${student._id}`)}>
+                            <Autorenew />
+                          </IconButton>
+                          <IconButton
+                            aria-label="Information"
+                            onClick={() => this.handleRedirect(`/estudiante/${student._id}`)}
+                          >
+                            <Info />
+                          </IconButton>
+                        </div>
+                      </Grid>
+                    </Grid>
+                  </ExpansionPanelDetails>
+                </ExpansionPanel>
+              ))}
+            </div>
+          );
+        }}
+      </Query>
     );
   }
 }
