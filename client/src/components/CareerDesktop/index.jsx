@@ -75,6 +75,13 @@ class index extends Component {
       // if the student was deleted, this will format the state successDeleted
       this.setState({ successDeleted: false });
     }
+
+    if (prevState.searchStudent !== '') {
+      // when the props change, the searchStudent will need to be an empty string
+      if (prevState.searchStudent === this.state.searchStudent && !this.state.deleted && !this.state.successDeleted) {
+        this.setState({ searchStudent: '' });
+      }
+    }
   }
 
   // It'll show one alert which will ask if the user wants to delete the student
