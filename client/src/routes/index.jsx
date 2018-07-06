@@ -6,6 +6,7 @@ import withRoot from '../utils/withRoot';
 import Home from './Home';
 import Career from './Career';
 import StudentInformation from './StudentInformation';
+import Graphics from './Graphics';
 import Register from './Register';
 import UpdateStudent from './UpdateStudent';
 import Login from './Login';
@@ -71,6 +72,7 @@ const Router = () => (
       <ExactCareer exact path="/carrera/:Career" component={Career} />
       <PrivateRoute exact path="/estudiante/:_id" component={StudentInformation} />
       <PrivateRoute exact path="/editar/:_id" component={UpdateStudent} />
+      <PrivateRoute exact path="/graficas" component={Graphics} />
       <IsLogin exact path="/registrar" component={Register} />
       <IsLogin exact path="/login" component={Login} />
       <Route component={Error404} />

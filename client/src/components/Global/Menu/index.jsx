@@ -9,6 +9,7 @@ import Drawer from '@material-ui/core/Drawer';
 
 import Carreras from './Careers';
 import Home from './Home';
+import Graphics from './Graphics';
 
 const styles = theme => ({
   root: {
@@ -64,6 +65,10 @@ class Menu extends Component {
     if (urlName[1] === 'estudiante') {
       return <span className={classes.title}>Información de estudiante</span>;
     }
+
+    if (urlName[1] === 'graficas') {
+      return <span className={classes.title}>Gráficas</span>;
+    }
   };
 
   render() {
@@ -93,6 +98,9 @@ class Menu extends Component {
               </List>
               <List>
                 <Carreras onHandleClose={this.handleMenuModal} />
+              </List>
+              <List>
+                <Graphics onHandleClose={this.handleMenuModal} />
               </List>
             </div>
           </div>
