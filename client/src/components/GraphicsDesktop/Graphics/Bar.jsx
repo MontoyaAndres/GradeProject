@@ -26,7 +26,8 @@ const BarGraphic = ({ chartConfig, graphicBy }) => (
             ticks: {
               fixedStepSize: 20,
               max: 100,
-              beginAtZero: true
+              beginAtZero: true,
+              autoSkip: false
             }
           }
         ]

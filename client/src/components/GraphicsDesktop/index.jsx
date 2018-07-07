@@ -74,21 +74,22 @@ const index = ({ classes, CodigoPrograma, TipoSemestre, graphicBy, isVariable, s
       if (Graphics.ok) {
         const keys = Object.keys(Graphics.values);
         const values = Object.values(Graphics.values);
+        const randomColor = [];
+
+        values.forEach(() =>
+          randomColor.push(
+            `rgba(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(
+              Math.random() * 256
+            )}, 0.6)`
+          )
+        );
+
         const chartConfig = {
           labels: keys,
           datasets: [
             {
               data: values,
-              backgroundColor: [
-                'rgba(255, 99, 132, 0.6)',
-                'rgba(54, 162, 235, 0.6)',
-                'rgba(255, 206, 86, 0.6)',
-                'rgba(75, 192, 192, 0.6)',
-                'rgba(153, 102, 255, 0.6)',
-                'rgba(255, 159, 64, 0.6)',
-                'rgba(125, 244, 66, 0.6)',
-                'rgba(238, 65, 244, 0.6)'
-              ]
+              backgroundColor: randomColor
             }
           ]
         };
