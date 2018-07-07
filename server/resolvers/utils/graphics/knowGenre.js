@@ -9,7 +9,7 @@ export default function knowGenre(values) {
       values: {
         MASCULINO: Math.round((MASCULINO / (MASCULINO + FEMENINO + NOGENERO)) * 100),
         FEMENINO: Math.round((FEMENINO / (MASCULINO + FEMENINO + NOGENERO)) * 100),
-        NOGENERO: Math.round((NOGENERO / (MASCULINO + FEMENINO + NOGENERO)) * 100)
+        'NO GENERO': Math.round((NOGENERO / (MASCULINO + FEMENINO + NOGENERO)) * 100)
       }
     };
   }

@@ -10,7 +10,7 @@ export default function knowTipoEstudianteAgrupado(values) {
       ok: true,
       values: {
         CONTINUO: Math.round((CONTINUO / SUM_VALUES) * 100),
-        PRIMERA_VEZ: Math.round((PRIMERA_VEZ / SUM_VALUES) * 100),
+        'PRIMERA VEZ': Math.round((PRIMERA_VEZ / SUM_VALUES) * 100),
         NINGUNO: Math.round((NINGUNO / SUM_VALUES) * 100)
       }
     };

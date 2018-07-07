@@ -12,9 +12,9 @@ export default function knowDescripcionMetodologia(values) {
       ok: true,
       values: {
         DISTANCIA: Math.round((DISTANCIA / SUM_VALUES) * 100),
-        DISTANCIA_TRADICIONAL: Math.round((DISTANCIA_TRADICIONAL / SUM_VALUES) * 100),
+        'DISTANCIA (TRADICIONAL)': Math.round((DISTANCIA_TRADICIONAL / SUM_VALUES) * 100),
         PRESENCIAL: Math.round((PRESENCIAL / SUM_VALUES) * 100),
-        NO_DESCRIPCION: Math.round((NO_DESCRIPCION / SUM_VALUES) * 100)
+        'NO DESCRIPCIÓN': Math.round((NO_DESCRIPCION / SUM_VALUES) * 100)
       }
     };
   }

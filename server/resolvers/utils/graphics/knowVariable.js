@@ -21,13 +21,13 @@ export default function knowVariable(values) {
     return {
       ok: true,
       values: {
-        ACADEMICO: Math.round((ACADEMICO / SUM_VALUES) * 100),
+        ACADÉMICO: Math.round((ACADEMICO / SUM_VALUES) * 100),
         FINANCIERA: Math.round((FINANCIERA / SUM_VALUES) * 100),
-        NO_CONTACTO: Math.round((NO_CONTACTO / SUM_VALUES) * 100),
-        NO_PERTENECE: Math.round((NO_PERTENECE / SUM_VALUES) * 100),
-        NO_GESTION: Math.round((NO_GESTION / SUM_VALUES) * 100),
+        'NO CONTACTO': Math.round((NO_CONTACTO / SUM_VALUES) * 100),
+        'NO PERTENECE A LA MATRIZ': Math.round((NO_PERTENECE / SUM_VALUES) * 100),
+        'NO SE REALIZÓ GESTIÓN POR PARTE DEL PROGRAMA': Math.round((NO_GESTION / SUM_VALUES) * 100),
         PSICOSOCIAL: Math.round((PSICOSOCIAL / SUM_VALUES) * 100),
-        NO_VARIABLE: Math.round((NO_VARIABLE / SUM_VALUES) * 100)
+        'NO VARIABLE': Math.round((NO_VARIABLE / SUM_VALUES) * 100)
       }
     };
   }

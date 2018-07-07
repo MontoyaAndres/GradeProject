@@ -22,9 +22,7 @@ export default async function knowSituacion(CodigoPrograma, TipoSemestre, isVari
     if (Object.keys(counts).length) {
       return {
         ok: true,
-        values: {
-          counts
-        }
+        values: counts
       };
     }
 

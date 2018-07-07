@@ -43,7 +43,8 @@ class Graphics extends Component {
     dataTipoSemestre: [''],
     TipoSemestre: '',
     graphicBy: 'Género',
-    isVariable: 'ACADÉMICO'
+    isVariable: 'ACADÉMICO',
+    style: 'Bar'
   };
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -66,7 +67,7 @@ class Graphics extends Component {
       classes,
       match: { url }
     } = this.props;
-    const { CodigoPrograma, dataTipoSemestre, TipoSemestre, graphicBy, isVariable } = this.state;
+    const { CodigoPrograma, dataTipoSemestre, TipoSemestre, graphicBy, isVariable, style } = this.state;
     const dataVariable = Object.getOwnPropertyNames(SelectData.VariableSituacion);
 
     return (
@@ -165,6 +166,28 @@ class Graphics extends Component {
                       </Select>
                     </FormControl>
                   </div>
+
+                  <div>
+                    <FormControl className={classes.formControlMobil}>
+                      <InputLabel htmlFor="style">Estilo</InputLabel>
+                      <Select
+                        inputProps={{
+                          id: 'style',
+                          name: 'style'
+                        }}
+                        value={style}
+                        onChange={this.handleChange}
+                        className={classes.select}
+                        native
+                      >
+                        {['Bar', 'Line', 'Pie', 'Doughnut'].map((data, index) => (
+                          <option value={data} key={index}>
+                            {data}
+                          </option>
+                        ))}
+                      </Select>
+                    </FormControl>
+                  </div>
                 </Grid>
               </Grid>
             </Grid>
@@ -175,6 +198,7 @@ class Graphics extends Component {
             TipoSemestre={TipoSemestre}
             graphicBy={graphicBy}
             isVariable={isVariable}
+            style={style}
           />
         </Hidden>
       </Layout>

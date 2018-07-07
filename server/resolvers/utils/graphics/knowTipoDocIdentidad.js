@@ -7,9 +7,9 @@ export default function knowTipoDocIdentidad(values) {
     return {
       ok: true,
       values: {
-        CEDULA: Math.round((CEDULA / (CEDULA + TARJETA + NODOCUMENTO)) * 100),
-        TARJETA: Math.round((TARJETA / (CEDULA + TARJETA + NODOCUMENTO)) * 100),
-        NODOCUMENTO: Math.round((NODOCUMENTO / (CEDULA + TARJETA + NODOCUMENTO)) * 100)
+        'CC-CÉDULA DE CIUDADANIA': Math.round((CEDULA / (CEDULA + TARJETA + NODOCUMENTO)) * 100),
+        'TI-TARJETA DE IDENTIDAD': Math.round((TARJETA / (CEDULA + TARJETA + NODOCUMENTO)) * 100),
+        'NO DOCUMENTO': Math.round((NODOCUMENTO / (CEDULA + TARJETA + NODOCUMENTO)) * 100)
       }
     };
   }

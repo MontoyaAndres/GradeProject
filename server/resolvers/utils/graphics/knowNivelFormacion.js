@@ -19,12 +19,12 @@ export default function knowNivelFormacion(values) {
     return {
       ok: true,
       values: {
-        ESPECIALIZACION: Math.round((ESPECIALIZACION / SUM_VALUES) * 100),
-        TECNICO_PROFESIONAL: Math.round((TECNICO_PROFESIONAL / SUM_VALUES) * 100),
+        ESPECIALIZACIÓN: Math.round((ESPECIALIZACION / SUM_VALUES) * 100),
+        'TÉCNICO PROFESIONAL': Math.round((TECNICO_PROFESIONAL / SUM_VALUES) * 100),
         LICENCIATURA: Math.round((LICENCIATURA / SUM_VALUES) * 100),
         PREGRADO: Math.round((PREGRADO / SUM_VALUES) * 100),
-        TECNOLOGIA: Math.round((TECNOLOGIA / SUM_VALUES) * 100),
-        NO_NIVEL_FORMACION: Math.round((NO_NIVEL_FORMACION / SUM_VALUES) * 100)
+        TECNOLOGÍA: Math.round((TECNOLOGIA / SUM_VALUES) * 100),
+        'NO NIVEL FORMACIÓN': Math.round((NO_NIVEL_FORMACION / SUM_VALUES) * 100)
       }
     };
   }

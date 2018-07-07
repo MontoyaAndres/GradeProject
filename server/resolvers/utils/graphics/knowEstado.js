@@ -10,8 +10,8 @@ export default function knowEstado(values) {
       ok: true,
       values: {
         AUSENTISMO: Math.round((AUSENTISMO / SUM_VALUES) * 100),
-        DESERCION: Math.round((DESERCION / SUM_VALUES) * 100),
-        NO_ESTADO: Math.round((NO_ESTADO / SUM_VALUES) * 100)
+        DESERCIÓN: Math.round((DESERCION / SUM_VALUES) * 100),
+        'NO ESTADO': Math.round((NO_ESTADO / SUM_VALUES) * 100)
       }
     };
   }

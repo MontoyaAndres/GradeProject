@@ -19,7 +19,7 @@ export default function knowCodigoSede(values) {
         PAN: Math.round((PAN / SUM_VALUES) * 100),
         SIL: Math.round((SIL / SUM_VALUES) * 100),
         MEL: Math.round((MEL / SUM_VALUES) * 100),
-        NO_CODIGO: Math.round((NO_CODIGO / SUM_VALUES) * 100)
+        'NO CÓDIGO DE SEDE': Math.round((NO_CODIGO / SUM_VALUES) * 100)
       }
     };
   }

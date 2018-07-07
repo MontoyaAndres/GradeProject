@@ -13,7 +13,7 @@ export default function knowJornada(values) {
         DISTANCIA: Math.round((DISTANCIA / SUM_VALUES) * 100),
         MAÑANA: Math.round((TOMORROW / SUM_VALUES) * 100),
         NOCHE: Math.round((NOCHE / SUM_VALUES) * 100),
-        NO_JORNADA: Math.round((NO_JORNADA / SUM_VALUES) * 100)
+        'NO JORNADA': Math.round((NO_JORNADA / SUM_VALUES) * 100)
       }
     };
   }
