@@ -1,4 +1,6 @@
-const API = 'http://181.51.3.153:8080';
+import config from '../config.json';
+
+const API = config.API_URL;
 
 function simulateClick(response) {
   // create new element <a> to "download" the file
