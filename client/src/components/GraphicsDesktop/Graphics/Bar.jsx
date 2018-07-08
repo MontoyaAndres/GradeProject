@@ -18,6 +18,15 @@ const BarGraphic = ({ chartConfig, graphicBy }) => (
         duration: 600,
         easing: 'easeInOutQuart'
       },
+      tooltips: {
+        callbacks: {
+          label: (tooltipItem, data) => {
+            const dataset = data.datasets[tooltipItem.datasetIndex];
+            const currentValue = dataset.data[tooltipItem.index];
+            return `${currentValue}%`;
+          }
+        }
+      },
       responsive: true,
       responsiveAnimationDuration: 600,
       scales: {
@@ -27,7 +36,10 @@ const BarGraphic = ({ chartConfig, graphicBy }) => (
               fixedStepSize: 20,
               max: 100,
               beginAtZero: true,
-              autoSkip: false
+              autoSkip: false,
+              callback(tick) {
+                return `${tick.toString()}%`;
+              }
             }
           }
         ]

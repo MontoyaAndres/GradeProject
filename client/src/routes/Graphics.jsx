@@ -12,12 +12,14 @@ import DialogContent from '@material-ui/core/DialogContent';
 import Select from '@material-ui/core/Select';
 import Hidden from '@material-ui/core/Hidden';
 import ViewHeadline from '@material-ui/icons/ViewHeadline';
+import FileDownload from '@material-ui/icons/FileDownload';
 
 import Layout from '../components/Global';
 import GraphicsDesktop from '../components/GraphicsDesktop';
 import GraphicsMobile from '../components/GraphicsMobile';
 import SelectData from '../utils/SelectData';
 import { studentDistinct } from '../graphql/query';
+import { donwloadGraphic } from '../utils/api';
 
 const styles = theme => ({
   select: {
@@ -31,6 +33,13 @@ const styles = theme => ({
     position: 'fixed',
     bottom: theme.spacing.unit * 2,
     right: theme.spacing.unit * 2,
+    padding: theme.spacing.unit * 2,
+    zIndex: 1
+  },
+  floatButtonDownload: {
+    position: 'fixed',
+    bottom: theme.spacing.unit * 2,
+    left: theme.spacing.unit * 2,
     padding: theme.spacing.unit * 2,
     zIndex: 1
   },
@@ -61,7 +70,7 @@ class Graphics extends Component {
     TipoSemestre: '',
     graphicBy: 'Género',
     isVariable: 'ACADÉMICO',
-    style: 'Bar',
+    style: 'Pie',
     openDialogMobile: false
   };
 
@@ -74,6 +83,22 @@ class Graphics extends Component {
     }
     return null;
   }
+
+  downloadButton = () => {
+    const { CodigoPrograma, TipoSemestre, graphicBy, isVariable, style } = this.state;
+    const { classes } = this.props;
+
+    return (
+      <Button
+        className={classes.floatButtonDownload}
+        variant="fab"
+        color="secondary"
+        onClick={() => donwloadGraphic(style, CodigoPrograma, TipoSemestre, graphicBy, isVariable)}
+      >
+        <FileDownload />
+      </Button>
+    );
+  };
 
   handleChange = e => {
     const { name, value } = e.target;
@@ -102,6 +127,8 @@ class Graphics extends Component {
 
     return (
       <Layout url={url}>
+        {this.downloadButton()}
+
         <Hidden xlUp smDown>
           {/* Desktop section */}
           <Paper className={classes.paper}>

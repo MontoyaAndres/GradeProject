@@ -39,7 +39,7 @@ function styleChart(style) {
   }
 
   // default chart
-  return 'column';
+  return 'pie';
 }
 
 function dataType(style, keys, values, graphicBy) {

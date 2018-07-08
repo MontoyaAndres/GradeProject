@@ -12,11 +12,20 @@ const PieGraphic = ({ chartConfig, graphicBy }) => (
       },
       legend: {
         display: true,
-        position: 'bottom'
+        position: 'top'
       },
       animation: {
         duration: 600,
         easing: 'easeInOutQuart'
+      },
+      tooltips: {
+        callbacks: {
+          label: (tooltipItem, data) => {
+            const dataset = data.datasets[tooltipItem.datasetIndex];
+            const currentValue = dataset.data[tooltipItem.index];
+            return `${currentValue}%`;
+          }
+        }
       },
       responsive: true,
       maintainAspectRatio: false,
