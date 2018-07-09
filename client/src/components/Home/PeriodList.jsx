@@ -188,17 +188,16 @@ class PeriodList extends Component {
 
     // When someone click a lot the checkbox, the "newSelect" has the same value.
     // So, this "newSelect" and "newChecked" will be formated and same way the state too.
-    if (newSelected[0] === newSelected[1]) {
+    if (newSelected[0] === newSelected[1] || newSelected.length >= 3) {
+      newChecked.splice(currentIndex);
+      newSelected.splice(compare);
       this.setState({ checked: [], selected: [] });
-      newChecked.splice(currentIndex, 1);
-      newSelected.splice(compare, 1);
     } else {
       this.setState({
         checked: newChecked,
         selected: newSelected
       });
     }
-
     onHandleSelectedAndCareer(newSelected, career);
   };
 
