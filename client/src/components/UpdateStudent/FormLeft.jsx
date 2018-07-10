@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import FormControl from '@material-ui/core/FormControl';
@@ -44,30 +43,31 @@ class FormLeft extends Component {
           <Grid container justify="center" wrap="wrap">
             <Grid item xs={12} sm={6}>
               <div style={{ padding: 10 }}>
-                <FormControl className={classes.textField}>
-                  <InputLabel htmlFor="Nombres">Nombres</InputLabel>
-                  <Input
-                    id="Nombres"
-                    type="text"
-                    name="Student.Nombres"
-                    value={values.Student.Nombres}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                  />
-                </FormControl>
+                <TextField
+                  id="Nombres"
+                  label="Nombre"
+                  type="text"
+                  name="Student.Nombres"
+                  value={values.Student.Nombres}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className={classes.textField}
+                  required
+                />
               </div>
+
               <div style={{ padding: 10 }}>
-                <FormControl className={classes.textField}>
-                  <InputLabel htmlFor="Apellidos">Apellidos</InputLabel>
-                  <Input
-                    id="Apellidos"
-                    type="text"
-                    name="Student.Apellidos"
-                    value={values.Student.Apellidos}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                  />
-                </FormControl>
+                <TextField
+                  id="Apellidos"
+                  label="Apellidos"
+                  type="text"
+                  name="Student.Apellidos"
+                  value={values.Student.Apellidos}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className={classes.textField}
+                  required
+                />
               </div>
 
               <div style={{ padding: 10 }}>
@@ -91,18 +91,19 @@ class FormLeft extends Component {
                   </Select>
                 </FormControl>
               </div>
+
               <div style={{ padding: 10 }}>
-                <FormControl className={classes.textField}>
-                  <InputLabel htmlFor="Edad">Edad</InputLabel>
-                  <Input
-                    id="Edad"
-                    type="number"
-                    name="Student.Edad"
-                    value={values.Student.Edad}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                  />
-                </FormControl>
+                <TextField
+                  id="Edad"
+                  label="Edad"
+                  type="number"
+                  name="Student.Edad"
+                  value={values.Student.Edad}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className={classes.textField}
+                  required
+                />
               </div>
 
               <div style={{ padding: 10 }}>
@@ -126,33 +127,35 @@ class FormLeft extends Component {
                   </Select>
                 </FormControl>
               </div>
+
               <div style={{ padding: 10 }}>
-                <FormControl className={classes.textField}>
-                  <InputLabel htmlFor="NumeroIdentificacion">Número de identificación</InputLabel>
-                  <Input
-                    id="NumeroIdentificacion"
-                    type="number"
-                    name="Student.NumeroIdentificacion"
-                    value={values.Student.NumeroIdentificacion}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                  />
-                </FormControl>
+                <TextField
+                  id="NumeroIdentificacion"
+                  label="Número de identificación"
+                  type="number"
+                  name="Student.NumeroIdentificacion"
+                  value={values.Student.NumeroIdentificacion}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className={classes.textField}
+                  required
+                />
               </div>
 
               <div style={{ padding: 10 }}>
-                <FormControl className={classes.textField}>
-                  <InputLabel htmlFor="TelCel">Teléfono</InputLabel>
-                  <Input
-                    id="TelCel"
-                    type="tel"
-                    name="Student.TelCel"
-                    value={values.Student.TelCel}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                  />
-                </FormControl>
+                <TextField
+                  id="TelCel"
+                  type="tel"
+                  label="Teléfono"
+                  name="Student.TelCel"
+                  value={values.Student.TelCel}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className={classes.textField}
+                  required
+                />
               </div>
+
               <div style={{ padding: 10 }}>
                 <TextField
                   label="Fecha Celular"
@@ -169,17 +172,18 @@ class FormLeft extends Component {
               </div>
 
               <div style={{ padding: 10 }}>
-                <FormControl className={classes.textField}>
-                  <InputLabel htmlFor="Ciudad">Ciudad</InputLabel>
-                  <Input
-                    id="Ciudad"
-                    name="Student.Ciudad"
-                    value={values.Student.Ciudad}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                  />
-                </FormControl>
+                <TextField
+                  id="Ciudad"
+                  label="Ciudad"
+                  name="Student.Ciudad"
+                  value={values.Student.Ciudad}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className={classes.textField}
+                  required
+                />
               </div>
+
               <div style={{ padding: 10 }}>
                 <FormControl className={classes.textField}>
                   <InputLabel htmlFor="NivelFormacion">Nivel de formación</InputLabel>
@@ -202,45 +206,48 @@ class FormLeft extends Component {
                 </FormControl>
               </div>
             </Grid>
+
             <Grid item xs={12} sm={6}>
               <div style={{ padding: 10 }}>
-                <FormControl className={classes.textField}>
-                  <InputLabel htmlFor="TelRe">Teléfono de residencia</InputLabel>
-                  <Input
-                    id="TelRe"
-                    type="tel"
-                    name="Student.TelRe"
-                    value={values.Student.TelRe}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                  />
-                </FormControl>
-              </div>
-              <div style={{ padding: 10 }}>
-                <FormControl className={classes.textField}>
-                  <InputLabel htmlFor="CorreoEstudiante1">Correo Institucional</InputLabel>
-                  <Input
-                    id="CorreoEstudiante1"
-                    name="Student.CorreoEstudiante1"
-                    value={values.Student.CorreoEstudiante1}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                  />
-                </FormControl>
+                <TextField
+                  id="TelRe"
+                  label="Teléfono de residencia"
+                  type="tel"
+                  name="Student.TelRe"
+                  value={values.Student.TelRe}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className={classes.textField}
+                  required
+                />
               </div>
 
               <div style={{ padding: 10 }}>
-                <FormControl className={classes.textField}>
-                  <InputLabel htmlFor="CodigoBanner">Código Banner</InputLabel>
-                  <Input
-                    id="CodigoBanner"
-                    name="Student.CodigoBanner"
-                    value={values.Student.CodigoBanner}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                  />
-                </FormControl>
+                <TextField
+                  id="CorreoEstudiante1"
+                  label="Correo Institucional"
+                  name="Student.CorreoEstudiante1"
+                  value={values.Student.CorreoEstudiante1}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className={classes.textField}
+                  required
+                />
               </div>
+
+              <div style={{ padding: 10 }}>
+                <TextField
+                  id="CodigoBanner"
+                  label="Código Banner"
+                  name="Student.CodigoBanner"
+                  value={values.Student.CodigoBanner}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className={classes.textField}
+                  required
+                />
+              </div>
+
               <div style={{ padding: 10 }}>
                 <FormControl className={classes.textField}>
                   <InputLabel htmlFor="TipoSemestre">Periodo</InputLabel>
@@ -264,17 +271,18 @@ class FormLeft extends Component {
               </div>
 
               <div style={{ padding: 10 }}>
-                <FormControl className={classes.textField}>
-                  <InputLabel htmlFor="CorreoEstudiante2">Correo Personal</InputLabel>
-                  <Input
-                    id="CorreoEstudiante2"
-                    name="Student.CorreoEstudiante2"
-                    value={values.Student.CorreoEstudiante2}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                  />
-                </FormControl>
+                <TextField
+                  id="CorreoEstudiante2"
+                  label="Correo Personal"
+                  name="Student.CorreoEstudiante2"
+                  value={values.Student.CorreoEstudiante2}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className={classes.textField}
+                  required
+                />
               </div>
+
               <div style={{ padding: 10 }}>
                 <TextField
                   label="Fecha Correo"
@@ -291,28 +299,29 @@ class FormLeft extends Component {
               </div>
 
               <div style={{ padding: 10 }}>
-                <FormControl className={classes.textField}>
-                  <InputLabel htmlFor="Direccion">Dirección</InputLabel>
-                  <Input
-                    id="Direccion"
-                    name="Student.Direccion"
-                    value={values.Student.Direccion}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                  />
-                </FormControl>
+                <TextField
+                  id="Direccion"
+                  label="Dirección"
+                  name="Student.Direccion"
+                  value={values.Student.Direccion}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className={classes.textField}
+                  required
+                />
               </div>
+
               <div style={{ padding: 10 }}>
-                <FormControl className={classes.textField}>
-                  <InputLabel htmlFor="Departamento">Departamento</InputLabel>
-                  <Input
-                    id="Departamento"
-                    name="Student.Departamento"
-                    value={values.Student.Departamento}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                  />
-                </FormControl>
+                <TextField
+                  id="Departamento"
+                  label="Departamento"
+                  name="Student.Departamento"
+                  value={values.Student.Departamento}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className={classes.textField}
+                  required
+                />
               </div>
 
               <div style={{ padding: 10 }}>
@@ -336,6 +345,7 @@ class FormLeft extends Component {
                   </Select>
                 </FormControl>
               </div>
+
               <div style={{ padding: 10 }}>
                 <FormControl className={classes.textField}>
                   <InputLabel htmlFor="DescripcionPrograma">Descripción del programa</InputLabel>

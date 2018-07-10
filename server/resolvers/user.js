@@ -17,6 +17,14 @@ export default {
       } catch (err) {
         return false;
       }
+    }),
+    updatePassword: requiresAuth.createResolver(async (parent, args, { models, user: { _id } }) => {
+      try {
+        console.log(args, _id);
+        return true;
+      } catch (err) {
+        return false;
+      }
     })
   }
 };

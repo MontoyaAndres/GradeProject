@@ -18,6 +18,7 @@ export default `
 
   type Mutation {
     login(email: String!, password: String!): LoginResponse!
-    updateUsernameOrEmail(username: String, email: String): Boolean!
+    updateUsernameOrEmail(username: String!, email: String!): Boolean!
+    updatePassword(oldPassword: String!, newPassword: String!): Boolean!
   }
 `;

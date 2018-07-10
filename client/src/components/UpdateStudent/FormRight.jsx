@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import FormControl from '@material-ui/core/FormControl';
+import TextField from '@material-ui/core/TextField';
 
 const styles = theme => ({
   textField: {
@@ -51,6 +51,7 @@ class FormRight extends Component {
                   </Select>
                 </FormControl>
               </div>
+
               <div style={{ padding: 10 }}>
                 <FormControl className={classes.textField}>
                   <InputLabel htmlFor="AreaConocimiento">Area de conocimiento</InputLabel>
@@ -96,6 +97,7 @@ class FormRight extends Component {
                   </Select>
                 </FormControl>
               </div>
+
               <div style={{ padding: 10 }}>
                 <FormControl className={classes.textField}>
                   <InputLabel htmlFor="Rectoria">Rectoria</InputLabel>
@@ -139,18 +141,18 @@ class FormRight extends Component {
                   </Select>
                 </FormControl>
               </div>
+
               <div style={{ padding: 10 }}>
-                <FormControl className={classes.textField}>
-                  <InputLabel htmlFor="Snies">Snies</InputLabel>
-                  <Input
-                    id="Snies"
-                    type="number"
-                    name="Student.Snies"
-                    value={values.Student.Snies}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                  />
-                </FormControl>
+                <TextField
+                  id="Snies"
+                  label="Snies"
+                  name="Student.Snies"
+                  value={values.Student.Snies}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className={classes.textField}
+                  required
+                />
               </div>
 
               <div style={{ padding: 10 }}>
@@ -174,18 +176,18 @@ class FormRight extends Component {
                   </Select>
                 </FormControl>
               </div>
+
               <div style={{ padding: 10 }}>
-                <FormControl className={classes.textField}>
-                  <InputLabel htmlFor="CodigoPeriodoAcademico">Código de periodo academico</InputLabel>
-                  <Input
-                    id="CodigoPeriodoAcademico"
-                    type="number"
-                    name="Student.CodigoPeriodoAcademico"
-                    value={values.Student.CodigoPeriodoAcademico}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                  />
-                </FormControl>
+                <TextField
+                  id="CodigoPeriodoAcademico"
+                  label="Código de periodo academico"
+                  name="Student.CodigoPeriodoAcademico"
+                  value={values.Student.CodigoPeriodoAcademico}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className={classes.textField}
+                  required
+                />
               </div>
 
               <div style={{ padding: 10 }}>
@@ -210,6 +212,7 @@ class FormRight extends Component {
                 </FormControl>
               </div>
             </Grid>
+
             <Grid item xs={12} sm={6}>
               <div style={{ padding: 10 }}>
                 <FormControl className={classes.textField}>
@@ -234,18 +237,18 @@ class FormRight extends Component {
               </div>
 
               <div style={{ padding: 10 }}>
-                <FormControl className={classes.textField}>
-                  <InputLabel htmlFor="PeriodoAcademicoInscripcion">Perido academico inscripción</InputLabel>
-                  <Input
-                    id="PeriodoAcademicoInscripcion"
-                    type="number"
-                    name="Student.PeriodoAcademicoInscripcion"
-                    value={values.Student.PeriodoAcademicoInscripcion}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                  />
-                </FormControl>
+                <TextField
+                  id="PeriodoAcademicoInscripcion"
+                  label="Perido academico inscripción"
+                  name="Student.PeriodoAcademicoInscripcion"
+                  value={values.Student.PeriodoAcademicoInscripcion}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className={classes.textField}
+                  required
+                />
               </div>
+
               <div style={{ padding: 10 }}>
                 <FormControl className={classes.textField}>
                   <InputLabel htmlFor="DescripcionMetodologia">Descripción metodologia</InputLabel>
@@ -289,18 +292,18 @@ class FormRight extends Component {
                   </Select>
                 </FormControl>
               </div>
+
               <div style={{ padding: 10 }}>
-                <FormControl className={classes.textField}>
-                  <InputLabel htmlFor="LugarResidencia">Lugar de residencia</InputLabel>
-                  <Input
-                    id="LugarResidencia"
-                    type="number"
-                    name="Student.LugarResidencia"
-                    value={values.Student.LugarResidencia}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                  />
-                </FormControl>
+                <TextField
+                  id="LugarResidencia"
+                  label="Lugar de residencia"
+                  name="Student.LugarResidencia"
+                  value={values.Student.LugarResidencia}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className={classes.textField}
+                  required
+                />
               </div>
 
               <div style={{ padding: 10 }}>
@@ -324,17 +327,18 @@ class FormRight extends Component {
                   </Select>
                 </FormControl>
               </div>
+
               <div style={{ padding: 10 }}>
-                <FormControl className={classes.textField}>
-                  <InputLabel htmlFor="Comentario">Comentario</InputLabel>
-                  <Input
-                    id="Comentario"
-                    name="Student.Comentario"
-                    value={values.Student.Comentario}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                  />
-                </FormControl>
+                <TextField
+                  id="Comentario"
+                  label="Comentario"
+                  name="Student.Comentario"
+                  value={values.Student.Comentario}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className={classes.textField}
+                  required
+                />
               </div>
 
               <div style={{ padding: 10 }}>
@@ -358,6 +362,7 @@ class FormRight extends Component {
                   </Select>
                 </FormControl>
               </div>
+
               <div style={{ padding: 10 }}>
                 <FormControl className={classes.textField}>
                   <InputLabel htmlFor="Variable">Variable</InputLabel>

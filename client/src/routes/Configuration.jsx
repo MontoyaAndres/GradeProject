@@ -9,6 +9,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import Layout from '../components/Global';
 import Loading from '../components/Global/Loading';
 import DialogUsernameAndEmail from '../components/Configuration/dialogUsernameAndEmail';
+import DialogPassword from '../components/Configuration/dialogPassword';
 import { userQuery } from '../graphql/query';
 
 const styles = theme => ({
@@ -20,7 +21,7 @@ const styles = theme => ({
   FormLabel: {
     fontWeight: '500',
     fontSize: 18,
-    margin: theme.spacing.unit * 2
+    paddingTop: 20
   }
 });
 
@@ -33,35 +34,43 @@ const Configuration = ({ classes, history, match: { url } }) => (
         }
 
         return (
-          <Grid item xs={12}>
-            <Paper className={classes.paper}>
-              <Grid container direction="column" justify="center" alignItems="center">
-                <h2>Configuración de usuario</h2>
-                <FormLabel className={classes.FormLabel}>
-                  En este apartado podra ver y cambiar su Correo, Contraseña y Nombre de usuario, de click en el icono{' '}
-                  <EditIcon />
-                  al campo que desea cambiar.
-                </FormLabel>
-                <Grid item xs={12}>
-                  <span className={classes.FormLabel}>Nombre de usuario: </span>
-                  <span>
-                    {user.username}
-                    <DialogUsernameAndEmail email={user.email} username={user.username} history={history} />
-                  </span>
-                </Grid>
-                <Grid item xs={12}>
-                  <span className={classes.FormLabel}>Correo Electrónico: </span>
-                  <span>
-                    {user.email}
-                    <DialogUsernameAndEmail email={user.email} username={user.username} history={history} />
-                  </span>
-                </Grid>
-                <Grid item xs={12}>
-                  <span className={classes.FormLabel}>Contraseña: </span> <span>Campo privado</span>
+          <Paper className={classes.paper}>
+            <Grid container>
+              <Grid item xs={12}>
+                <Grid container direction="column" justify="center" alignItems="center" wrap="wrap">
+                  <h2>Configuración de usuario</h2>
+                  <FormLabel className={classes.FormLabel}>
+                    En este apartado podra ver y cambiar su Correo, Contraseña y Nombre de usuario, de click en el icono{' '}
+                    <EditIcon />
+                    al campo que desea cambiar.
+                  </FormLabel>
+
+                  <Grid item xs={12}>
+                    <div className={classes.FormLabel}>Nombre de usuario: </div>
+                    <div>
+                      {user.username}
+                      <DialogUsernameAndEmail email={user.email} username={user.username} history={history} />
+                    </div>
+                  </Grid>
+
+                  <Grid item xs={12}>
+                    <div className={classes.FormLabel}>Correo Electrónico: </div>
+                    <div>
+                      {user.email}
+                      <DialogUsernameAndEmail email={user.email} username={user.username} history={history} />
+                    </div>
+                  </Grid>
+
+                  <Grid item xs={12}>
+                    <div className={classes.FormLabel}>Contraseña: </div>{' '}
+                    <div>
+                      Campo privado <DialogPassword history={history} />
+                    </div>
+                  </Grid>
                 </Grid>
               </Grid>
-            </Paper>
-          </Grid>
+            </Grid>
+          </Paper>
         );
       }}
     </Query>
