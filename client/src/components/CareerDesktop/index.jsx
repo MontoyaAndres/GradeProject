@@ -76,11 +76,13 @@ class index extends Component {
       this.setState({ successDeleted: false });
     }
 
-    if (prevState.searchStudent !== '') {
-      // when the props change, the searchStudent will need to be an empty string
-      if (prevState.searchStudent === this.state.searchStudent && !this.state.deleted && !this.state.successDeleted) {
-        this.setState({ searchStudent: '' });
-      }
+    if (
+      prevProps.Variable !== this.props.Variable ||
+      prevProps.Situacion !== this.props.Situacion ||
+      prevProps.Estado !== this.props.Estado ||
+      prevProps.TipoSemestre !== this.props.TipoSemestre
+    ) {
+      this.setState({ searchStudent: '' });
     }
   }
 
@@ -152,7 +154,7 @@ class index extends Component {
       }
     });
 
-    this.setState({ searchStudent: '', deleted: false, studenIdDelete: 0, successDeleted: true });
+    this.setState({ deleted: false, studenIdDelete: 0, successDeleted: true });
   };
 
   handleSearchStudent = search => {

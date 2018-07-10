@@ -1,5 +1,14 @@
 import gql from 'graphql-tag';
 
+const userQuery = gql`
+  query user {
+    user {
+      username
+      email
+    }
+  }
+`;
+
 const studentDistinct = gql`
   query StudentDistinct($param: String!) {
     StudentDistinct(Param: $param)
@@ -51,4 +60,4 @@ const QueryStudentInformation = gql`
   }
 `;
 
-export { studentDistinct, QueryStudentInformation };
+export { userQuery, studentDistinct, QueryStudentInformation };

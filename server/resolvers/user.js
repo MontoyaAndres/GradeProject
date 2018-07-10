@@ -1,23 +1,22 @@
 import { tryLogin } from '../utils/auth';
-import formatErrors from '../utils/formatErrors';
+import requiresAuth from '../utils/permissions';
 
 export default {
+  Query: {
+    user: requiresAuth.createResolver(async (parent, args, { models, user: { _id } }) =>
+      models.User.findById({ _id }).lean()
+    )
+  },
   Mutation: {
     login: (parent, { email, password }, { models, SECRET, SECRET2 }) =>
       tryLogin(email, password, models, SECRET, SECRET2),
-    register: async (parent, args, { models }) => {
+    updateUsernameOrEmail: requiresAuth.createResolver(async (parent, args, { models, user: { _id } }) => {
       try {
-        const user = await models.User.create(args);
-        return {
-          ok: true,
-          user
-        };
+        await models.User.findByIdAndUpdate(_id, { ...args });
+        return true;
       } catch (err) {
-        return {
-          ok: false,
-          errors: formatErrors(err, models)
-        };
+        return false;
       }
-    }
+    })
   }
 };

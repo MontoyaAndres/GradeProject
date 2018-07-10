@@ -5,12 +5,6 @@ export default `
     email: String!
   }
 
-  type RegisterResponse {
-    ok: Boolean!
-    user: User
-    errors: [Error]
-  }
-
   type LoginResponse {
     ok: Boolean!
     token: String
@@ -18,8 +12,12 @@ export default `
     errors: [Error]
   }
 
+  type Query {
+    user: User!
+  }
+
   type Mutation {
-    register(username: String!, email: String!, password: String!): RegisterResponse!
     login(email: String!, password: String!): LoginResponse!
+    updateUsernameOrEmail(username: String, email: String): Boolean!
   }
 `;

@@ -7,7 +7,7 @@ import Home from './Home';
 import Career from './Career';
 import StudentInformation from './StudentInformation';
 import Graphics from './Graphics';
-import Register from './Register';
+import Configuration from './Configuration';
 import UpdateStudent from './UpdateStudent';
 import Login from './Login';
 import Error404 from './Error404';
@@ -73,7 +73,7 @@ const Router = () => (
       <PrivateRoute exact path="/estudiante/:_id" component={StudentInformation} />
       <PrivateRoute exact path="/editar/:_id" component={UpdateStudent} />
       <PrivateRoute exact path="/graficas" component={Graphics} />
-      <IsLogin exact path="/registrar" component={Register} />
+      <PrivateRoute exact path="/configuracion" component={Configuration} />
       <IsLogin exact path="/login" component={Login} />
       <Route component={Error404} />
     </Switch>

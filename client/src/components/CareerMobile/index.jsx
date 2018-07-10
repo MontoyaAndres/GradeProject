@@ -18,7 +18,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import FormLabel from '@material-ui/core/FormLabel';
 import ErrorIcon from '@material-ui/icons/Error';
 import DeleteIcon from '@material-ui/icons/Delete';
-import Autorenew from '@material-ui/icons/Autorenew';
+import EditIcon from '@material-ui/icons/Edit';
 import Info from '@material-ui/icons/Info';
 
 import Successfully from '../Global/Successfully';
@@ -69,6 +69,15 @@ class index extends Component {
     if (prevState.successDeleted) {
       // if the student was deleted, this will format the state successDeleted
       this.setState({ successDeleted: false });
+    }
+
+    if (
+      prevProps.Variable !== this.props.Variable ||
+      prevProps.Situacion !== this.props.Situacion ||
+      prevProps.Estado !== this.props.Estado ||
+      prevProps.TipoSemestre !== this.props.TipoSemestre
+    ) {
+      this.setState({ searchStudent: '' });
     }
   }
 
@@ -128,7 +137,7 @@ class index extends Component {
       }
     });
 
-    this.setState({ searchStudent: '', deleted: false, studenIdDelete: 0, successDeleted: true });
+    this.setState({ deleted: false, studenIdDelete: 0, successDeleted: true });
   };
 
   handleSearchStudent = search => {
@@ -220,7 +229,7 @@ class index extends Component {
                             <DeleteIcon />
                           </IconButton>
                           <IconButton aria-label="Update" onClick={() => this.handleRedirect(`/editar/${student._id}`)}>
-                            <Autorenew />
+                            <EditIcon />
                           </IconButton>
                           <IconButton
                             aria-label="Information"
