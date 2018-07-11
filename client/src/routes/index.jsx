@@ -9,6 +9,7 @@ import StudentInformation from './StudentInformation';
 import Graphics from './Graphics';
 import Configuration from './Configuration';
 import UpdateStudent from './UpdateStudent';
+import Logout from '../components/Global/Menu/Logout.jsx';
 import Login from './Login';
 import Error404 from './Error404';
 
@@ -19,7 +20,10 @@ function isAuthenticated() {
   const refreshToken = localStorage.getItem('refreshToken');
   try {
     decode(token);
-    decode(refreshToken);
+    const { exp } = decode(refreshToken);
+    if (Date.now() / 1000 > exp) {
+      return false;
+    }
   } catch (err) {
     return false;
   }
@@ -37,22 +41,13 @@ function isExactCareer(url) {
 }
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
-  <Route
-    {...rest}
-    render={props => (isAuthenticated() ? <Component {...props} /> : <Redirect to={{ pathname: '/login' }} />)}
-  />
+  <Route {...rest} render={props => (isAuthenticated() ? <Component {...props} /> : <Logout />)} />
 );
 
 const IsLogin = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
-    render={props =>
-      'token' in localStorage || 'refreshToken' in localStorage ? (
-        <Redirect to={{ pathname: '/' }} />
-      ) : (
-        <Component {...props} />
-      )
-    }
+    render={props => (isAuthenticated() ? <Redirect to={{ pathname: '/' }} /> : <Component {...props} />)}
   />
 );
 
