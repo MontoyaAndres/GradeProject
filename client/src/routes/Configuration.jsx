@@ -20,8 +20,7 @@ const styles = theme => ({
   },
   FormLabel: {
     fontWeight: '500',
-    fontSize: 18,
-    paddingTop: 20
+    fontSize: 18
   }
 });
 
@@ -45,27 +44,33 @@ const Configuration = ({ classes, history, match: { url } }) => (
                     al campo que desea cambiar.
                   </FormLabel>
 
-                  <Grid item xs={12}>
-                    <div className={classes.FormLabel}>Nombre de usuario: </div>
-                    <div>
+                  <Grid container alignItems="center" style={{ paddingTop: 30 }}>
+                    <Grid item xs={12} sm={6} className={classes.FormLabel}>
+                      Nombre de usuario:
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
                       {user.username}
                       <DialogUsernameAndEmail email={user.email} username={user.username} history={history} />
-                    </div>
+                    </Grid>
                   </Grid>
 
-                  <Grid item xs={12}>
-                    <div className={classes.FormLabel}>Correo Electrónico: </div>
-                    <div>
+                  <Grid container alignItems="center">
+                    <Grid item xs={12} sm={6} className={classes.FormLabel}>
+                      Correo Electrónico:
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
                       {user.email}
                       <DialogUsernameAndEmail email={user.email} username={user.username} history={history} />
-                    </div>
+                    </Grid>
                   </Grid>
 
-                  <Grid item xs={12}>
-                    <div className={classes.FormLabel}>Contraseña: </div>{' '}
-                    <div>
+                  <Grid container alignItems="center">
+                    <Grid item xs={12} sm={6} className={classes.FormLabel}>
+                      Contraseña:
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
                       Campo privado <DialogPassword history={history} />
-                    </div>
+                    </Grid>
                   </Grid>
                 </Grid>
               </Grid>

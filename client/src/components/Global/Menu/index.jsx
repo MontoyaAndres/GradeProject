@@ -169,7 +169,7 @@ class index extends Component {
                 <MenuIcon />
               </IconButton>
               <div>
-                <img src="uniminuto.png" alt="uniminuto" height="100vh" width="200" />
+                <img src="/uniminuto.png" alt="uniminuto" height="100vh" width="200" />
               </div>
             </div>
             <div className={classes.list}>
