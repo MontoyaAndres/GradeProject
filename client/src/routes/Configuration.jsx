@@ -36,7 +36,7 @@ const Configuration = ({ classes, history, match: { url } }) => (
           <Paper className={classes.paper}>
             <Grid container>
               <Grid item xs={12}>
-                <Grid container direction="column" justify="center" alignItems="center" wrap="wrap">
+                <Grid container direction="column" justify="center" wrap="wrap">
                   <h2>Configuración de usuario</h2>
                   <FormLabel className={classes.FormLabel}>
                     En este apartado podra ver y cambiar su Correo, Contraseña y Nombre de usuario, de click en el icono{' '}

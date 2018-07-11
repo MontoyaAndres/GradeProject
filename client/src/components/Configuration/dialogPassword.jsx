@@ -1,7 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
+import * as Yup from 'yup';
 import { Formik, Form } from 'formik';
+import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -11,9 +13,26 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 
+import normalizeErrors from '../../normalizeErrors';
+
+const styles = () => ({
+  error: {
+    color: 'red',
+    fontSize: 14
+  }
+});
+
 const updatePassword = gql`
   mutation updatePassword($oldPassword: String!, $newPassword: String!) {
-    updatePassword(oldPassword: $oldPassword, newPassword: $newPassword)
+    updatePassword(oldPassword: $oldPassword, newPassword: $newPassword) {
+      ok
+      token
+      refreshToken
+      errors {
+        path
+        message
+      }
+    }
   }
 `;
 
@@ -27,7 +46,7 @@ class dialogPassword extends Component {
   };
 
   render() {
-    const { history } = this.props;
+    const { mutate, history, classes } = this.props;
     const { open } = this.state;
 
     return (
@@ -38,20 +57,40 @@ class dialogPassword extends Component {
 
         <Formik
           initialValues={{ oldPassword: '', newPassword: '' }}
-          onSubmit={(values, { setSubmitting }) => {
-            setSubmitting(false);
-            this.props.mutate({
+          onSubmit={async (values, { setSubmitting, setErrors }) => {
+            const response = await mutate({
               variables: { oldPassword: values.oldPassword, newPassword: values.newPassword }
             });
-            this.handleDialog();
-            history.push('/');
+
+            const { ok, token, refreshToken, errors } = response.data.updatePassword;
+            if (ok) {
+              setSubmitting(false);
+              localStorage.setItem('token', token);
+              localStorage.setItem('refreshToken', refreshToken);
+              this.handleDialog();
+              history.push('/');
+            } else {
+              setSubmitting(false);
+              setErrors(normalizeErrors(errors));
+            }
           }}
+          validationSchema={() =>
+            Yup.object().shape({
+              oldPassword: Yup.string()
+                .nullable()
+                .required('El campo es obligatorio!'),
+              newPassword: Yup.string()
+                .nullable()
+                .required('El campo es obligatorio!')
+            })
+          }
           render={props => (
             <Dialog open={open} onClose={this.handleDialog} aria-labelledby="form-dialog-title">
               <Form>
                 <DialogTitle id="form-dialog-title">Configuración de usuario</DialogTitle>
                 <DialogContent>
                   <TextField
+                    error={Boolean(props.touched.oldPassword && props.errors.oldPassword)}
                     autoFocus
                     margin="dense"
                     id="oldPassword"
@@ -63,7 +102,11 @@ class dialogPassword extends Component {
                     onBlur={props.handleBlur}
                     fullWidth
                   />
+                  <span className={classes.error}>
+                    {props.touched.oldPassword && props.errors.oldPassword ? props.errors.oldPassword : null}
+                  </span>
                   <TextField
+                    error={Boolean(props.touched.newPassword && props.errors.newPassword)}
                     margin="dense"
                     id="newPassword"
                     name="newPassword"
@@ -74,6 +117,9 @@ class dialogPassword extends Component {
                     onBlur={props.handleBlur}
                     fullWidth
                   />
+                  <span className={classes.error}>
+                    {props.touched.newPassword && props.errors.newPassword ? props.errors.newPassword : null}
+                  </span>
                 </DialogContent>
                 <DialogActions>
                   <Button onClick={this.handleDialog} color="primary">
@@ -92,4 +138,4 @@ class dialogPassword extends Component {
   }
 }
 
-export default graphql(updatePassword)(dialogPassword);
+export default graphql(updatePassword)(withStyles(styles)(dialogPassword));

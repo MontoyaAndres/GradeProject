@@ -65,6 +65,7 @@ class dialogUsernameAndEmail extends Component {
                     onChange={props.handleChange}
                     onBlur={props.handleBlur}
                     fullWidth
+                    required
                   />
                   <TextField
                     margin="dense"
@@ -76,6 +77,7 @@ class dialogUsernameAndEmail extends Component {
                     onChange={props.handleChange}
                     onBlur={props.handleBlur}
                     fullWidth
+                    required
                   />
                 </DialogContent>
                 <DialogActions>
