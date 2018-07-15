@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import Dropzone from 'react-dropzone';
+import { Formik, Form } from 'formik';
+import * as Yup from 'yup';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -11,16 +13,11 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import Button from '@material-ui/core/Button';
 
-import Loading from '../Global/Loading';
 import Successfully from '../Global/Successfully';
 import normalizeErrors from '../../normalizeErrors';
 
 // query
 import { studentDistinct } from '../../graphql/query';
-
-function getFileExtension(filename) {
-  return filename.slice(((filename.lastIndexOf('.') - 1) >>> 0) + 2);
-}
 
 const uploadFileMutation = gql`
   mutation($file: Upload!, $period: String!) {
@@ -37,19 +34,9 @@ const uploadFileMutation = gql`
 
 class uploadFile extends Component {
   state = {
-    period: '',
-    errorClient: false,
-    errorServer: true,
-    errorTitle: '',
-    errorMessage: ''
-  };
-
-  handleErrorClient = () => {
-    this.setState({ errorClient: !this.state.errorClient, errorTitle: '', errorMessage: '' });
-  };
-
-  handleErrorServer = () => {
-    this.setState({ errorServer: !this.state.errorServer });
+    fileName: '',
+    fileUploaded: '',
+    errorServer: true
   };
 
   handleChange = e => {
@@ -57,29 +44,8 @@ class uploadFile extends Component {
     this.setState({ [name]: value });
   };
 
-  displayClientError = () => {
-    const { errorClient, errorTitle, errorMessage } = this.state;
-    return (
-      <div>
-        <Dialog
-          open={errorClient}
-          keepMounted
-          onClose={this.handleErrorClient}
-          aria-labelledby="alert-title"
-          aria-describedby="alert-description"
-        >
-          <DialogTitle id="alert-title">{errorTitle}</DialogTitle>
-          <DialogContent>
-            <DialogContentText id="alert-description">{errorMessage}</DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={this.handleErrorClient} color="primary" autoFocus>
-              Intentar otra vez.
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </div>
-    );
+  handleErrorServer = () => {
+    this.setState({ errorServer: !this.state.errorServer });
   };
 
   displayServerError = ({ errorTitle, errorMessage, values }) => {
@@ -117,7 +83,7 @@ class uploadFile extends Component {
   };
 
   render() {
-    const { errorClient, errorServer, errorTitle, errorMessage, period } = this.state;
+    const { errorServer, fileUploaded, fileName } = this.state;
 
     return (
       <Mutation
@@ -125,8 +91,8 @@ class uploadFile extends Component {
         refetchQueries={[{ query: studentDistinct, variables: { param: 'TipoSemestre' } }]}
       >
         {(mutate, { data }) => {
+          // show server errors
           if (errorServer && data && data.uploadFile.errors) {
-            // show server errors
             const { errors, values } = data.uploadFile;
             const errorMsg = normalizeErrors(errors).file[0];
 
@@ -138,18 +104,10 @@ class uploadFile extends Component {
             return this.displayServerError({ errorTitle: 'Error', errorMessage: errorMsg });
           }
 
-          if (errorClient && errorTitle !== '' && errorMessage !== '') {
-            // show front-end errors
-            return this.displayClientError();
-          }
-
-          if (data && data.loading) {
-            return <Loading />;
-          }
-
           return (
             <div>
-              <Successfully hide={!!(data && data.uploadFile.ok)} message="Periodo subido con exito!" />
+              <Successfully hide={!!data && data.uploadFile.ok} message="Periodo subido con exito!" />
+
               <Grid item xs={12}>
                 <Grid
                   container
@@ -159,46 +117,85 @@ class uploadFile extends Component {
                   justify="center"
                   style={{ paddingTop: 18, paddingBottom: 18 }}
                 >
-                  <Dropzone
-                    onDrop={([file]) => {
-                      const extension = getFileExtension(file.name);
-                      if (extension === 'xlsx' || extension === 'xls' || extension === 'xlsm' || extension === 'csv') {
-                        if (period !== '') {
-                          const isTipoSemestre = new RegExp(/^\d{4}-[1-2]$/);
-                          if (isTipoSemestre.test(period)) {
-                            mutate({ variables: { file, period } });
-                          } else {
-                            this.setState({
-                              errorClient: true,
-                              errorTitle: 'Periodo incorrecto',
-                              errorMessage: 'Por favor ingresar un periodo correcto.'
-                            });
-                          }
-                        } else {
-                          this.setState({
-                            errorClient: true,
-                            errorTitle: 'Campo vacio',
-                            errorMessage: 'Por favor completar el campo periodo.'
-                          });
-                        }
-                      } else {
-                        this.setState({
-                          errorClient: true,
-                          errorTitle: 'Archivo incorrecto',
-                          errorMessage: 'Por favor subir un archivo con las extensiones .xlsx, .xls, .xlsm, .csv.'
-                        });
-                      }
+                  <Formik
+                    initialValues={{ period: '' }}
+                    validationSchema={() =>
+                      Yup.object().shape({
+                        period: Yup.string()
+                          .nullable()
+                          .matches(/^\d{4}-[1-2]$/, { message: 'Periodo incorrecto' })
+                          .required('El campo es obligatorio!')
+                      })
+                    }
+                    onSubmit={({ period }, { setSubmitting, resetForm }) => {
+                      setSubmitting(false);
+                      mutate({ variables: { file: fileUploaded, period } });
+                      resetForm();
                     }}
-                  >
-                    <img src="arrow.png" alt="Subir archivo" style={{ pointerEvents: 'none' }} />
-                  </Dropzone>
-                  <TextField
-                    id="period"
-                    name="period"
-                    label="Ingrese periodo"
-                    value={period}
-                    onChange={this.handleChange}
-                    margin="normal"
+                    render={props => (
+                      <Form>
+                        <div>
+                          <Dropzone
+                            accept=".xlsx, .xls, .xlsm, .csv"
+                            className="ignore"
+                            onDrop={([file]) => {
+                              if (file) {
+                                this.setState({ fileUploaded: file, fileName: file.name });
+                              }
+                            }}
+                          >
+                            {({ isDragActive }) => (
+                              <div
+                                style={{
+                                  marginTop: 20,
+                                  border: '4px dashed #3f51b5',
+                                  position: 'relative',
+                                  backgroundColor: isDragActive ? 'rgba(63, 81, 181, 0.2)' : 'white'
+                                }}
+                              >
+                                <div
+                                  style={{
+                                    fontWeight: 100,
+                                    textTransform: 'uppercase',
+                                    color: '#3f51b5',
+                                    padding: 60,
+                                    textAlign: 'center'
+                                  }}
+                                >
+                                  <h3>{fileName === '' ? 'Arrastre archivo o seleccione dando click' : fileName}</h3>
+                                </div>
+                              </div>
+                            )}
+                          </Dropzone>
+                        </div>
+                        <div>
+                          <TextField
+                            error={Boolean(props.touched.period && props.errors.period)}
+                            id="period"
+                            name="period"
+                            label="Ingrese periodo"
+                            value={props.values.period}
+                            onChange={props.handleChange}
+                            onBlur={props.handleBlur}
+                            margin="normal"
+                            fullWidth
+                          />
+                          <span
+                            style={{
+                              color: 'red',
+                              fontSize: 14
+                            }}
+                          >
+                            {props.touched.period && props.errors.period ? props.errors.period : null}
+                          </span>
+                        </div>
+                        <div style={{ paddingTop: 10 }}>
+                          <Button type="submit" variant="contained" disabled={props.isSubmitting} color="primary">
+                            Enviar
+                          </Button>
+                        </div>
+                      </Form>
+                    )}
                   />
                 </Grid>
               </Grid>
