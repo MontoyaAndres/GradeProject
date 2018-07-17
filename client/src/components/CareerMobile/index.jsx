@@ -24,7 +24,7 @@ import Info from '@material-ui/icons/Info';
 import Successfully from '../Global/Successfully';
 import Loading from '../../components/Global/Loading';
 import Seacher from './Searcher';
-import { StudentByParams } from '../../graphql/mutation';
+import { StudentByParams } from '../../graphql/query';
 
 const styles = theme => ({
   root: {
@@ -126,11 +126,25 @@ class index extends Component {
         if (deleteStudent) {
           const data = store.readQuery({
             query: StudentByParams,
-            variables: { Search: searchStudent, Variable, Situacion, CodigoPrograma, Estado, TipoSemestre }
+            variables: {
+              Search: searchStudent,
+              Variable,
+              Situacion,
+              CodigoPrograma,
+              Estado,
+              TipoSemestre
+            }
           });
           store.writeQuery({
             query: StudentByParams,
-            variables: { Search: searchStudent, Variable, Situacion, CodigoPrograma, Estado, TipoSemestre },
+            variables: {
+              Search: searchStudent,
+              Variable,
+              Situacion,
+              CodigoPrograma,
+              Estado,
+              TipoSemestre
+            },
             data: { StudentByParams: data.StudentByParams.filter(item => item._id !== studenIdDelete) }
           });
         }

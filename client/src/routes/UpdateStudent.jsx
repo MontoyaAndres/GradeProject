@@ -13,8 +13,7 @@ import FormRight from '../components/UpdateStudent/FormRight';
 import Layout from '../components/Global';
 import Loading from '../components/Global/Loading';
 import SelectData from '../utils/SelectData';
-import { QueryStudentInformation, studentDistinct } from '../graphql/query';
-import { StudentByParams } from '../graphql/mutation';
+import { StudentByParams, QueryStudentInformation, studentDistinct } from '../graphql/query';
 
 const styles = theme => ({
   paper: {

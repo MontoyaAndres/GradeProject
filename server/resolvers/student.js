@@ -6,35 +6,23 @@ export default {
     Student: requiresAuth.createResolver((parent, { _id }, { models }) => models.Student.findOne({ _id }).lean()),
     StudentByParams: requiresAuth.createResolver(
       (parent, { Search, Variable, Situacion, CodigoPrograma, Estado, TipoSemestre }, { models }) => {
-        let student = '';
-
         // if "Search" is different to an empty string.
         if (!Search) {
-          if (Variable === 'TODO' && Situacion === 'TODO' && Estado && TipoSemestre) {
-            student = models.Student.find({ CodigoPrograma, Estado, TipoSemestre });
-          } else if (Variable !== 'TODO' && Situacion === 'TODO' && Estado && TipoSemestre) {
-            student = models.Student.find({ CodigoPrograma, Variable, Estado, TipoSemestre });
-          } else {
-            student = models.Student.find({
-              CodigoPrograma,
-              TipoSemestre,
-              Situacion,
-              Variable,
-              Estado
-            });
-          }
-
-          return student;
+          return models.Student.find({
+            CodigoPrograma,
+            TipoSemestre,
+            Situacion,
+            Variable,
+            Estado
+          });
         }
 
         // if not, it'll return the student/s depending of the name, lastname or id
         const param = new RegExp(Search);
-        student = models.Student.find({
+        return models.Student.find({
           CodigoPrograma,
           $or: [{ Nombres: param }, { Apellidos: param }, { CodigoBanner: param }]
         }).limit(10);
-
-        return student;
       }
     ),
     StudentDistinct: requiresAuth.createResolver((parent, { Param }, { models }) =>

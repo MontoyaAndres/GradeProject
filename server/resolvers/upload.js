@@ -5,7 +5,7 @@ import { GraphQLUpload } from 'apollo-upload-server';
 import { uploadFile } from './utils/uploadFile';
 import requiresAuth from '../utils/permissions';
 
-const UPLOAD_ROUTE = `${__dirname}/../upload`;
+const UPLOAD_ROUTE = `${__dirname}/../files`;
 
 const storeUpload = ({ stream, filename }) =>
   new Promise((resolve, reject) =>
