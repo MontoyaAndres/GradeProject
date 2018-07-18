@@ -1,28 +1,47 @@
-import formatErrors from '../utils/formatErrors';
 import requiresAuth from '../utils/permissions';
 
 export default {
   Query: {
     Student: requiresAuth.createResolver((parent, { _id }, { models }) => models.Student.findOne({ _id }).lean()),
     StudentByParams: requiresAuth.createResolver(
-      (parent, { Search, Variable, Situacion, CodigoPrograma, Estado, TipoSemestre }, { models }) => {
-        // if "Search" is different to an empty string.
+      (
+        parent,
+        { Search, Variable, Situacion, CodigoPrograma, Estado, TipoSemestre, page, rowsPerPage },
+        { models }
+      ) => {
+        let student = [];
+
+        // How many students there
+        const count = models.Student.count({
+          CodigoPrograma,
+          TipoSemestre,
+          Situacion,
+          Variable,
+          Estado
+        }).exec();
+
+        // if "Search" is different a empty string.
         if (!Search) {
-          return models.Student.find({
+          student = models.Student.find({
             CodigoPrograma,
             TipoSemestre,
             Situacion,
             Variable,
             Estado
-          });
+          }).limit(rowsPerPage * (page === 0 ? 1 : page + 1));
+        } else {
+          // if not, it'll return the student/s depending of the name, lastname or id
+          const param = new RegExp(Search);
+          student = models.Student.find({
+            CodigoPrograma,
+            $or: [{ Nombres: param }, { Apellidos: param }, { CodigoBanner: param }]
+          }).limit(10);
         }
 
-        // if not, it'll return the student/s depending of the name, lastname or id
-        const param = new RegExp(Search);
-        return models.Student.find({
-          CodigoPrograma,
-          $or: [{ Nombres: param }, { Apellidos: param }, { CodigoBanner: param }]
-        }).limit(10);
+        return {
+          student,
+          count
+        };
       }
     ),
     StudentDistinct: requiresAuth.createResolver((parent, { Param }, { models }) =>
@@ -32,20 +51,6 @@ export default {
     )
   },
   Mutation: {
-    createStudent: requiresAuth.createResolver(async (parent, args, { models }) => {
-      try {
-        const student = new models.Student(args).save();
-        return {
-          ok: true,
-          student
-        };
-      } catch (err) {
-        return {
-          ok: false,
-          errors: formatErrors(err, models)
-        };
-      }
-    }),
     updateStudent: requiresAuth.createResolver(
       async (
         parent,

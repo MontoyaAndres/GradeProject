@@ -8,6 +8,8 @@ const StudentByParams = gql`
     $CodigoPrograma: String!
     $Estado: String!
     $TipoSemestre: String!
+    $page: Int
+    $rowsPerPage: Int
   ) {
     StudentByParams(
       Search: $Search
@@ -16,14 +18,19 @@ const StudentByParams = gql`
       CodigoPrograma: $CodigoPrograma
       Estado: $Estado
       TipoSemestre: $TipoSemestre
+      page: $page
+      rowsPerPage: $rowsPerPage
     ) {
-      _id
-      CodigoBanner
-      Nombres
-      Apellidos
-      Comentario
-      Situacion
-      Variable
+      student {
+        _id
+        CodigoBanner
+        Nombres
+        Apellidos
+        Comentario
+        Situacion
+        Variable
+      }
+      count
     }
   }
 `;

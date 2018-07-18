@@ -134,38 +134,26 @@ class index extends Component {
   };
 
   handleDeleteStudent = async () => {
-    const { studenIdDelete, searchStudent } = this.state;
+    const { studenIdDelete, searchStudent, page, rowsPerPage } = this.state;
     const { Variable, Situacion, CodigoPrograma, Estado, TipoSemestre } = this.props;
 
     await this.props.mutate({
       variables: { id: studenIdDelete },
-      update: (store, { data: { deleteStudent } }) => {
-        if (deleteStudent) {
-          const data = store.readQuery({
-            query: StudentByParams,
-            variables: {
-              Search: searchStudent,
-              Variable,
-              Situacion,
-              CodigoPrograma,
-              Estado,
-              TipoSemestre
-            }
-          });
-          store.writeQuery({
-            query: StudentByParams,
-            variables: {
-              Search: searchStudent,
-              Variable,
-              Situacion,
-              CodigoPrograma,
-              Estado,
-              TipoSemestre
-            },
-            data: { StudentByParams: data.StudentByParams.filter(item => item._id !== studenIdDelete) }
-          });
+      refetchQueries: [
+        {
+          query: StudentByParams,
+          variables: {
+            Search: searchStudent,
+            Variable,
+            Situacion,
+            CodigoPrograma,
+            Estado,
+            TipoSemestre,
+            page,
+            rowsPerPage
+          }
         }
-      }
+      ]
     });
 
     this.setState({ deleted: false, studenIdDelete: 0, successDeleted: true });
@@ -188,11 +176,13 @@ class index extends Component {
           Situacion,
           CodigoPrograma,
           Estado,
-          TipoSemestre
+          TipoSemestre,
+          page,
+          rowsPerPage
         }}
         fetchPolicy="network-only"
       >
-        {({ loading, data }) => {
+        {({ loading, data, fetchMore }) => {
           if (loading) {
             return <Loading />;
           }
@@ -222,8 +212,9 @@ class index extends Component {
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {data.StudentByParams.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(
-                        (student, i) => (
+                      {data.StudentByParams.student
+                        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                        .map((student, i) => (
                           <TableRow key={i} hover tabIndex={-1}>
                             <TableCell
                               className={classes.CodigoBanner}
@@ -266,14 +257,13 @@ class index extends Component {
                               </Button>
                             </TableCell>
                           </TableRow>
-                        )
-                      )}
+                        ))}
                     </TableBody>
                   </Table>
                 </div>
                 <TablePagination
                   component="div"
-                  count={data.StudentByParams.length}
+                  count={data.StudentByParams.count}
                   rowsPerPage={rowsPerPage}
                   page={page}
                   backIconButtonProps={{
@@ -282,7 +272,33 @@ class index extends Component {
                   nextIconButtonProps={{
                     'aria-label': 'Next Page'
                   }}
-                  onChangePage={this.handleChangePage}
+                  onChangePage={(e, pg) => {
+                    fetchMore({
+                      variables: {
+                        Search: searchStudent,
+                        Variable,
+                        Situacion,
+                        CodigoPrograma,
+                        Estado,
+                        TipoSemestre,
+                        page,
+                        rowsPerPage
+                      },
+                      updateQuery: (previousResult, { fetchMoreResult }) => {
+                        // Changing page
+                        this.handleChangePage(e, pg);
+
+                        if (!fetchMoreResult) {
+                          return previousResult;
+                        }
+
+                        return {
+                          ...previousResult,
+                          StudentByParams: { ...previousResult.StudentByParams, ...fetchMoreResult.StudentByParams }
+                        };
+                      }
+                    });
+                  }}
                   onChangeRowsPerPage={this.handleChangeRowsPerPage}
                 />
               </Paper>

@@ -20,6 +20,7 @@ import ErrorIcon from '@material-ui/icons/Error';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import Info from '@material-ui/icons/Info';
+import Replay from '@material-ui/icons/Replay';
 
 import Successfully from '../Global/Successfully';
 import Loading from '../../components/Global/Loading';
@@ -62,7 +63,9 @@ class index extends Component {
     deleted: false,
     studenIdDelete: 0,
     successDeleted: false,
-    searchStudent: ''
+    searchStudent: '',
+    page: 0,
+    hasMoreItems: true
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -117,38 +120,25 @@ class index extends Component {
   };
 
   handleDeleteStudent = async () => {
-    const { studenIdDelete, searchStudent } = this.state;
+    const { studenIdDelete, searchStudent, page } = this.state;
     const { Variable, Situacion, CodigoPrograma, Estado, TipoSemestre } = this.props;
 
     await this.props.mutate({
       variables: { id: studenIdDelete },
-      update: (store, { data: { deleteStudent } }) => {
-        if (deleteStudent) {
-          const data = store.readQuery({
-            query: StudentByParams,
-            variables: {
-              Search: searchStudent,
-              Variable,
-              Situacion,
-              CodigoPrograma,
-              Estado,
-              TipoSemestre
-            }
-          });
-          store.writeQuery({
-            query: StudentByParams,
-            variables: {
-              Search: searchStudent,
-              Variable,
-              Situacion,
-              CodigoPrograma,
-              Estado,
-              TipoSemestre
-            },
-            data: { StudentByParams: data.StudentByParams.filter(item => item._id !== studenIdDelete) }
-          });
+      refetchQueries: [
+        {
+          query: StudentByParams,
+          variables: {
+            Search: searchStudent,
+            Variable,
+            Situacion,
+            CodigoPrograma,
+            Estado,
+            TipoSemestre,
+            page
+          }
         }
-      }
+      ]
     });
 
     this.setState({ deleted: false, studenIdDelete: 0, successDeleted: true });
@@ -165,20 +155,20 @@ class index extends Component {
 
   render() {
     const { classes, Variable, Situacion, CodigoPrograma, Estado, TipoSemestre } = this.props;
-    const { deleted, successDeleted, searchStudent } = this.state;
+    const { page, hasMoreItems, deleted, successDeleted, searchStudent } = this.state;
 
     return (
       <Query
         query={StudentByParams}
-        variables={{ Search: searchStudent, Variable, Situacion, CodigoPrograma, Estado, TipoSemestre }}
+        variables={{ Search: searchStudent, Variable, Situacion, CodigoPrograma, Estado, TipoSemestre, page }}
         fetchPolicy="network-only"
       >
-        {({ loading, data }) => {
+        {({ loading, data, fetchMore }) => {
           if (loading) {
             return <Loading />;
           }
 
-          if (data.StudentByParams.length === 0) {
+          if (data.StudentByParams.student.length === 0) {
             return (
               <Paper className={classes.error}>
                 <Grid container wrap="nowrap">
@@ -204,11 +194,11 @@ class index extends Component {
               {/* Button to find students */}
               <Seacher onHandleSearchStudent={this.handleSearchStudent} />
 
-              {data.StudentByParams.map((student, i) => (
+              {data.StudentByParams.student.map((student, i) => (
                 <ExpansionPanel key={i}>
                   <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                     <span className={classes.heading}>{student.Apellidos}</span>
-                    <span className={classes.secondaryHeading}>{`${student.CodigoBanner}`}</span>
+                    <span className={classes.secondaryHeading}>{student.CodigoBanner}</span>
                   </ExpansionPanelSummary>
                   <ExpansionPanelDetails>
                     <Grid container>
@@ -257,6 +247,45 @@ class index extends Component {
                   </ExpansionPanelDetails>
                 </ExpansionPanel>
               ))}
+
+              {hasMoreItems && (
+                <div style={{ textAlign: 'center' }}>
+                  <IconButton
+                    aria-label="Refretch"
+                    onClick={() => {
+                      fetchMore({
+                        variables: {
+                          Search: searchStudent,
+                          Variable,
+                          Situacion,
+                          CodigoPrograma,
+                          Estado,
+                          TipoSemestre,
+                          page
+                        },
+                        updateQuery: (previousResult, { fetchMoreResult }) => {
+                          this.setState({ page: page + 1 });
+
+                          if (!fetchMoreResult) {
+                            return previousResult;
+                          }
+
+                          if (fetchMoreResult.StudentByParams.student.length === data.StudentByParams.count) {
+                            this.setState({ hasMoreItems: false });
+                          }
+
+                          return {
+                            ...previousResult,
+                            StudentByParams: { ...previousResult.StudentByParams, ...fetchMoreResult.StudentByParams }
+                          };
+                        }
+                      });
+                    }}
+                  >
+                    <Replay />
+                  </IconButton>
+                </div>
+              )}
             </div>
           );
         }}
