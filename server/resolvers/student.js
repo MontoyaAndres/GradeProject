@@ -35,7 +35,7 @@ export default {
           student = models.Student.find({
             CodigoPrograma,
             $or: [{ Nombres: param }, { Apellidos: param }, { CodigoBanner: param }]
-          }).limit(10);
+          }).limit(10 * (page === 0 ? 1 : page + 1));
         }
 
         return {

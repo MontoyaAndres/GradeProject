@@ -1,4 +1,4 @@
-server/upload/**/*
+server/files/**/*
 
 # Public files
 server/public/**/*

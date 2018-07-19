@@ -20,7 +20,6 @@ import ErrorIcon from '@material-ui/icons/Error';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import Info from '@material-ui/icons/Info';
-import Replay from '@material-ui/icons/Replay';
 
 import Successfully from '../Global/Successfully';
 import Loading from '../../components/Global/Loading';
@@ -249,9 +248,9 @@ class index extends Component {
               ))}
 
               {hasMoreItems && (
-                <div style={{ textAlign: 'center' }}>
-                  <IconButton
-                    aria-label="Refretch"
+                <div style={{ textAlign: 'center', padding: 10 }}>
+                  <Button
+                    color="primary"
                     onClick={() => {
                       fetchMore({
                         variables: {
@@ -282,8 +281,8 @@ class index extends Component {
                       });
                     }}
                   >
-                    <Replay />
-                  </IconButton>
+                    Ver más
+                  </Button>
                 </div>
               )}
             </div>

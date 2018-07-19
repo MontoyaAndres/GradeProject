@@ -125,7 +125,7 @@ class index extends Component {
   };
 
   handleChangeRowsPerPage = e => {
-    this.setState({ rowsPerPage: e.target.value });
+    this.setState({ rowsPerPage: e.target.value, page: 0 });
   };
 
   handleRedirect = link => {
