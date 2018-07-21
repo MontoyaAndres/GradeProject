@@ -189,7 +189,7 @@ class index extends Component {
 
           return (
             <Grid item xs={12}>
-              {/* To ask if the user want to delete the student */}
+              {/* To ask if the user wants to delete the student */}
               {deleted ? this.displayAlert() : null}
 
               {/* To show one alert which will show a message */}

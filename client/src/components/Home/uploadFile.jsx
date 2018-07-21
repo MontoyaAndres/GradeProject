@@ -13,7 +13,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import Button from '@material-ui/core/Button';
 
-import Successfully from '../Global/Successfully';
+import Loading from '../Global/Loading';
 import normalizeErrors from '../../normalizeErrors';
 
 // query
@@ -35,8 +35,7 @@ const uploadFileMutation = gql`
 class uploadFile extends Component {
   state = {
     fileName: '',
-    fileUploaded: '',
-    errorServer: true
+    error: false
   };
 
   handleChange = e => {
@@ -45,15 +44,15 @@ class uploadFile extends Component {
   };
 
   handleErrorServer = () => {
-    this.setState({ errorServer: !this.state.errorServer });
+    this.setState({ error: !this.state.error });
   };
 
   displayServerError = ({ errorTitle, errorMessage, values }) => {
-    const { errorServer } = this.state;
+    const { error } = this.state;
     return (
       <div>
         <Dialog
-          open={errorServer}
+          open={error}
           keepMounted
           onClose={this.handleErrorServer}
           aria-labelledby="alert-title"
@@ -83,30 +82,34 @@ class uploadFile extends Component {
   };
 
   render() {
-    const { errorServer, fileUploaded, fileName } = this.state;
+    const { error, fileName } = this.state;
 
     return (
       <Mutation
         mutation={uploadFileMutation}
         refetchQueries={[{ query: studentDistinct, variables: { param: 'TipoSemestre' } }]}
       >
-        {(mutate, { data }) => {
+        {(mutate, { data, loading }) => {
           // show server errors
-          if (errorServer && data && data.uploadFile.errors) {
+          if (error && data && data.uploadFile.errors) {
             const { errors, values } = data.uploadFile;
             const errorMsg = normalizeErrors(errors).file[0];
 
             if (values && values.length > 0) {
               // incorrect values
-              return this.displayServerError({ errorTitle: 'Error', errorMessage: errorMsg, values });
+              return this.displayServerError({
+                errorTitle: 'Error con validación de datos.',
+                errorMessage: errorMsg,
+                values
+              });
             }
             // period already saved
-            return this.displayServerError({ errorTitle: 'Error', errorMessage: errorMsg });
+            return this.displayServerError({ errorTitle: 'Error con archivo.', errorMessage: errorMsg });
           }
 
           return (
             <div>
-              <Successfully hide={!!data && data.uploadFile.ok} message="Periodo subido con exito!" />
+              {loading && <Loading />}
 
               <Grid item xs={12}>
                 <Grid
@@ -118,7 +121,8 @@ class uploadFile extends Component {
                   style={{ paddingTop: 18, paddingBottom: 18 }}
                 >
                   <Formik
-                    initialValues={{ period: '' }}
+                    enableReinitialize
+                    initialValues={{ period: '', file: '' }}
                     validationSchema={() =>
                       Yup.object().shape({
                         period: Yup.string()
@@ -127,9 +131,17 @@ class uploadFile extends Component {
                           .required('El campo es obligatorio!')
                       })
                     }
-                    onSubmit={({ period }, { setSubmitting, resetForm }) => {
+                    onSubmit={({ period, file }, { setSubmitting, resetForm }) => {
+                      mutate({ variables: { file, period } }).then(response => {
+                        if (response.data && response.data.uploadFile.errors) {
+                          // If there are errors, it'll return the response and will change the state of error
+                          this.setState({ error: true });
+                          return response;
+                        }
+                        // Return to the list of periods
+                        this.props.onHandleHideElement();
+                      });
                       setSubmitting(false);
-                      mutate({ variables: { file: fileUploaded, period } });
                       resetForm();
                     }}
                     render={props => (
@@ -140,7 +152,8 @@ class uploadFile extends Component {
                             className="ignore"
                             onDrop={([file]) => {
                               if (file) {
-                                this.setState({ fileUploaded: file, fileName: file.name });
+                                props.setFieldValue('file', file);
+                                this.setState({ fileName: file.name });
                               }
                             }}
                           >

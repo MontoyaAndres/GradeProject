@@ -6,9 +6,7 @@ import requiresAuth from '../utils/permissions';
 
 export default {
   Query: {
-    user: requiresAuth.createResolver(async (parent, args, { models, user: { _id } }) =>
-      models.User.findById({ _id }).lean()
-    )
+    user: requiresAuth.createResolver(async (parent, args, { user: { _id }, userLoader }) => userLoader.load(_id))
   },
   Mutation: {
     login: (parent, { email, password }, { models, SECRET, SECRET2 }) =>

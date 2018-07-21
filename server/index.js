@@ -6,6 +6,7 @@ import mongoose from 'mongoose';
 import helmet from 'helmet';
 import json2xls from 'json2xls';
 import compression from 'compression';
+import DataLoader from 'dataloader';
 import { graphqlExpress } from 'apollo-server-express';
 import { makeExecutableSchema } from 'graphql-tools';
 import { fileLoader, mergeTypes, mergeResolvers } from 'merge-graphql-schemas';
@@ -15,6 +16,7 @@ import expressPlayground from 'graphql-playground-middleware-express';
 import models from './models';
 import controllers from './controllers';
 import { refreshTokens } from './utils/auth';
+import { StudentDistinctBatcher, userBatcher } from './utils/batchFunctions';
 
 const typeDefs = mergeTypes(fileLoader(path.join(__dirname, './schema')));
 const resolvers = mergeResolvers(fileLoader(path.join(__dirname, './resolvers')));
@@ -71,7 +73,9 @@ app
         models,
         user: req.user,
         SECRET: process.env.SECRET1,
-        SECRET2: process.env.SECRET2
+        SECRET2: process.env.SECRET2,
+        StudentDistinctLoader: new DataLoader(params => StudentDistinctBatcher(params, models, req.user)),
+        userLoader: new DataLoader(ids => userBatcher(ids, models, req.user))
       }
     }))
   );

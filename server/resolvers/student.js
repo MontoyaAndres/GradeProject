@@ -44,10 +44,8 @@ export default {
         };
       }
     ),
-    StudentDistinct: requiresAuth.createResolver((parent, { Param }, { models }) =>
-      models.Student.find()
-        .distinct(Param)
-        .lean()
+    StudentDistinct: requiresAuth.createResolver((parent, { Param }, { StudentDistinctLoader }) =>
+      StudentDistinctLoader.load(Param)
     )
   },
   Mutation: {

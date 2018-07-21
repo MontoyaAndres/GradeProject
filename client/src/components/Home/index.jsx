@@ -184,7 +184,7 @@ class Home extends Component {
             </div>
           </Grid>
           {hide ? (
-            <UploadFile />
+            <UploadFile onHandleHideElement={this.handleHideElement} />
           ) : hasDataSelected ? (
             <Compare selected={selected} Career={Career} />
           ) : (
