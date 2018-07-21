@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = () => ({
@@ -37,9 +36,7 @@ const styles = () => ({
 
 const LoadingRoute = ({ classes }) => (
   <div className={classes.wrapper}>
-    <ReactCSSTransitionGroup transitionName="loading" transitionEnterTimeout={500} transitionLeaveTimeout={300}>
-      <div className={classes.circle} />
-    </ReactCSSTransitionGroup>
+    <div className={classes.circle} />
   </div>
 );
 
