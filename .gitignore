@@ -1,7 +1,6 @@
-server/files/**/*
-
-# Public files
-server/public/**/*
+# Project
+server/src/files/**/*
+server/dist/**/*
 
 # Logs
 logs

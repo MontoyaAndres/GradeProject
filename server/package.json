@@ -6,7 +6,8 @@
   "scripts": {
     "kill": "fuser -k 8080/tcp &>/dev/null",
     "dev": "NODE_ENV=development nodemon --exec babel-node index.js",
-    "start": "NODE_ENV=production node index.js"
+    "build": "babel src -d dist --copy-files",
+    "start": "node dist/index.js"
   },
   "keywords": [
     "uniminuto",
@@ -38,8 +39,10 @@
   },
   "devDependencies": {
     "babel-cli": "latest",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "latest",
     "babel-preset-stage-3": "latest",
+    "babel-runtime": "^6.26.0",
     "dotenv": "latest",
     "eslint": "latest",
     "eslint-config-airbnb": "latest",
