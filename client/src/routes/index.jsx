@@ -1,17 +1,12 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import decode from 'jwt-decode';
+import Loadable from 'react-loadable';
 
 import withRoot from '../utils/withRoot';
-import Home from './Home';
-import Career from './Career';
-import StudentInformation from './StudentInformation';
-import Graphics from './Graphics';
-import Configuration from './Configuration';
-import UpdateStudent from './UpdateStudent';
 import Logout from '../components/Global/Menu/Logout.jsx';
-import Login from './Login';
 import Error404 from './Error404';
+import LoadingRoute from './LoadingRoute';
 
 import SelectData from '../utils/SelectData';
 
@@ -60,16 +55,51 @@ const ExactCareer = ({ component: Component, ...rest }) => (
   />
 );
 
+const AsyncHome = Loadable({
+  loader: () => import('./Home'),
+  loading: () => <LoadingRoute />
+});
+
+const AsyncCareer = Loadable({
+  loader: () => import('./Career'),
+  loading: () => <LoadingRoute />
+});
+
+const AsyncStudentInformation = Loadable({
+  loader: () => import('./StudentInformation'),
+  loading: () => <LoadingRoute />
+});
+
+const AsyncUpdateStudent = Loadable({
+  loader: () => import('./UpdateStudent'),
+  loading: () => <LoadingRoute />
+});
+
+const AsyncGraphics = Loadable({
+  loader: () => import('./Graphics'),
+  loading: () => <LoadingRoute />
+});
+
+const AsyncConfiguration = Loadable({
+  loader: () => import('./Configuration'),
+  loading: () => <LoadingRoute />
+});
+
+const AsyncLogin = Loadable({
+  loader: () => import('./Login'),
+  loading: () => <LoadingRoute />
+});
+
 const Router = () => (
   <BrowserRouter>
     <Switch>
-      <PrivateRoute exact path="/" component={Home} />
-      <ExactCareer exact path="/carrera/:Career" component={Career} />
-      <PrivateRoute exact path="/estudiante/:_id" component={StudentInformation} />
-      <PrivateRoute exact path="/editar/:_id" component={UpdateStudent} />
-      <PrivateRoute exact path="/graficas" component={Graphics} />
-      <PrivateRoute exact path="/configuracion" component={Configuration} />
-      <IsLogin exact path="/login" component={Login} />
+      <PrivateRoute exact path="/" component={AsyncHome} />
+      <ExactCareer exact path="/carrera/:Career" component={AsyncCareer} />
+      <PrivateRoute exact path="/estudiante/:_id" component={AsyncStudentInformation} />
+      <PrivateRoute exact path="/editar/:_id" component={AsyncUpdateStudent} />
+      <PrivateRoute exact path="/graficas" component={AsyncGraphics} />
+      <PrivateRoute exact path="/configuracion" component={AsyncConfiguration} />
+      <IsLogin exact path="/login" component={AsyncLogin} />
       <Route component={Error404} />
     </Switch>
   </BrowserRouter>
