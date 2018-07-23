@@ -43,5 +43,6 @@ const link = afterwareLink.concat(middlewareLink.concat(httpLink));
 export default new ApolloClient({
   link,
   ssrMode: true,
-  cache: new InMemoryCache()
+  cache: new InMemoryCache().restore(window.__APOLLO_STATE__),
+  ssrForceFetchDelay: 100
 });

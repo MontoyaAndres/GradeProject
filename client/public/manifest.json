@@ -1,15 +1,64 @@
 {
-  "short_name": "RemisiónExcepción",
-  "name": "Remisión y Excepción de ausentismo",
   "icons": [
     {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "src": "./icon_1024x1024.png",
+      "sizes": "1024x1024",
+      "type": "image/png"
+    },
+    {
+      "src": "./icon_512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "./icon_384x384.png",
+      "sizes": "384x384",
+      "type": "image/png"
+    },
+    {
+      "src": "./icon_256x256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "./icon_192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./icon_128x128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "./icon_96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "./icon_64x64.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    },
+    {
+      "src": "./icon_32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "./icon_16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
     }
   ],
-  "start_url": "./index.html",
+  "name": "Software de remisión (Excepción de ausentismo).",
+  "short_name": "Software de remisión",
+  "orientation": "portrait",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "start_url": "/",
+  "description": "Software pensado para la excepción de ausentismo, enfocado a la administración, creación, edición, eliminación y graficación de dichos datos. Además contará con la funcionalidad de comparar datos de otras base de datos de estudiantes.",
+  "scope": "./",
+  "lang": "es",
+  "background_color": "#3F51B5",
+  "theme_color": "#FFFFFF"
 }

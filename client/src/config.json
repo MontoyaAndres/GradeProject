@@ -1,4 +1,4 @@
 {
-  "GRAPHQL_SERVER_URL": "http://192.168.0.38:8080/graphql",
-  "API_URL": "http://192.168.0.38:8080"
+  "GRAPHQL_SERVER_URL": "http://localhost:8080/graphql",
+  "API_URL": "http://localhost:8080"
 }

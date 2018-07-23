@@ -175,7 +175,7 @@ class uploadFile extends Component {
                                     textAlign: 'center'
                                   }}
                                 >
-                                  <h3>{fileName === '' ? 'Arrastre archivo o seleccione dando click' : fileName}</h3>
+                                  <h3>{fileName === '' ? 'Arrastre un archivo o seleccione dando click' : fileName}</h3>
                                 </div>
                               </div>
                             )}

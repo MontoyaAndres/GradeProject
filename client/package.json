@@ -1,14 +1,13 @@
 {
   "name": "client",
   "version": "0.0.1",
-  "description": "Software de remisión (Excepción de ausentismo) para la Uniminuto de Girardot, Colombia.",
+  "description": "Software pensado para la excepción de ausentismo, enfocado a la administración, creación, edición, eliminación y graficación de dichos datos. Además contará con la funcionalidad de comparar datos de otras base de datos de estudiantes.",
   "main": "index.jsx",
   "scripts": {
     "kill": "fuser -k 3000/tcp",
     "dev": "NODE_ENV=development react-scripts start",
-    "start": "node index.js",
     "build": "react-scripts build",
-    "eject": "react-scripts eject"
+    "start": "NODE_ENV=production node server.js"
   },
   "keywords": [
     "uniminuto",
@@ -27,6 +26,7 @@
     "apollo-link-context": "^1.0.8",
     "apollo-upload-client": "^8.0.0",
     "chart.js": "^2.7.2",
+    "express": "^4.16.3",
     "formik": "^0.11.11",
     "graphql": "^0.13.2",
     "graphql-tag": "^2.9.2",

@@ -1,6 +1,7 @@
 # Project
 server/src/files/**/*
 server/dist/**/*
+client/build/**/*
 
 # Logs
 logs
