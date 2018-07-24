@@ -1,6 +1,4 @@
-import config from '../config.json';
-
-const API = config.API_URL;
+const API = process.env.REACT_APP_SERVER_URL;
 
 function simulateClick(response) {
   // create new element <a> to "download" the file

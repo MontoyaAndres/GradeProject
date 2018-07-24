@@ -4,9 +4,7 @@ import { setContext } from 'apollo-link-context';
 import { ApolloLink } from 'apollo-link';
 import { createUploadLink } from 'apollo-upload-client';
 
-import config from './config.json';
-
-const httpLink = createUploadLink({ uri: config.GRAPHQL_SERVER_URL });
+const httpLink = createUploadLink({ uri: `${process.env.REACT_APP_SERVER_URL}/graphql` });
 
 const middlewareLink = setContext(() => ({
   headers: {

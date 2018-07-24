@@ -7,7 +7,7 @@
     "kill": "fuser -k 8080/tcp &>/dev/null",
     "dev": "NODE_ENV=development nodemon --exec babel-node src/index.js",
     "build": "babel src -d dist --copy-files",
-    "start": "node dist/index.js"
+    "start": "NODE_ENV=production node dist/index.js"
   },
   "keywords": [
     "uniminuto",

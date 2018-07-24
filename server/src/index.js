@@ -30,10 +30,6 @@ const schema = makeExecutableSchema({
 });
 
 const app = express();
-const corsOptions = {
-  origin: process.env.GRAPHQL_CLIENT_URL,
-  optionsSuccessStatus: 200
-};
 
 // middleware to auth
 const addUser = async (req, res, next) => {
@@ -56,8 +52,19 @@ const addUser = async (req, res, next) => {
   next();
 };
 
+const isProduction = process.env.NODE_ENV === 'production';
+if (isProduction) {
+  // Files from react app
+  const staticFiles = express.static(path.join(__dirname, '../../client/build'));
+
+  app.use(staticFiles);
+} else {
+  app
+    .use(cors({ origin: 'http://localhost:3000', optionsSuccessStatus: 200 }))
+    .get('/graphiql', expressPlayground({ endpoint: process.env.GRAPHQL_END_POINT }));
+}
+
 app
-  .use(cors(corsOptions))
   .use(compression())
   .use(helmet())
   .use(json2xls.middleware)
@@ -79,10 +86,6 @@ app
       }
     }))
   );
-
-if (process.env.NODE_ENV === 'development') {
-  app.get('/graphiql', expressPlayground({ endpoint: process.env.GRAPHQL_END_POINT }));
-}
 
 mongoose.Promise = global.Promise;
 mongoose.connect(process.env.DATABASE_URL).then(() => app.listen(process.env.PORT));
