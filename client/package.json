@@ -6,7 +6,8 @@
   "scripts": {
     "kill": "fuser -k 3000/tcp",
     "dev": "NODE_ENV=development react-scripts start",
-    "build": "rm -r build && NODE_ENV=production react-scripts build"
+    "build": "rm -r build && NODE_ENV=production react-scripts build",
+    "eject": "react-scripts eject"
   },
   "keywords": [
     "uniminuto",
@@ -29,6 +30,8 @@
     "graphql": "^0.13.2",
     "graphql-tag": "^2.9.2",
     "jwt-decode": "^2.2.0",
+    "preact": "^8.2.9",
+    "preact-compat": "^3.18.0",
     "react": "^16.4.1",
     "react-apollo": "^2.1.6",
     "react-chartjs-2": "^2.7.2",
