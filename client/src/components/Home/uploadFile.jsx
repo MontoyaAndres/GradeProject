@@ -112,14 +112,7 @@ class uploadFile extends Component {
               {loading && <Loading />}
 
               <Grid item xs={12}>
-                <Grid
-                  container
-                  spacing={16}
-                  direction="column"
-                  alignItems="center"
-                  justify="center"
-                  style={{ paddingTop: 18, paddingBottom: 18 }}
-                >
+                <Grid container direction="column" alignItems="center" justify="center" style={{ padding: 18 }}>
                   <Formik
                     enableReinitialize
                     initialValues={{ period: '', file: '' }}
