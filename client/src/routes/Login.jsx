@@ -51,7 +51,7 @@ const Login = ({ classes, values, handleChange, handleBlur, handleSubmit, isSubm
         <Grid container alignItems="center" justify="center" className={classes.container}>
           <Paper className={classes.paper}>
             <Grid item xs={12}>
-              <img className={classes.image} src="uniminuto.jpeg" alt="Uniminuto" />
+              <img className={classes.image} src="uniminuto-login.svg" alt="Uniminuto" />
             </Grid>
             <Form onSubmit={handleSubmit}>
               <Grid item xs={12}>

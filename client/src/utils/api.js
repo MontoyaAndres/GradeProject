@@ -29,7 +29,7 @@ async function downloadFileCompared(periodSelected1, periodSelected2, career) {
 }
 
 async function donwloadGraphic(style, CodigoPrograma, TipoSemestre, graphicBy, isVariable) {
-  await fetch(`${API}/grafica/${style}/${CodigoPrograma}/${TipoSemestre}/${graphicBy}/${isVariable}}`).then(response =>
+  await fetch(`${API}/grafica/${style}/${CodigoPrograma}/${TipoSemestre}/${graphicBy}/${isVariable}`).then(response =>
     simulateClick(response)
   );
 }

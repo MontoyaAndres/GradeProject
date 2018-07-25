@@ -57,6 +57,7 @@ const addUser = async (req, res, next) => {
 app
   .use(compression())
   .use(helmet())
+  .use(cors())
   .use(json2xls.middleware)
   .use(addUser)
   .use(controllers)
@@ -85,9 +86,7 @@ if (isProduction) {
     res.sendFile(path.join(__dirname, 'build/index.html'));
   });
 } else {
-  app
-    .use(cors({ origin: 'http://localhost:3000', optionsSuccessStatus: 200 }))
-    .get('/graphiql', expressPlayground({ endpoint: process.env.GRAPHQL_END_POINT }));
+  app.get('/graphiql', expressPlayground({ endpoint: process.env.GRAPHQL_END_POINT }));
 }
 
 mongoose.Promise = global.Promise;

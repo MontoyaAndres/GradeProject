@@ -168,8 +168,8 @@ class index extends Component {
               <IconButton onClick={this.handleMenuModal}>
                 <MenuIcon />
               </IconButton>
-              <div>
-                <img src="/uniminuto.png" alt="uniminuto" height="100vh" width="200" />
+              <div style={{ margin: '0 auto', height: '100%' }}>
+                <img src="/uniminuto-menu.svg" alt="uniminuto" height="100" width="150" />
               </div>
             </div>
             <div className={classes.list}>
