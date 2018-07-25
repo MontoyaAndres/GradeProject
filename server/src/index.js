@@ -55,10 +55,10 @@ const addUser = async (req, res, next) => {
 const isProduction = process.env.NODE_ENV === 'production';
 if (isProduction) {
   // Files from react app
-  app.use(express.static(path.join(__dirname, '../../client/build')));
+  app.use(express.static(path.join(__dirname, 'build')));
 
   app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../../client/build/index.html'));
+    res.sendFile(path.join(__dirname, 'build/index.html'));
   });
 } else {
   app
