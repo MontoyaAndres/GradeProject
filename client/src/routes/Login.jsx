@@ -10,6 +10,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
 import normalizeErrors from '../normalizeErrors';
+import UniminutoLogin from '../img/uniminuto-login.svg';
 
 const styles = theme => ({
   root: {
@@ -51,7 +52,7 @@ const Login = ({ classes, values, handleChange, handleBlur, handleSubmit, isSubm
         <Grid container alignItems="center" justify="center" className={classes.container}>
           <Paper className={classes.paper}>
             <Grid item xs={12}>
-              <img className={classes.image} src="uniminuto-login.svg" alt="Uniminuto" />
+              <img className={classes.image} src={UniminutoLogin} alt="Uniminuto" />
             </Grid>
             <Form onSubmit={handleSubmit}>
               <Grid item xs={12}>

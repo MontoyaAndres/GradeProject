@@ -20,6 +20,8 @@ import Graphics from './Graphics';
 import Logout from './Logout';
 import { userQuery } from '../../../graphql/query';
 
+import UniminutoMenu from '../../../img/uniminuto-menu.svg';
+
 const styles = theme => ({
   root: {
     flexGrow: 1
@@ -169,7 +171,7 @@ class index extends Component {
                 <MenuIcon />
               </IconButton>
               <div style={{ margin: '0 auto', height: '100%' }}>
-                <img src="/uniminuto-menu.svg" alt="uniminuto" height="100" width="150" />
+                <img src={UniminutoMenu} alt="uniminuto" height="100" width="150" />
               </div>
             </div>
             <div className={classes.list}>
