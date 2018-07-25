@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -14,10 +14,12 @@ const styles = theme => ({
   }
 });
 
-class FormRight extends Component {
+class FormRight extends PureComponent {
   componentWillReceiveProps(prevProps) {
+    const { values } = this.props;
+
     // if variable changes, situacion will change too.
-    if (prevProps.values.Student.Variable !== this.props.values.Student.Variable) {
+    if (prevProps.values.Student.Variable !== values.Student.Variable) {
       // eslint-disable-next-line
       prevProps.values.Student.Situacion = prevProps.dataSituacion[0];
     }

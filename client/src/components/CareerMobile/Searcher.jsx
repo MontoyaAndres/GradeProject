@@ -19,7 +19,7 @@ const styles = theme => ({
   }
 });
 
-class Searcher extends React.Component {
+class Searcher extends React.PureComponent {
   state = {
     open: false,
     search: ''
@@ -31,14 +31,19 @@ class Searcher extends React.Component {
   };
 
   handleClick = () => {
-    this.setState({ open: !this.state.open, search: '' });
+    const { open } = this.state;
+
+    this.setState({ open: !open, search: '' });
   };
 
   handleSeacherStudent = () => {
+    const { search, open } = this.state;
+    const { onHandleSearchStudent } = this.props;
+
     // Passing the student (name, lastname, or ID)
-    this.props.onHandleSearchStudent(this.state.search);
+    onHandleSearchStudent(search);
     // Resetting the state
-    this.setState({ open: !this.state.open, search: '' });
+    this.setState({ open: !open, search: '' });
   };
 
   render() {

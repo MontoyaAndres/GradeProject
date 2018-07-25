@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import Dropzone from 'react-dropzone';
@@ -32,7 +32,7 @@ const uploadFileMutation = gql`
   }
 `;
 
-class uploadFile extends Component {
+class uploadFile extends PureComponent {
   state = {
     fileName: '',
     error: false
@@ -44,7 +44,9 @@ class uploadFile extends Component {
   };
 
   handleErrorServer = () => {
-    this.setState({ error: !this.state.error });
+    const { error } = this.state;
+
+    this.setState({ error: !error });
   };
 
   displayServerError = ({ errorTitle, errorMessage, values }) => {
@@ -83,6 +85,7 @@ class uploadFile extends Component {
 
   render() {
     const { error, fileName } = this.state;
+    const { onHandleHideElement } = this.props;
 
     return (
       <Mutation
@@ -132,7 +135,7 @@ class uploadFile extends Component {
                           return response;
                         }
                         // Return to the list of periods
-                        this.props.onHandleHideElement();
+                        onHandleHideElement();
                       });
                       setSubmitting(false);
                       resetForm();

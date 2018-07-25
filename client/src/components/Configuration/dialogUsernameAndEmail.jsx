@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import { Formik, Form } from 'formik';
@@ -19,17 +19,19 @@ const updateUsernameOrEmailMutation = gql`
   }
 `;
 
-class dialogUsernameAndEmail extends Component {
+class dialogUsernameAndEmail extends PureComponent {
   state = {
     open: false
   };
 
   handleDialog = () => {
-    this.setState({ open: !this.state.open });
+    const { open } = this.state;
+
+    this.setState({ open: !open });
   };
 
   render() {
-    const { username, email, history } = this.props;
+    const { username, email, history, mutate } = this.props;
     const { open } = this.state;
 
     return (
@@ -42,7 +44,7 @@ class dialogUsernameAndEmail extends Component {
           initialValues={{ username, email }}
           onSubmit={(values, { setSubmitting }) => {
             setSubmitting(false);
-            this.props.mutate({
+            mutate({
               variables: { username: values.username, email: values.email },
               refetchQueries: [{ query: userQuery }]
             });

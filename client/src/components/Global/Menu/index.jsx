@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { graphql } from 'react-apollo';
 import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
@@ -47,7 +47,7 @@ const styles = theme => ({
   }
 });
 
-class index extends Component {
+class index extends PureComponent {
   state = {
     open: false,
     openUser: null,
@@ -65,7 +65,9 @@ class index extends Component {
   }
 
   handleMenuModal = () => {
-    this.setState({ open: !this.state.open });
+    const { open } = this.state;
+
+    this.setState({ open: !open });
   };
 
   handleMenuName = () => {

@@ -15,7 +15,9 @@ class Carreras extends PureComponent {
   state = { open: false };
 
   handleClick = () => {
-    this.setState({ open: !this.state.open });
+    const { open } = this.state;
+
+    this.setState({ open: !open });
   };
 
   render() {

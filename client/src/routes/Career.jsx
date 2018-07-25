@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { graphql } from 'react-apollo';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -41,7 +41,7 @@ const styles = theme => ({
   }
 });
 
-class Career extends Component {
+class Career extends PureComponent {
   state = {
     Variable: 'ACADÉMICO',
     Situacion: 'CAMBIO DE SEDE',
@@ -50,6 +50,17 @@ class Career extends Component {
     TipoSemestre: '',
     openDialogMobile: false
   };
+
+  componentDidUpdate(prevProps, prevState) {
+    const { Variable } = this.state;
+
+    // If the "variable" will change, the "situacion" will change too.
+    const Situacion = SelectData.VariableSituacion[Variable][0];
+    if (prevState.Variable !== Variable) {
+      // eslint-disable-next-line
+      this.setState({ Situacion });
+    }
+  }
 
   static getDerivedStateFromProps(nextProps, prevState) {
     if (prevState.TipoSemestre === '') {
@@ -61,22 +72,15 @@ class Career extends Component {
     return null;
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    // If the "variable" will change, the "situacion" will change too.
-    const Situacion = SelectData.VariableSituacion[this.state.Variable][0];
-    if (prevState.Variable !== this.state.Variable) {
-      // eslint-disable-next-line
-      this.setState({ Situacion });
-    }
-  }
-
   handleChange = e => {
     const { name, value } = e.target;
     this.setState({ [name]: value });
   };
 
   handleDialogMobile = () => {
-    this.setState({ openDialogMobile: !this.state.openDialogMobile });
+    const { openDialogMobile } = this.state;
+
+    this.setState({ openDialogMobile: !openDialogMobile });
   };
 
   render() {

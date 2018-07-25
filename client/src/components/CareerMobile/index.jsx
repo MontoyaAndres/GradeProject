@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Query, graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import { withStyles } from '@material-ui/core/styles';
@@ -22,7 +22,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import Info from '@material-ui/icons/Info';
 
 import Successfully from '../Global/Successfully';
-import Loading from '../../components/Global/Loading';
+import Loading from '../Global/Loading';
 import Seacher from './Searcher';
 import { StudentByParams } from '../../graphql/query';
 
@@ -57,7 +57,7 @@ const deleteStudentMutation = gql`
   }
 `;
 
-class index extends Component {
+class index extends PureComponent {
   state = {
     deleted: false,
     studenIdDelete: 0,
@@ -68,16 +68,18 @@ class index extends Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
+    const { Variable, Situacion, Estado, TipoSemestre } = this.props;
+
     if (prevState.successDeleted) {
       // if the student was deleted, this will format the state successDeleted
       this.setState({ successDeleted: false });
     }
 
     if (
-      prevProps.Variable !== this.props.Variable ||
-      prevProps.Situacion !== this.props.Situacion ||
-      prevProps.Estado !== this.props.Estado ||
-      prevProps.TipoSemestre !== this.props.TipoSemestre
+      prevProps.Variable !== Variable ||
+      prevProps.Situacion !== Situacion ||
+      prevProps.Estado !== Estado ||
+      prevProps.TipoSemestre !== TipoSemestre
     ) {
       this.setState({ searchStudent: '' });
     }
@@ -120,9 +122,9 @@ class index extends Component {
 
   handleDeleteStudent = async () => {
     const { studenIdDelete, searchStudent, page } = this.state;
-    const { Variable, Situacion, CodigoPrograma, Estado, TipoSemestre } = this.props;
+    const { Variable, Situacion, CodigoPrograma, Estado, TipoSemestre, mutate } = this.props;
 
-    await this.props.mutate({
+    await mutate({
       variables: { id: studenIdDelete },
       refetchQueries: [
         {

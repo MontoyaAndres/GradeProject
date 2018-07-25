@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import * as Yup from 'yup';
@@ -36,13 +36,15 @@ const updatePassword = gql`
   }
 `;
 
-class dialogPassword extends Component {
+class dialogPassword extends PureComponent {
   state = {
     open: false
   };
 
   handleDialog = () => {
-    this.setState({ open: !this.state.open });
+    const { open } = this.state;
+
+    this.setState({ open: !open });
   };
 
   render() {

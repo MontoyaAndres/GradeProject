@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Query, graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import { withStyles } from '@material-ui/core/styles';
@@ -46,7 +46,7 @@ const deletePeriod = gql`
   }
 `;
 
-class PeriodList extends Component {
+class PeriodList extends PureComponent {
   state = {
     career: 'ADFU',
     checked: [],
@@ -58,10 +58,13 @@ class PeriodList extends Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.career !== this.state.career) {
+    const { career, selected } = this.state;
+    const { onHandleSelectedAndCareer } = this.props;
+
+    if (prevState.career !== career) {
       // If the checkbox was changed and then the career will be change
       // so, the function "onHandleSelectedAndCareer" needs to update!
-      this.props.onHandleSelectedAndCareer(this.state.selected, this.state.career);
+      onHandleSelectedAndCareer(selected, career);
     }
 
     if (prevState.successDeleted) {
@@ -156,8 +159,9 @@ class PeriodList extends Component {
 
   handleDeletePeriod = () => {
     const { valueDeleleted } = this.state;
+    const { mutate } = this.props;
     // delete the period and refetch the query "studentDistinct"
-    this.props.mutate({
+    mutate({
       variables: { period: valueDeleleted },
       refetchQueries: [{ query: studentDistinct, variables: { param: 'TipoSemestre' } }]
     });

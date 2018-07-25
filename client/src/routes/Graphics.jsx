@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { graphql } from 'react-apollo';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -63,7 +63,7 @@ const graphicByArray = [
   'Situacion'
 ];
 
-class Graphics extends Component {
+class Graphics extends PureComponent {
   state = {
     CodigoPrograma: 'ADFU',
     dataTipoSemestre: [''],
@@ -106,7 +106,9 @@ class Graphics extends Component {
   };
 
   handleDialogMobile = () => {
-    this.setState({ openDialogMobile: !this.state.openDialogMobile });
+    const { openDialogMobile } = this.state;
+
+    this.setState({ openDialogMobile: !openDialogMobile });
   };
 
   render() {

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { graphql } from 'react-apollo';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -17,7 +17,7 @@ const styles = theme => ({
   }
 });
 
-class FormLeft extends Component {
+class FormLeft extends PureComponent {
   state = {
     dataTipoSemestre: [''],
     TipoSemestre: ''

@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Hidden from '@material-ui/core/Hidden';
@@ -49,7 +49,7 @@ const styles = theme => ({
   }
 });
 
-class Home extends Component {
+class Home extends PureComponent {
   state = {
     hide: false,
     selected: [],
@@ -58,7 +58,9 @@ class Home extends Component {
   };
 
   handleHideElement = () => {
-    this.setState({ hide: !this.state.hide });
+    const { hide } = this.state;
+
+    this.setState({ hide: !hide });
   };
 
   handleSelectedAndCareer = (selected, Career) => {
@@ -66,11 +68,15 @@ class Home extends Component {
   };
 
   handleHasDataSelected = () => {
-    this.setState({ hasDataSelected: !this.state.hasDataSelected });
+    const { hasDataSelected } = this.state;
+
+    this.setState({ hasDataSelected: !hasDataSelected });
   };
 
   handleShowHasDataSelected = () => {
-    this.setState({ hasDataSelected: !this.state.hasDataSelected, selected: [] });
+    const { hasDataSelected } = this.state;
+
+    this.setState({ hasDataSelected: !hasDataSelected, selected: [] });
   };
 
   render() {
