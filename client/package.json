@@ -6,7 +6,7 @@
   "scripts": {
     "kill": "fuser -k 3000/tcp",
     "dev": "NODE_ENV=development react-scripts start",
-    "build": "NODE_ENV=production react-scripts build"
+    "build": "rm -r build && NODE_ENV=production react-scripts build"
   },
   "keywords": [
     "uniminuto",
