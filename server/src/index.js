@@ -21,6 +21,8 @@ import { StudentDistinctBatcher, userBatcher } from './utils/batchFunctions';
 const typeDefs = mergeTypes(fileLoader(path.join(__dirname, './schema')));
 const resolvers = mergeResolvers(fileLoader(path.join(__dirname, './resolvers')));
 
+const isProduction = process.env.NODE_ENV === 'production';
+
 // Load environment variables from .env file
 require('dotenv').config();
 
@@ -52,20 +54,6 @@ const addUser = async (req, res, next) => {
   next();
 };
 
-const isProduction = process.env.NODE_ENV === 'production';
-if (isProduction) {
-  // Files from react app
-  app.use(express.static(path.join(__dirname, 'build')));
-
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'build/index.html'));
-  });
-} else {
-  app
-    .use(cors({ origin: 'http://localhost:3000', optionsSuccessStatus: 200 }))
-    .get('/graphiql', expressPlayground({ endpoint: process.env.GRAPHQL_END_POINT }));
-}
-
 app
   .use(compression())
   .use(helmet())
@@ -88,6 +76,19 @@ app
       }
     }))
   );
+
+if (isProduction) {
+  // Files from react app
+  app.use(express.static(path.join(__dirname, 'build')));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build/index.html'));
+  });
+} else {
+  app
+    .use(cors({ origin: 'http://localhost:3000', optionsSuccessStatus: 200 }))
+    .get('/graphiql', expressPlayground({ endpoint: process.env.GRAPHQL_END_POINT }));
+}
 
 mongoose.Promise = global.Promise;
 mongoose.connect(process.env.DATABASE_URL).then(() => app.listen(process.env.PORT));
