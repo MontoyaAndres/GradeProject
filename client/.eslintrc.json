@@ -1,16 +1,18 @@
-module.exports = {
-  extends: [
-    'airbnb',
-    'prettier',
+{
+  "extends": [
+    "airbnb",
+    "prettier",
     "prettier/react"
   ],
-  plugins: ['react', 'jsx-a11y', 'import', 'prettier'],
-  rules: {
-    'react/jsx-filename-extension': 0,
-  },
-  globals: {
-    document: 1,
-    localStorage: 1,
+  "plugins": [
+    "react",
+    "jsx-a11y",
+    "import",
+    "prettier"
+  ],
+  "globals": {
+    "document": true,
+    "localStorage": true
   },
   "parser": "babel-eslint",
   "parserOptions": {
@@ -26,8 +28,8 @@ module.exports = {
     "node": true
   },
   "rules": {
+    "react/jsx-filename-extension": 0,
     "react/prop-types": 0,
-
     "react/no-array-index-key": 0,
     "complexity": 0,
     "no-nested-ternary": 0,
@@ -183,15 +185,6 @@ module.exports = {
     "jsx-a11y/accessible-emoji": 0,
     "react/display-name": 0,
     "import/no-extraneous-dependencies": 0,
-    "react/jsx-filename-extension": [
-      1,
-      {
-        "extensions": [
-          ".js",
-          ".jsx"
-        ]
-      }
-    ],
     "radix": 0,
     "no-shadow": [
       2,
@@ -232,4 +225,4 @@ module.exports = {
       }
     ]
   }
-};
+}
