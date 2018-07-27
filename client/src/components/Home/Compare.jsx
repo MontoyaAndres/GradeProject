@@ -129,7 +129,7 @@ class Compare extends PureComponent {
             </Grid>
           </DialogContent>
           <DialogActions>
-            <Button onClick={() => this.handleDownloadFile()} color="primary">
+            <Button onClick={() => this.handleDownloadFile()} color="primary" disabled={periodSelected === ''}>
               Descargar
             </Button>
             <Button onClick={this.handleDialog} color="primary" autoFocus>
