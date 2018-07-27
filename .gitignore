@@ -2,6 +2,8 @@
 server/src/files/**/*
 server/dist/**/*
 client/build/**/*
+server/package-lock.json
+client/package-lock.json
 
 # Logs
 logs
