@@ -22,8 +22,8 @@ async function downloadFilePeriod(CodigoPrograma, TipoSemestre) {
   await fetch(`${API}/download/${CodigoPrograma}/${TipoSemestre}`).then(response => simulateClick(response));
 }
 
-async function downloadFileCompared(periodSelected1, periodSelected2, career) {
-  await fetch(`${API}/compare/${periodSelected1}/${periodSelected2}/${career}`).then(response =>
+async function downloadFileCompared(periodSelected1, periodSelected2, career, periodSelected) {
+  await fetch(`${API}/compare/${periodSelected1}/${periodSelected2}/${career}/${periodSelected}`).then(response =>
     simulateClick(response)
   );
 }

@@ -41,7 +41,8 @@ async function downloadFilePeriod(request, response) {
 
 async function downloadFileCompared(request, response) {
   try {
-    const { periodSelected1, periodSelected2, career } = request.params;
+    const { periodSelected1, periodSelected2, career, periodSelected } = request.params;
+    // If the periodSelect is empty, it'll take the periodSelected1 by default.
     const period1 = periodSelected1; // first period
     const period2 = periodSelected2; // second period
 
@@ -49,27 +50,34 @@ async function downloadFileCompared(request, response) {
 
     const periodData1 = await Student.find({ TipoSemestre: period1, CodigoPrograma: career }, { _id: 0 })
       .select(
-        'CodigoBanner Nombres Apellidos Genero Edad NumeroIdentificacion TipoDocIdentidad NivelFormacion CodigoPrograma DescripcionPrograma Jornada AreaConocimiento NucleoBasicoConocimiento IES Snies Rectoria CodigoSede Sede CentroRegional CodigoPeriodoAcademico PeriodoAcademicoInscripcion DescripcionMetodologia TipoEstudianteAgrupado LugarResidencia TelCel FechaCel TelRe CorreoEstudiante1 CorreoEstudiante2 FechaCorreo Direccion Departamento Ciudad Comentario Situacion Variable'
+        'TipoSemestre CodigoBanner Nombres Apellidos Genero Edad NumeroIdentificacion TipoDocIdentidad NivelFormacion CodigoPrograma DescripcionPrograma Jornada AreaConocimiento NucleoBasicoConocimiento IES Snies Rectoria CodigoSede Sede CentroRegional CodigoPeriodoAcademico PeriodoAcademicoInscripcion DescripcionMetodologia TipoEstudianteAgrupado LugarResidencia TelCel FechaCel TelRe CorreoEstudiante1 CorreoEstudiante2 FechaCorreo Direccion Departamento Ciudad Comentario Situacion Variable'
       )
       .lean();
 
     const periodData2 = await Student.find({ TipoSemestre: period2, CodigoPrograma: career }, { _id: 0 })
       .select(
-        'CodigoBanner Nombres Apellidos Genero Edad NumeroIdentificacion TipoDocIdentidad NivelFormacion CodigoPrograma DescripcionPrograma Jornada AreaConocimiento NucleoBasicoConocimiento IES Snies Rectoria CodigoSede Sede CentroRegional CodigoPeriodoAcademico PeriodoAcademicoInscripcion DescripcionMetodologia TipoEstudianteAgrupado LugarResidencia TelCel FechaCel TelRe CorreoEstudiante1 CorreoEstudiante2 FechaCorreo Direccion Departamento Ciudad Comentario Situacion Variable'
+        'TipoSemestre CodigoBanner Nombres Apellidos Genero Edad NumeroIdentificacion TipoDocIdentidad NivelFormacion CodigoPrograma DescripcionPrograma Jornada AreaConocimiento NucleoBasicoConocimiento IES Snies Rectoria CodigoSede Sede CentroRegional CodigoPeriodoAcademico PeriodoAcademicoInscripcion DescripcionMetodologia TipoEstudianteAgrupado LugarResidencia TelCel FechaCel TelRe CorreoEstudiante1 CorreoEstudiante2 FechaCorreo Direccion Departamento Ciudad Comentario Situacion Variable'
       )
       .lean();
 
     await periodData1.forEach(data1 => {
       periodData2.forEach(data2 => {
         if (data1.CodigoBanner === data2.CodigoBanner) {
-          // it'll pass the data (data1 and data2 have the same info).
-          exists.push(data1);
+          // it'll pass the data (data1 and data2 have the same info) but the rest info is different.
+          if (data1.TipoSemestre === periodSelected) {
+            exists.push(data1);
+          } else if (data2.TipoSemestre === periodSelected) {
+            exists.push(data2);
+          }
         }
       });
     });
 
-    const json = await exists.map(data =>
-      JSON.parse(
+    const json = await exists.map(data => {
+      // Delete TipoSemestre from data it's not necessary
+      delete data.TipoSemestre;
+
+      return JSON.parse(
         JSON.stringify(data)
           .replace('"CodigoPrograma"', '"Código Programa"')
           .replace('"CodigoBanner"', '"Código Banner"')
@@ -86,10 +94,10 @@ async function downloadFileCompared(request, response) {
           .replace('"DescripciónMetodologia"', '"Descripción Metodología"')
           .replace('"TipoEstudianteAgrupado"', '"Tipo Estudiante Agrupado"')
           .replace('"LugarResidencia"', '"Lugar Residencia"')
-      )
-    );
+      );
+    });
 
-    await response.xls(`${career} ${period1} - ${period2}.xlsx`, json);
+    await response.xls(`${career} ${periodSelected}.xlsx`, json);
   } catch (e) {
     response
       .status(500)

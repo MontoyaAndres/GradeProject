@@ -103,7 +103,6 @@ class index extends PureComponent {
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            update
             <Button onClick={() => this.handleDeleteStudent()} color="primary">
               Sí
             </Button>
