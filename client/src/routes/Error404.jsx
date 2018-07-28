@@ -13,7 +13,7 @@ const Error404 = () => (
       textAlign: 'center'
     }}
   >
-    <h1 style={{ color: 'white', fontSize: 100 }}>Página no encontrada</h1>
+    <h1 style={{ color: 'white', fontSize: 60 }}>Página no encontrada</h1>
     <Button style={{ color: '#BDBDBD', fontSize: 30 }} href="/">
       Regresar a inicio
     </Button>
