@@ -31,8 +31,7 @@ import { studentDistinct } from '../../graphql/query';
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
-    margin: theme.spacing.unit
+    backgroundColor: theme.palette.background.paper
   },
   close: {
     width: theme.spacing.unit * 4,

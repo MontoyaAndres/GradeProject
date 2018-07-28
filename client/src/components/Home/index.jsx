@@ -16,7 +16,7 @@ import UploadFile from './uploadFile';
 
 const styles = theme => ({
   paper: {
-    margin: theme.spacing.unit * 3
+    margin: theme.spacing.unit
   },
   titlePaper: {
     display: 'flex',
