@@ -80,6 +80,11 @@ const AsyncGraphics = Loadable({
   loading: () => <LoadingRoute />
 });
 
+const AsyncHelp = Loadable({
+  loader: () => import('./Help'),
+  loading: () => <LoadingRoute />
+});
+
 const AsyncConfiguration = Loadable({
   loader: () => import('./Configuration'),
   loading: () => <LoadingRoute />
@@ -98,6 +103,7 @@ const Router = () => (
       <PrivateRoute exact path="/estudiante/:_id" component={AsyncStudentInformation} />
       <PrivateRoute exact path="/editar/:_id" component={AsyncUpdateStudent} />
       <PrivateRoute exact path="/graficas" component={AsyncGraphics} />
+      <PrivateRoute exact path="/ayuda" component={AsyncHelp} />
       <PrivateRoute exact path="/configuracion" component={AsyncConfiguration} />
       <IsLogin exact path="/login" component={AsyncLogin} />
       <Route component={Error404} />

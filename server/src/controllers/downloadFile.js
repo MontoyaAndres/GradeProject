@@ -105,4 +105,26 @@ async function downloadFileCompared(request, response) {
   }
 }
 
-export { downloadFilePeriod, downloadFileCompared };
+async function downloadManual(request, response) {
+  const { type } = request.params;
+
+  try {
+    if (type === 'desktop') {
+      response.download(`${__dirname}/manuals/test.txt`);
+    }
+
+    if (type === 'phone') {
+      response.download(`${__dirname}/manuals/test.txt`);
+    }
+
+    if (type === 'excel') {
+      response.download(`${__dirname}/manuals/test.txt`);
+    }
+  } catch (e) {
+    response
+      .status(500)
+      .send({ error: 'No se pudo descargar el archivo, por favor consultar con el administrador de la página.' });
+  }
+}
+
+export { downloadFilePeriod, downloadFileCompared, downloadManual };

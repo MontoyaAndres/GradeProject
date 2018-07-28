@@ -5,17 +5,17 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Grade from '@material-ui/icons/Grade';
 
-const Graphics = ({ onHandleClose }) => (
+const Help = ({ onHandleClose }) => (
   <Fragment>
-    <Link to="/graficas" replace style={{ textDecoration: 'none' }}>
+    <Link to="/ayuda" replace style={{ textDecoration: 'none' }}>
       <ListItem button onClick={onHandleClose}>
         <ListItemIcon>
           <Grade />
         </ListItemIcon>
-        <ListItemText inset primary="Gráficas" />
+        <ListItemText inset primary="Ayuda" />
       </ListItem>
     </Link>
   </Fragment>
 );
 
-export default Graphics;
+export default Help;

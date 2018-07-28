@@ -12,7 +12,10 @@ module.exports = {
   ],
   "globals": {
     "document": true,
-    "localStorage": true
+    "localStorage": true,
+    "fetch": true,
+    "window": true,
+    "MouseEvent": true
   },
   "parser": "babel-eslint",
   "parserOptions": {

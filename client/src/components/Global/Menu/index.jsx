@@ -17,6 +17,7 @@ import Check from '@material-ui/icons/Check';
 import Carreras from './Careers';
 import Home from './Home';
 import Graphics from './Graphics';
+import Help from './Help';
 import Logout from './Logout';
 import { userQuery } from '../../../graphql/query';
 
@@ -93,6 +94,10 @@ class index extends PureComponent {
 
     if (urlName[1] === 'graficas') {
       return <span className={classes.title}>Gráficas</span>;
+    }
+
+    if (urlName[1] === 'ayuda') {
+      return <span className={classes.title}>Ayuda</span>;
     }
 
     if (urlName[1] === 'configuracion') {
@@ -185,6 +190,9 @@ class index extends PureComponent {
               </List>
               <List>
                 <Graphics onHandleClose={this.handleMenuModal} />
+              </List>
+              <List>
+                <Help onHandleClose={this.handleMenuModal} />
               </List>
             </div>
           </div>

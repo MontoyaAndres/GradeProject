@@ -4,6 +4,7 @@ import { Offline, Online } from 'react-detect-offline';
 
 import Routes from './routes';
 import client from './apollo';
+import NoInternet from './utils/NoInternet';
 
 const App = () => (
   <Fragment>
@@ -12,7 +13,9 @@ const App = () => (
         <Routes />
       </ApolloProvider>
     </Online>
-    <Offline>No hay internet</Offline>
+    <Offline>
+      <NoInternet />
+    </Offline>
   </Fragment>
 );
 
