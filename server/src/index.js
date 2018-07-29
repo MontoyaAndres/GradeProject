@@ -83,6 +83,9 @@ if (isProduction) {
   app.use(express.static(path.join(__dirname, 'build')));
 
   app.get('*', (req, res) => {
+    // Remove cache of create-react-app
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0');
+
     res.sendFile(path.join(__dirname, 'build/index.html'));
   });
 } else {

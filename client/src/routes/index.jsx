@@ -7,7 +7,6 @@ import withRoot from '../utils/withRoot';
 import Logout from '../components/Global/Menu/Logout.jsx';
 import Error404 from './Error404';
 import LoadingRoute from './LoadingRoute';
-import { unregister } from '../registerServiceWorker';
 
 import SelectData from '../utils/SelectData';
 
@@ -18,8 +17,6 @@ function isAuthenticated() {
     decode(token);
     const { exp } = decode(refreshToken);
     if (Date.now() / 1000 > exp) {
-      // remove cache
-      unregister();
       return false;
     }
   } catch (err) {
