@@ -123,25 +123,16 @@ class FormRight extends PureComponent {
               </div>
 
               <div style={{ padding: 10 }}>
-                <FormControl className={classes.textField}>
-                  <InputLabel htmlFor="IES">IES</InputLabel>
-                  <Select
-                    inputProps={{
-                      id: 'IES',
-                      name: 'Student.IES'
-                    }}
-                    value={values.Student.IES}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    native
-                  >
-                    {SelectData.IES.map((data, index) => (
-                      <option value={data} key={index}>
-                        {data === values.Student.IES ? values.Student.IES : data}
-                      </option>
-                    ))}
-                  </Select>
-                </FormControl>
+                <TextField
+                  id="IES"
+                  label="IES"
+                  name="Student.IES"
+                  value={values.Student.IES}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className={classes.textField}
+                  required
+                />
               </div>
 
               <div style={{ padding: 10 }}>

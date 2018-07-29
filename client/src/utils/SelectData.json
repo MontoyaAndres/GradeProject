@@ -83,12 +83,9 @@
     "SOCIOLOGÍA TRABAJO SOCIAL Y AFINES",
     "NO NÚCLEO BÁSICO"
   ],
-  "IES": [
-    2829,
-    0
-  ],
   "Rectoria": [
-    "R CUNDINAMARCA"
+    "R CUNDINAMARCA",
+    "RECTORÍA CUNDINAMARCA"
   ],
   "CodigoSede": [
     "APU",
@@ -101,11 +98,21 @@
   ],
   "Sede": [
     "SUMAPAZ (PANDI)",
+    "CP SUMAPAZ",
+    "CP SUMAPAZ (PANDI)",
+    "CERES PANDI",
     "GIRARDOT",
+    "CR GIRARDOT",
+    "REGIONAL GIRARDOT",
     "APULO",
+    "CT APULO",
+    "CERES APULO",
     "LA MESA",
+    "CT LA MESA",
     "SILVANA",
+    "CT SILVANA",
     "MELGAR",
+    "CT MELGAR",
     "NO SEDE"
   ],
   "CentroRegional": [
