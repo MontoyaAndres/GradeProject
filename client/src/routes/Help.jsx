@@ -6,7 +6,6 @@ import School from '@material-ui/icons/School';
 import GitHub from '@material-ui/icons/Code';
 
 import Layout from '../components/Global';
-import { downloadManual } from '../utils/api';
 
 const Help = ({ match: { url } }) => (
   <Layout url={url}>
@@ -14,7 +13,11 @@ const Help = ({ match: { url } }) => (
       <div style={{ padding: '30px 0' }}>
         <h1>Manual de usuario (Versión de escritorio)</h1>
         <Button
-          onClick={() => downloadManual('desktop')}
+          onClick={() =>
+            window.open(
+              'https://docs.google.com/document/d/1JQmSufvyk8H02z9-OY6WPfp0x8GGYOt4DIj55Y3WvEo/edit?usp=sharing'
+            )
+          }
           style={{ backgroundColor: '#F44336', color: 'white' }}
           variant="contained"
         >
@@ -26,7 +29,11 @@ const Help = ({ match: { url } }) => (
       <div style={{ padding: '30px 0' }}>
         <h1>Manual de usuario (Versión para celulares)</h1>
         <Button
-          onClick={() => downloadManual('phone')}
+          onClick={() =>
+            window.open(
+              'https://docs.google.com/document/d/1dmSFLYvSqUbUCbqmPfUDGxPgOw6BU621H4yB-Zp96g4/edit?usp=sharing'
+            )
+          }
           style={{ backgroundColor: '#F44336', color: 'white' }}
           variant="contained"
         >
@@ -38,7 +45,7 @@ const Help = ({ match: { url } }) => (
       <div style={{ padding: '30px 0' }}>
         <h1>Ejemplo archivos Excel</h1>
         <Button
-          onClick={() => downloadManual('excel')}
+          onClick={() => window.open('https://drive.google.com/open?id=1a-Ff8XXThLz_vv4uFvebbz_UYyqHlnzZ')}
           style={{ backgroundColor: '#4CAF50', color: 'white' }}
           variant="contained"
         >

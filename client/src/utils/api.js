@@ -34,8 +34,4 @@ async function donwloadGraphic(style, CodigoPrograma, TipoSemestre, graphicBy, i
   );
 }
 
-async function downloadManual(type) {
-  await fetch(`${API}/manual/${type}`).then(response => simulateClick(response));
-}
-
-export { downloadFilePeriod, downloadFileCompared, donwloadGraphic, downloadManual };
+export { downloadFilePeriod, downloadFileCompared, donwloadGraphic };
