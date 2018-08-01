@@ -6,7 +6,7 @@ async function downloadFilePeriod(request, response) {
   try {
     await Student.find({ CodigoPrograma, TipoSemestre }, { _id: 0 })
       .select(
-        'CodigoBanner Nombres Apellidos Genero Edad NumeroIdentificacion TipoDocIdentidad NivelFormacion CodigoPrograma DescripcionPrograma Jornada AreaConocimiento NucleoBasicoConocimiento IES Snies Rectoria CodigoSede Sede CentroRegional CodigoPeriodoAcademico PeriodoAcademicoInscripcion DescripcionMetodologia TipoEstudianteAgrupado LugarResidencia TelCel FechaCel TelRe CorreoEstudiante1 CorreoEstudiante2 FechaCorreo Direccion Departamento Ciudad Comentario Situacion Variable'
+        'CodigoBanner Nombres Apellidos Genero Edad NumeroIdentificacion TipoDocIdentidad NivelFormacion CodigoPrograma DescripcionPrograma Jornada AreaConocimiento NucleoBasicoConocimiento IES Snies Rectoria CodigoSede Sede CentroRegional CodigoPeriodoAcademico PeriodoAcademicoInscripcion DescripcionMetodologia TipoEstudianteAgrupado LugarResidencia TelCel FechaCel TelRe CorreoEstudiante1 CorreoEstudiante2 FechaCorreo Direccion Departamento Ciudad Estado Comentario Situacion Variable'
       )
       .lean()
       .exec(async (err, doc) => {
@@ -50,13 +50,13 @@ async function downloadFileCompared(request, response) {
 
     const periodData1 = await Student.find({ TipoSemestre: period1, CodigoPrograma: career }, { _id: 0 })
       .select(
-        'TipoSemestre CodigoBanner Nombres Apellidos Genero Edad NumeroIdentificacion TipoDocIdentidad NivelFormacion CodigoPrograma DescripcionPrograma Jornada AreaConocimiento NucleoBasicoConocimiento IES Snies Rectoria CodigoSede Sede CentroRegional CodigoPeriodoAcademico PeriodoAcademicoInscripcion DescripcionMetodologia TipoEstudianteAgrupado LugarResidencia TelCel FechaCel TelRe CorreoEstudiante1 CorreoEstudiante2 FechaCorreo Direccion Departamento Ciudad Comentario Situacion Variable'
+        'TipoSemestre CodigoBanner Nombres Apellidos Genero Edad NumeroIdentificacion TipoDocIdentidad NivelFormacion CodigoPrograma DescripcionPrograma Jornada AreaConocimiento NucleoBasicoConocimiento IES Snies Rectoria CodigoSede Sede CentroRegional CodigoPeriodoAcademico PeriodoAcademicoInscripcion DescripcionMetodologia TipoEstudianteAgrupado LugarResidencia TelCel FechaCel TelRe CorreoEstudiante1 CorreoEstudiante2 FechaCorreo Direccion Departamento Ciudad Estado Comentario Situacion Variable'
       )
       .lean();
 
     const periodData2 = await Student.find({ TipoSemestre: period2, CodigoPrograma: career }, { _id: 0 })
       .select(
-        'TipoSemestre CodigoBanner Nombres Apellidos Genero Edad NumeroIdentificacion TipoDocIdentidad NivelFormacion CodigoPrograma DescripcionPrograma Jornada AreaConocimiento NucleoBasicoConocimiento IES Snies Rectoria CodigoSede Sede CentroRegional CodigoPeriodoAcademico PeriodoAcademicoInscripcion DescripcionMetodologia TipoEstudianteAgrupado LugarResidencia TelCel FechaCel TelRe CorreoEstudiante1 CorreoEstudiante2 FechaCorreo Direccion Departamento Ciudad Comentario Situacion Variable'
+        'TipoSemestre CodigoBanner Nombres Apellidos Genero Edad NumeroIdentificacion TipoDocIdentidad NivelFormacion CodigoPrograma DescripcionPrograma Jornada AreaConocimiento NucleoBasicoConocimiento IES Snies Rectoria CodigoSede Sede CentroRegional CodigoPeriodoAcademico PeriodoAcademicoInscripcion DescripcionMetodologia TipoEstudianteAgrupado LugarResidencia TelCel FechaCel TelRe CorreoEstudiante1 CorreoEstudiante2 FechaCorreo Direccion Departamento Ciudad Estado Comentario Situacion Variable'
       )
       .lean();
 
