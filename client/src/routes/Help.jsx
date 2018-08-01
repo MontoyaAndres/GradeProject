@@ -45,7 +45,9 @@ const Help = ({ match: { url } }) => (
       <div style={{ padding: '30px 0' }}>
         <h1>Ejemplo archivos Excel</h1>
         <Button
-          onClick={() => window.open('https://drive.google.com/open?id=1a-Ff8XXThLz_vv4uFvebbz_UYyqHlnzZ')}
+          onClick={() =>
+            window.open('https://drive.google.com/file/d/14JBW49u0Lez0TdKI3dwPRwoN83Jwvwfg/view?usp=sharing')
+          }
           style={{ backgroundColor: '#4CAF50', color: 'white' }}
           variant="contained"
         >
