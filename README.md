@@ -1,17 +1,98 @@
-## Software de remisión (Excepción de ausentismo).
+# Software de remisión (Excepción de ausentismo).
 
-Software pensado para la excepción de ausentismo, enfocado a la administración, creación, edición, eliminación y graficación de dichos datos. Además contará con la funcionalidad de comparar datos de otras base de datos de estudiantes.
+Software para manejar archivos de excepción en ausentismo de la Uniminuto de Girardot, enfocado a la administración, creación, edición, eliminación, graficación y comparación entre los datos de la base de datos.
 
-Será una aplicación web diseñada en el Back-end con NodeJS y MongoDB. La razón por la cual se decidió elegir estas tecnologías es siempre procurar que la aplicación sea lo más rápida posible cuando cuente con más datos, su rendimiento nunca baje y además, sea muy fácil de mantener para futuras mejoras. En el lado del Front-end se hará con ReactJS, para dar una experiencia de real time y velocidad instantánea a la hora de pedir o modificar datos.
+Aplicación web diseñada bajo NodeJS, GraphQL y MongoDB, siguiendo el concepto SPA (Single Page Application) con React y PWA (Progressive Web Application), los cuales ofrecen un ecosistema seguro, adaptado para móviles y sin problemas de rendimiento a la hora de manipular una gran cantidad de datos.
 
-Se seguirá el concepto de SPA (Single Page Application) el cual se dará por seguro que la aplicación no tendrá problemas de rendimiento a la hora de manipular millones o más datos. Se puede ver un ejemplo de este tipo de aplicaciones en páginas como youtube o facebook, que su rendimiento es excelente.
+Puede probar este sistema aquí:
+
+> La siguiente URL es de prueba, la universidad Uniminuto usará otro domino para el manejo de datos. Para poder entrar, envie un correo a andresmontoyafcb@gmail.com para obtener los datos.
+
+https://ausentismodesercion.now.sh/
+
+Y aprender a manejarlo leyendo:
+
+[Manual de usuario (Versión de escritorio)](https://docs.google.com/document/d/1JQmSufvyk8H02z9-OY6WPfp0x8GGYOt4DIj55Y3WvEo/edit?usp=sharing)
+
+[Manual de usuario (Versión para celulares)](https://docs.google.com/document/d/1dmSFLYvSqUbUCbqmPfUDGxPgOw6BU621H4yB-Zp96g4/edit?usp=sharing)
+
+## Soporte
+
+En este apartado únicamente se va a hablar acerca de como subir este software a cualquier servidor y resolver posible problemas técnicos.
+
+**Recomendaciones**
+
+Antes de subir a producción, este seguro que el dominio trabaja bajo HTTPS y HTTP2, para que el software pueda usar las funciones de una aplicación PWA y así mismo, las peticiones que se hagan a GraphQL se ejecuten rápidamente.
+
+**Configuración de variables**
+
+*Variables de cliente*
+
+Entre a la carpeta *Client*, luego cree un archivo .env con el contenido de [.env.example](client/.env.example), despues remplaze `http://your-awesome-site.com` por el sitio que esta usando en producción.
+
+> Por recomendación, cuando pegue la URL, elimine el ultimo /. [Aquí podrá encontrar la razón](https://github.com/MontoyaAndres/GradeProject/blob/master/client/src/utils/api.js), leyendo el funcionamiento de las peticiones GET.
+
+```
+# Contenido de ejemplo para el archivo .env
+
+REACT_APP_SERVER_URL=https://ausentismodesercion.now.sh
+```
+
+*Variables de servidor*
+
+Entre a la carpeta *Server*, luego cree un archivo .env con el contenido de [.env.example](server/.env.example), despues remplaze las variables con < TEXTO > por las que este usando.
+
+```
+# Contenido de archivo .env.example
+
+DATABASE_URL=<Mongodb_url>
+SECRET1=<Secret_key>
+SECRET2=<Secret_key>
+PORT=<Port>
+GRAPHQL_END_POINT=<Graphql_end_point>
+```
+
+Por ejemplo:
+
+> Es recomendable que el puerto sea `80` ya que por este medio *Por lo regular* GraphQL hace las peticiones.
+
+> El endpoint esta configurado para que sea `/graphql`por defecto, o lo puede cambiar [aquí](client/src/apollo.js#L7).
+
+```
+# Contenido de ejemplo para el archivo .env
+
+DATABASE_URL=mongodb://HOST:27017/ausentismodesercion
+SECRET1='YourSuperSecretPasswordForAuth'
+SECRET2='YourSuperSecretPasswordForPasswords'
+PORT=80
+GRAPHQL_END_POINT='/graphql'
+```
+
+**Aplicación en producción**
+
+Entre a la carpeta *Client* y luego ejecute el comando *Build*, el cual puede ver en [package.json](client/package.json) y espere un momento hasta que finalize.
+
+```
+npm run build
+```
+
+Una vez terminado, vaya a la carpeta *Server* y ejecute el comando *Build*, el cual puede ver en [package.json](server/package.json)
+
+> Es importante que el servidor cuente con la versión 10.7 de node. [Aquí](server/.babelrc) puede ver la configuración de Babel para saber más.
+
+```
+npm run build
+```
+
+Y luego inicie la aplicación.
+
+```
+npm start
+```
+
+> Si su sevidor funciona bajo GIT, procure que la carpeta files que crea el comando *Build* haya sido subida con exito.
 
 ## Cronograma
 
 https://docs.google.com/spreadsheets/d/1GhwYvmZus2zo12BZq1Y4yOzL_2oVIeFiUdy8mA4kGA0/edit?usp=sharing
-
-## Manual de usuario
-
-https://docs.google.com/document/d/1JQmSufvyk8H02z9-OY6WPfp0x8GGYOt4DIj55Y3WvEo/edit?usp=sharing
-
-# Aún en desarrollo.
+    
