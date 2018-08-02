@@ -90,7 +90,7 @@ Y luego inicie la aplicación.
 npm start
 ```
 
-> Si su sevidor funciona bajo GIT, procure que la carpeta files que crea el comando *Build* haya sido subida con exito.
+> Si su sevidor funciona bajo GIT, procure que la carpeta files que crea el comando *Build* halla sido subida con exito.
 
 ## Cronograma
 
