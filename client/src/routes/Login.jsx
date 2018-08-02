@@ -3,6 +3,7 @@ import { graphql, compose } from 'react-apollo';
 import * as Yup from 'yup';
 import gql from 'graphql-tag';
 import { withFormik, Form } from 'formik';
+import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -94,6 +95,11 @@ const Login = ({ classes, values, handleChange, handleBlur, handleSubmit, isSubm
               >
                 Entrar
               </Button>
+              <Grid item xs={12} style={{ paddingTop: 10 }}>
+                <Link to="/reset" style={{ textDecoration: 'none', color: '#9E9E9E' }}>
+                  ¿Olvido la contraseña?
+                </Link>
+              </Grid>
             </Form>
           </Paper>
         </Grid>

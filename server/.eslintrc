@@ -1,12 +1,11 @@
-module.exports = {
-  extends: [
-    'airbnb-base',
-    'prettier'
+{
+  "extends": [
+    "airbnb-base",
+    "prettier"
   ],
-  "rules": {
-    "no-tabs": 0
-  },
-  plugins: ['prettier'],
+  "plugins": [
+    "prettier"
+  ],
   "parserOptions": {
     "sourceType": "module",
     "allowImportExportEverywhere": false,
@@ -17,6 +16,7 @@ module.exports = {
     "node": true
   },
   "rules": {
+    "no-tabs": 0,
     "complexity": 0,
     "no-nested-ternary": 0,
     "accessor-pairs": 2,
@@ -176,4 +176,4 @@ module.exports = {
       }
     ]
   }
-};
+}

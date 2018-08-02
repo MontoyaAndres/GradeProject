@@ -95,6 +95,11 @@ const AsyncLogin = Loadable({
   loading: () => <LoadingRoute />
 });
 
+const AsyncResetPassword = Loadable({
+  loader: () => import('./ResetPassword'),
+  loading: () => <LoadingRoute />
+});
+
 const Router = () => (
   <BrowserRouter>
     <Switch>
@@ -106,6 +111,7 @@ const Router = () => (
       <PrivateRoute exact path="/ayuda" component={AsyncHelp} />
       <PrivateRoute exact path="/configuracion" component={AsyncConfiguration} />
       <IsLogin exact path="/login" component={AsyncLogin} />
+      <IsLogin exact path="/reset/:token?" component={AsyncResetPassword} />
       <Route component={Error404} />
     </Switch>
   </BrowserRouter>

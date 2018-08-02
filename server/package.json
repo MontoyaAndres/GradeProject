@@ -40,6 +40,7 @@
     "merge-graphql-schemas": "^1.5.1",
     "moment": "^2.22.2",
     "mongoose": "^5.1.4",
+    "nodemailer": "^4.6.7",
     "xlsx-chart": "^0.3.0"
   },
   "devDependencies": {

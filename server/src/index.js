@@ -6,6 +6,7 @@ import mongoose from 'mongoose';
 import helmet from 'helmet';
 import json2xls from 'json2xls';
 import compression from 'compression';
+import nodemailer from 'nodemailer';
 import DataLoader from 'dataloader';
 import { graphqlExpress } from 'apollo-server-express';
 import { makeExecutableSchema } from 'graphql-tools';
@@ -54,6 +55,14 @@ const addUser = async (req, res, next) => {
   next();
 };
 
+const transporter = nodemailer.createTransport({
+  service: process.env.EMAIL_SERVICE,
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASSWORD
+  }
+});
+
 app
   .use(compression())
   .use(helmet())
@@ -69,9 +78,12 @@ app
       schema,
       context: {
         models,
+        transporter,
         user: req.user,
         SECRET: process.env.SECRET1,
         SECRET2: process.env.SECRET2,
+        EMAIL_SECRET: process.env.EMAIL_SECRET,
+        CurrentURL: `${req.protocol}://${req.get('host')}`,
         StudentDistinctLoader: new DataLoader(params => StudentDistinctBatcher(params, models, req.user)),
         userLoader: new DataLoader(ids => userBatcher(ids, models, req.user))
       }
