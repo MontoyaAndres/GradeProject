@@ -50,6 +50,11 @@ SECRET1=<Secret_key>
 SECRET2=<Secret_key>
 PORT=<Port>
 GRAPHQL_END_POINT=<Graphql_end_point>
+
+EMAIL_SECRET=<Secret_key>
+EMAIL_SERVICE=<Email_service>,
+EMAIL_USER=<Email_user>
+EMAIL_PASSWORD=<Email_password>
 ```
 
 Por ejemplo:
@@ -66,6 +71,11 @@ SECRET1='YourSuperSecretPasswordForAuth'
 SECRET2='YourSuperSecretPasswordForPasswords'
 PORT=80
 GRAPHQL_END_POINT='/graphql'
+
+EMAIL_SECRET='YourSuperSecretPasswordForEmail'
+EMAIL_SERVICE='Gmail',
+EMAIL_USER='correo@gmail.com'
+EMAIL_PASSWORD='password123'
 ```
 
 **Aplicación en producción**
