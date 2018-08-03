@@ -83,7 +83,7 @@ app
         SECRET: process.env.SECRET1,
         SECRET2: process.env.SECRET2,
         EMAIL_SECRET: process.env.EMAIL_SECRET,
-        CurrentURL: `${req.protocol}://${req.get('host')}`,
+        CurrentURL: `${req.connection.encrypted ? 'https' : 'http'}://${req.get('host')}`,
         StudentDistinctLoader: new DataLoader(params => StudentDistinctBatcher(params, models, req.user)),
         userLoader: new DataLoader(ids => userBatcher(ids, models, req.user))
       }
