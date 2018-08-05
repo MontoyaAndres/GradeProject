@@ -4,15 +4,11 @@
       "env",
       {
         "targets": {
-          "node": "10.7"
+          "node": "current"
         }
       }
     ]
   ],
-  "plugins": [
-    "transform-object-rest-spread"
-  ],
-  "ignore": [
-    "src/files"
-  ]
+  "plugins": ["transform-object-rest-spread"],
+  "ignore": ["src/files"]
 }
