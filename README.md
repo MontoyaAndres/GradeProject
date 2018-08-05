@@ -88,8 +88,6 @@ npm run build
 
 Una vez terminado, vaya a la carpeta *Server* y ejecute el comando *Build*, el cual puede ver en [package.json](server/package.json)
 
-> Es importante que el servidor cuente con la versión 10.7 de node. [Aquí](server/.babelrc) puede ver la configuración de Babel para saber más.
-
 ```
 npm run build
 ```
