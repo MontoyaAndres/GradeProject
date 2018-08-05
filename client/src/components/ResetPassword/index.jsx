@@ -1,4 +1,4 @@
-import SendEmail from './SendEmail';
-import SendToken from './SendToken';
+import SendEmail from "./SendEmail";
+import SendToken from "./SendToken";
 
 export { SendEmail, SendToken };

@@ -1,5 +1,5 @@
-import React from 'react';
-import { Line } from 'react-chartjs-2';
+import React from "react";
+import { Line } from "react-chartjs-2";
 
 const LineGraphic = ({ chartConfig, graphicBy }) => (
   <Line
@@ -12,11 +12,11 @@ const LineGraphic = ({ chartConfig, graphicBy }) => (
       },
       legend: {
         display: false,
-        position: 'bottom'
+        position: "bottom"
       },
       animation: {
         duration: 600,
-        easing: 'easeInOutQuart'
+        easing: "easeInOutQuart"
       },
       responsive: true,
       responsiveAnimationDuration: 600,

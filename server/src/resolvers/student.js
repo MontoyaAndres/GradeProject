@@ -1,12 +1,23 @@
-import requiresAuth from '../utils/permissions';
+import requiresAuth from "../utils/permissions";
 
 export default {
   Query: {
-    Student: requiresAuth.createResolver((parent, { _id }, { models }) => models.Student.findOne({ _id }).lean()),
+    Student: requiresAuth.createResolver((parent, { _id }, { models }) =>
+      models.Student.findOne({ _id }).lean()
+    ),
     StudentByParams: requiresAuth.createResolver(
       (
         parent,
-        { Search, Variable, Situacion, CodigoPrograma, Estado, TipoSemestre, page, rowsPerPage },
+        {
+          Search,
+          Variable,
+          Situacion,
+          CodigoPrograma,
+          Estado,
+          TipoSemestre,
+          page,
+          rowsPerPage
+        },
         { models }
       ) => {
         let student = [];
@@ -34,7 +45,11 @@ export default {
           const param = new RegExp(Search);
           student = models.Student.find({
             CodigoPrograma,
-            $or: [{ Nombres: param }, { Apellidos: param }, { CodigoBanner: param }]
+            $or: [
+              { Nombres: param },
+              { Apellidos: param },
+              { CodigoBanner: param }
+            ]
           }).limit(10 * (page === 0 ? 1 : page + 1));
         }
 
@@ -44,8 +59,9 @@ export default {
         };
       }
     ),
-    StudentDistinct: requiresAuth.createResolver((parent, { Param }, { StudentDistinctLoader }) =>
-      StudentDistinctLoader.load(Param)
+    StudentDistinct: requiresAuth.createResolver(
+      (parent, { Param }, { StudentDistinctLoader }) =>
+        StudentDistinctLoader.load(Param)
     )
   },
   Mutation: {
@@ -142,21 +158,25 @@ export default {
         }
       }
     ),
-    deleteStudent: requiresAuth.createResolver(async (parent, { _id }, { models }) => {
-      try {
-        await models.Student.findByIdAndRemove({ _id });
-        return true;
-      } catch (err) {
-        return false;
+    deleteStudent: requiresAuth.createResolver(
+      async (parent, { _id }, { models }) => {
+        try {
+          await models.Student.findByIdAndRemove({ _id });
+          return true;
+        } catch (err) {
+          return false;
+        }
       }
-    }),
-    deleteTipoSemestre: requiresAuth.createResolver(async (parent, { TipoSemestre }, { models }) => {
-      try {
-        await models.Student.deleteMany({ TipoSemestre });
-        return true;
-      } catch (err) {
-        return false;
+    ),
+    deleteTipoSemestre: requiresAuth.createResolver(
+      async (parent, { TipoSemestre }, { models }) => {
+        try {
+          await models.Student.deleteMany({ TipoSemestre });
+          return true;
+        } catch (err) {
+          return false;
+        }
       }
-    })
+    )
   }
 };

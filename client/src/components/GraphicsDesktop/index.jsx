@@ -1,21 +1,21 @@
-import React from 'react';
-import { Query } from 'react-apollo';
-import gql from 'graphql-tag';
-import { withStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Fade from '@material-ui/core/Fade';
-import ErrorIcon from '@material-ui/icons/Error';
+import React from "react";
+import { Query } from "react-apollo";
+import gql from "graphql-tag";
+import { withStyles } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
+import Fade from "@material-ui/core/Fade";
+import ErrorIcon from "@material-ui/icons/Error";
 
-import normalizeErrors from '../../normalizeErrors';
-import Loading from '../Global/Loading';
-import Graficas from './Graphics/index';
+import normalizeErrors from "../../normalizeErrors";
+import Loading from "../Global/Loading";
+import Graficas from "./Graphics/index";
 
 const styles = theme => ({
   error: {
-    color: '#D8000C',
-    backgroundColor: '#FFBABA',
-    textAlign: 'center',
+    color: "#D8000C",
+    backgroundColor: "#FFBABA",
+    textAlign: "center",
     margin: theme.spacing.unit,
     padding: theme.spacing.unit * 3
   },
@@ -26,7 +26,12 @@ const styles = theme => ({
 });
 
 const graphicQuery = gql`
-  query Graphics($CodigoPrograma: String!, $TipoSemestre: String!, $graphicBy: String!, $isVariable: String!) {
+  query Graphics(
+    $CodigoPrograma: String!
+    $TipoSemestre: String!
+    $graphicBy: String!
+    $isVariable: String!
+  ) {
     Graphics(
       CodigoPrograma: $CodigoPrograma
       TipoSemestre: $TipoSemestre
@@ -43,7 +48,14 @@ const graphicQuery = gql`
   }
 `;
 
-const index = ({ classes, CodigoPrograma, TipoSemestre, graphicBy, isVariable, style }) => (
+const index = ({
+  classes,
+  CodigoPrograma,
+  TipoSemestre,
+  graphicBy,
+  isVariable,
+  style
+}) => (
   <Query
     query={graphicQuery}
     variables={{ CodigoPrograma, TipoSemestre, graphicBy, isVariable }}
@@ -78,9 +90,9 @@ const index = ({ classes, CodigoPrograma, TipoSemestre, graphicBy, isVariable, s
 
         values.forEach(() =>
           randomColor.push(
-            `rgba(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(
+            `rgba(${Math.floor(Math.random() * 256)}, ${Math.floor(
               Math.random() * 256
-            )}, 0.6)`
+            )}, ${Math.floor(Math.random() * 256)}, 0.6)`
           )
         );
 
@@ -98,7 +110,11 @@ const index = ({ classes, CodigoPrograma, TipoSemestre, graphicBy, isVariable, s
           <Paper className={classes.paper}>
             <Fade in>
               <Grid container wrap="nowrap">
-                <Graficas chartConfig={chartConfig} graphicBy={graphicBy} style={style} />
+                <Graficas
+                  chartConfig={chartConfig}
+                  graphicBy={graphicBy}
+                  style={style}
+                />
               </Grid>
             </Fade>
           </Paper>

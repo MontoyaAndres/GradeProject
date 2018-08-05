@@ -1,23 +1,23 @@
-import React, { PureComponent, Fragment } from 'react';
-import { graphql } from 'react-apollo';
-import gql from 'graphql-tag';
-import * as Yup from 'yup';
-import { Formik, Form } from 'formik';
-import { withStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import IconButton from '@material-ui/core/IconButton';
-import EditIcon from '@material-ui/icons/Edit';
+import React, { PureComponent, Fragment } from "react";
+import { graphql } from "react-apollo";
+import gql from "graphql-tag";
+import * as Yup from "yup";
+import { Formik, Form } from "formik";
+import { withStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import IconButton from "@material-ui/core/IconButton";
+import EditIcon from "@material-ui/icons/Edit";
 
-import normalizeErrors from '../../normalizeErrors';
+import normalizeErrors from "../../normalizeErrors";
 
 const styles = () => ({
   error: {
-    color: 'red',
+    color: "red",
     fontSize: 14
   }
 });
@@ -58,19 +58,27 @@ class dialogPassword extends PureComponent {
         </IconButton>
 
         <Formik
-          initialValues={{ oldPassword: '', newPassword: '' }}
+          initialValues={{ oldPassword: "", newPassword: "" }}
           onSubmit={async (values, { setSubmitting, setErrors }) => {
             const response = await mutate({
-              variables: { oldPassword: values.oldPassword, newPassword: values.newPassword }
+              variables: {
+                oldPassword: values.oldPassword,
+                newPassword: values.newPassword
+              }
             });
 
-            const { ok, token, refreshToken, errors } = response.data.updatePassword;
+            const {
+              ok,
+              token,
+              refreshToken,
+              errors
+            } = response.data.updatePassword;
             if (ok) {
               setSubmitting(false);
-              localStorage.setItem('token', token);
-              localStorage.setItem('refreshToken', refreshToken);
+              localStorage.setItem("token", token);
+              localStorage.setItem("refreshToken", refreshToken);
               this.handleDialog();
-              history.push('/');
+              history.push("/");
             } else {
               setSubmitting(false);
               setErrors(normalizeErrors(errors));
@@ -80,19 +88,27 @@ class dialogPassword extends PureComponent {
             Yup.object().shape({
               oldPassword: Yup.string()
                 .nullable()
-                .required('El campo es obligatorio!'),
+                .required("El campo es obligatorio!"),
               newPassword: Yup.string()
                 .nullable()
-                .required('El campo es obligatorio!')
+                .required("El campo es obligatorio!")
             })
           }
           render={props => (
-            <Dialog open={open} onClose={this.handleDialog} aria-labelledby="form-dialog-title">
+            <Dialog
+              open={open}
+              onClose={this.handleDialog}
+              aria-labelledby="form-dialog-title"
+            >
               <Form>
-                <DialogTitle id="form-dialog-title">Configuración de usuario</DialogTitle>
+                <DialogTitle id="form-dialog-title">
+                  Configuración de usuario
+                </DialogTitle>
                 <DialogContent>
                   <TextField
-                    error={Boolean(props.touched.oldPassword && props.errors.oldPassword)}
+                    error={Boolean(
+                      props.touched.oldPassword && props.errors.oldPassword
+                    )}
                     autoFocus
                     margin="dense"
                     id="oldPassword"
@@ -105,10 +121,14 @@ class dialogPassword extends PureComponent {
                     fullWidth
                   />
                   <span className={classes.error}>
-                    {props.touched.oldPassword && props.errors.oldPassword ? props.errors.oldPassword : null}
+                    {props.touched.oldPassword && props.errors.oldPassword
+                      ? props.errors.oldPassword
+                      : null}
                   </span>
                   <TextField
-                    error={Boolean(props.touched.newPassword && props.errors.newPassword)}
+                    error={Boolean(
+                      props.touched.newPassword && props.errors.newPassword
+                    )}
                     margin="dense"
                     id="newPassword"
                     name="newPassword"
@@ -120,14 +140,20 @@ class dialogPassword extends PureComponent {
                     fullWidth
                   />
                   <span className={classes.error}>
-                    {props.touched.newPassword && props.errors.newPassword ? props.errors.newPassword : null}
+                    {props.touched.newPassword && props.errors.newPassword
+                      ? props.errors.newPassword
+                      : null}
                   </span>
                 </DialogContent>
                 <DialogActions>
                   <Button onClick={this.handleDialog} color="primary">
                     Cancelar
                   </Button>
-                  <Button type="submit" disabled={props.isSubmitting} color="primary">
+                  <Button
+                    type="submit"
+                    disabled={props.isSubmitting}
+                    color="primary"
+                  >
                     Enviar
                   </Button>
                 </DialogActions>

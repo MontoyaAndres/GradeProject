@@ -1,24 +1,24 @@
-import React, { PureComponent } from 'react';
-import { graphql } from 'react-apollo';
-import { withStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import Select from '@material-ui/core/Select';
-import Hidden from '@material-ui/core/Hidden';
-import ViewHeadline from '@material-ui/icons/ViewHeadline';
+import React, { PureComponent } from "react";
+import { graphql } from "react-apollo";
+import { withStyles } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
+import FormControl from "@material-ui/core/FormControl";
+import InputLabel from "@material-ui/core/InputLabel";
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import Select from "@material-ui/core/Select";
+import Hidden from "@material-ui/core/Hidden";
+import ViewHeadline from "@material-ui/icons/ViewHeadline";
 
-import Layout from '../components/Global';
-import CareerMobile from '../components/CareerMobile';
-import CareerDesktop from '../components/CareerDesktop';
+import Layout from "../components/Global";
+import CareerMobile from "../components/CareerMobile";
+import CareerDesktop from "../components/CareerDesktop";
 
-import { studentDistinct } from '../graphql/query';
-import SelectData from '../utils/SelectData';
+import { studentDistinct } from "../graphql/query";
+import SelectData from "../utils/SelectData";
 
 const styles = theme => ({
   select: {
@@ -29,7 +29,7 @@ const styles = theme => ({
     padding: theme.spacing.unit * 3
   },
   floatButton: {
-    position: 'fixed',
+    position: "fixed",
     bottom: theme.spacing.unit * 2,
     right: theme.spacing.unit * 2,
     padding: theme.spacing.unit * 2,
@@ -37,17 +37,17 @@ const styles = theme => ({
   },
   formControlMobil: {
     paddingBottom: theme.spacing.unit * 2,
-    width: '100%'
+    width: "100%"
   }
 });
 
 class Career extends PureComponent {
   state = {
-    Variable: 'ACADÉMICO',
-    Situacion: 'CAMBIO DE SEDE',
-    Estado: 'Ausentismo',
-    dataTipoSemestre: [''],
-    TipoSemestre: '',
+    Variable: "ACADÉMICO",
+    Situacion: "CAMBIO DE SEDE",
+    Estado: "Ausentismo",
+    dataTipoSemestre: [""],
+    TipoSemestre: "",
     openDialogMobile: false
   };
 
@@ -63,10 +63,13 @@ class Career extends PureComponent {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (prevState.TipoSemestre === '') {
+    if (prevState.TipoSemestre === "") {
       // To get the props of "TipoSemestre" before the component rendered
       if (nextProps.data && nextProps.data.StudentDistinct) {
-        return { dataTipoSemestre: nextProps.data.StudentDistinct, TipoSemestre: nextProps.data.StudentDistinct[0] };
+        return {
+          dataTipoSemestre: nextProps.data.StudentDistinct,
+          TipoSemestre: nextProps.data.StudentDistinct[0]
+        };
       }
     }
     return null;
@@ -89,9 +92,18 @@ class Career extends PureComponent {
       history,
       match: { url, params }
     } = this.props;
-    const { Variable, Situacion, TipoSemestre, Estado, dataTipoSemestre, openDialogMobile } = this.state;
+    const {
+      Variable,
+      Situacion,
+      TipoSemestre,
+      Estado,
+      dataTipoSemestre,
+      openDialogMobile
+    } = this.state;
 
-    const dataVariable = Object.getOwnPropertyNames(SelectData.VariableSituacion);
+    const dataVariable = Object.getOwnPropertyNames(
+      SelectData.VariableSituacion
+    );
     const dataSituacion = SelectData.VariableSituacion[Variable];
     const CodigoPrograma = params.Career;
 
@@ -107,8 +119,8 @@ class Career extends PureComponent {
                     <InputLabel htmlFor="Variable">Variable</InputLabel>
                     <Select
                       inputProps={{
-                        id: 'Variable',
-                        name: 'Variable'
+                        id: "Variable",
+                        name: "Variable"
                       }}
                       value={Variable}
                       onChange={this.handleChange}
@@ -127,8 +139,8 @@ class Career extends PureComponent {
                     <InputLabel htmlFor="Situacion">Situacion</InputLabel>
                     <Select
                       inputProps={{
-                        id: 'Situacion',
-                        name: 'Situacion'
+                        id: "Situacion",
+                        name: "Situacion"
                       }}
                       value={Situacion}
                       onChange={this.handleChange}
@@ -147,8 +159,8 @@ class Career extends PureComponent {
                     <InputLabel htmlFor="Estado">Estado</InputLabel>
                     <Select
                       inputProps={{
-                        id: 'Estado',
-                        name: 'Estado'
+                        id: "Estado",
+                        name: "Estado"
                       }}
                       value={Estado}
                       onChange={this.handleChange}
@@ -167,8 +179,8 @@ class Career extends PureComponent {
                     <InputLabel htmlFor="TipoSemestre">Periodo</InputLabel>
                     <Select
                       inputProps={{
-                        id: 'TipoSemestre',
-                        name: 'TipoSemestre'
+                        id: "TipoSemestre",
+                        name: "TipoSemestre"
                       }}
                       value={TipoSemestre}
                       onChange={this.handleChange}
@@ -209,8 +221,8 @@ class Career extends PureComponent {
                           <InputLabel htmlFor="Variable">Variable</InputLabel>
                           <Select
                             inputProps={{
-                              id: 'Variable',
-                              name: 'Variable'
+                              id: "Variable",
+                              name: "Variable"
                             }}
                             value={Variable}
                             onChange={this.handleChange}
@@ -231,8 +243,8 @@ class Career extends PureComponent {
                           <InputLabel htmlFor="Situacion">Situacion</InputLabel>
                           <Select
                             inputProps={{
-                              id: 'Situacion',
-                              name: 'Situacion'
+                              id: "Situacion",
+                              name: "Situacion"
                             }}
                             value={Situacion}
                             onChange={this.handleChange}
@@ -253,8 +265,8 @@ class Career extends PureComponent {
                           <InputLabel htmlFor="Estado">Estado</InputLabel>
                           <Select
                             inputProps={{
-                              id: 'Estado',
-                              name: 'Estado'
+                              id: "Estado",
+                              name: "Estado"
                             }}
                             value={Estado}
                             onChange={this.handleChange}
@@ -272,11 +284,13 @@ class Career extends PureComponent {
 
                       <div>
                         <FormControl className={classes.formControlMobil}>
-                          <InputLabel htmlFor="TipoSemestre">Periodo</InputLabel>
+                          <InputLabel htmlFor="TipoSemestre">
+                            Periodo
+                          </InputLabel>
                           <Select
                             inputProps={{
-                              id: 'TipoSemestre',
-                              name: 'TipoSemestre'
+                              id: "TipoSemestre",
+                              name: "TipoSemestre"
                             }}
                             value={TipoSemestre}
                             onChange={this.handleChange}
@@ -303,7 +317,12 @@ class Career extends PureComponent {
             </DialogActions>
           </Dialog>
 
-          <Button className={classes.floatButton} variant="fab" color="secondary" onClick={this.handleDialogMobile}>
+          <Button
+            className={classes.floatButton}
+            variant="fab"
+            color="secondary"
+            onClick={this.handleDialogMobile}
+          >
             <ViewHeadline />
           </Button>
 
@@ -327,7 +346,7 @@ class Career extends PureComponent {
 export default graphql(studentDistinct, {
   options: props => ({
     variables: {
-      param: 'TipoSemestre'
+      param: "TipoSemestre"
     }
   })
 })(withStyles(styles)(Career));

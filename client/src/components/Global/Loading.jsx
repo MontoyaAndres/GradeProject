@@ -1,13 +1,13 @@
-import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import React from "react";
+import { withStyles } from "@material-ui/core/styles";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const styles = theme => ({
   progress: {
     margin: theme.spacing.unit * 2
   },
   center: {
-    textAlign: 'center'
+    textAlign: "center"
   }
 });
 

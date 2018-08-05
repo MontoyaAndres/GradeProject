@@ -1,41 +1,41 @@
 const correctOrder = [
-  'codigo banner',
-  'nombres',
-  'apellidos',
-  'genero',
-  'edad',
-  'numero identificacion',
-  'tipo doc identidad',
-  'nivel formacion',
-  'codigo programa',
-  'descripcion programa',
-  'jornada',
-  'area conocimiento',
-  'nucleo basico conocimiento',
-  'ies',
-  'snies',
-  'rectoria',
-  'codigo sede',
-  'sede',
-  'centro regional',
-  'codigo periodo academico',
-  'periodo academico inscripcion',
-  'descripcion metodologia',
-  'tipo estudiante agrupado',
-  'lugar residencia',
-  'tel cel',
-  'fecha cel',
-  'tel re',
-  'correo estudiante 1',
-  'correo estudiante 2',
-  'fecha correo',
-  'direccion',
-  'departamento',
-  'ciudad',
-  'estado',
-  'comentario',
-  'situacion',
-  'variable'
+  "codigo banner",
+  "nombres",
+  "apellidos",
+  "genero",
+  "edad",
+  "numero identificacion",
+  "tipo doc identidad",
+  "nivel formacion",
+  "codigo programa",
+  "descripcion programa",
+  "jornada",
+  "area conocimiento",
+  "nucleo basico conocimiento",
+  "ies",
+  "snies",
+  "rectoria",
+  "codigo sede",
+  "sede",
+  "centro regional",
+  "codigo periodo academico",
+  "periodo academico inscripcion",
+  "descripcion metodologia",
+  "tipo estudiante agrupado",
+  "lugar residencia",
+  "tel cel",
+  "fecha cel",
+  "tel re",
+  "correo estudiante 1",
+  "correo estudiante 2",
+  "fecha correo",
+  "direccion",
+  "departamento",
+  "ciudad",
+  "estado",
+  "comentario",
+  "situacion",
+  "variable"
 ];
 
 async function uploadFile(data, period, models) {
@@ -47,8 +47,8 @@ async function uploadFile(data, period, models) {
   // To validate if the header has correct order.
   const correction = Object.values(firstSheet[0]).map(field =>
     field
-      .normalize('NFD')
-      .replace(/([aeio])\u0301|(u)[\u0301\u0308]/gi, '$1$2') // delete tildes except ñ
+      .normalize("NFD")
+      .replace(/([aeio])\u0301|(u)[\u0301\u0308]/gi, "$1$2") // delete tildes except ñ
       .toLowerCase()
   );
   correctOrder.forEach((field, index) => {
@@ -80,14 +80,16 @@ async function uploadFile(data, period, models) {
 
     return {
       ok: false,
-      errors: [{ path: 'file', message: 'El semestre ya fue previamente guardado.' }]
+      errors: [
+        { path: "file", message: "El semestre ya fue previamente guardado." }
+      ]
     };
   }
   // return the header's errors
   return {
     ok: false,
     values,
-    errors: [{ path: 'file', message: 'Campos incorrectos.' }]
+    errors: [{ path: "file", message: "Campos incorrectos." }]
   };
 }
 

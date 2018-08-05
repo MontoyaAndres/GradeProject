@@ -1,59 +1,59 @@
-import React, { Fragment, PureComponent } from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import { Query } from 'react-apollo';
-import gql from 'graphql-tag';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import Hidden from '@material-ui/core/Hidden';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import Divider from '@material-ui/core/Divider';
-import Button from '@material-ui/core/Button';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FileDownload from '@material-ui/icons/FileDownload';
-import ErrorIcon from '@material-ui/icons/Error';
+import React, { Fragment, PureComponent } from "react";
+import { withStyles } from "@material-ui/core/styles";
+import { Query } from "react-apollo";
+import gql from "graphql-tag";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
+import Hidden from "@material-ui/core/Hidden";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import Divider from "@material-ui/core/Divider";
+import Button from "@material-ui/core/Button";
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FileDownload from "@material-ui/icons/FileDownload";
+import ErrorIcon from "@material-ui/icons/Error";
 
-import Loading from '../Global/Loading';
-import { downloadFileCompared } from '../../utils/api';
-import normalizeErrors from '../../normalizeErrors';
+import Loading from "../Global/Loading";
+import { downloadFileCompared } from "../../utils/api";
+import normalizeErrors from "../../normalizeErrors";
 
 const styles = theme => ({
   error: {
-    color: '#D8000C',
-    backgroundColor: '#FFBABA',
-    textAlign: 'center',
+    color: "#D8000C",
+    backgroundColor: "#FFBABA",
+    textAlign: "center",
     padding: theme.spacing.unit * 3
   },
   warning: {
-    color: '#F57F17',
-    backgroundColor: '#FFF176',
-    textAlign: 'center',
+    color: "#F57F17",
+    backgroundColor: "#FFF176",
+    textAlign: "center",
     padding: theme.spacing.unit * 3
   },
   root: {
-    width: '100%',
+    width: "100%",
     backgroundColor: theme.palette.background.paper
   },
   titleDesktop: {
     padding: theme.spacing.unit * 3,
-    fontWeight: 'bold',
-    fontSize: '150%'
+    fontWeight: "bold",
+    fontSize: "150%"
   },
   titleMobile: {
     padding: theme.spacing.unit,
-    fontWeight: 'bold',
-    fontSize: '100%'
+    fontWeight: "bold",
+    fontSize: "100%"
   },
   button: {
-    margin: '10%'
+    margin: "10%"
   }
 });
 
@@ -77,7 +77,7 @@ const compareQuery = gql`
 class Compare extends PureComponent {
   state = {
     openDialog: false,
-    periodSelected: ''
+    periodSelected: ""
   };
 
   handleChange = event => {
@@ -113,7 +113,9 @@ class Compare extends PureComponent {
         >
           <DialogTitle id="alert-title">Descargar archivo</DialogTitle>
           <DialogContent>
-            <DialogContentText id="alert-description">¿Qué datos va a descargar?</DialogContentText>
+            <DialogContentText id="alert-description">
+              ¿Qué datos va a descargar?
+            </DialogContentText>
             <Grid container>
               {selected.map((period, index) => (
                 <RadioGroup
@@ -123,13 +125,22 @@ class Compare extends PureComponent {
                   value={periodSelected}
                   onChange={this.handleChange}
                 >
-                  <FormControlLabel value={period} control={<Radio />} label={period} style={{ padding: 4 }} />
+                  <FormControlLabel
+                    value={period}
+                    control={<Radio />}
+                    label={period}
+                    style={{ padding: 4 }}
+                  />
                 </RadioGroup>
               ))}
             </Grid>
           </DialogContent>
           <DialogActions>
-            <Button onClick={() => this.handleDownloadFile()} color="primary" disabled={periodSelected === ''}>
+            <Button
+              onClick={() => this.handleDownloadFile()}
+              color="primary"
+              disabled={periodSelected === ""}
+            >
               Descargar
             </Button>
             <Button onClick={this.handleDialog} color="primary" autoFocus>
@@ -179,7 +190,9 @@ class Compare extends PureComponent {
                       <Grid container justify="space-around">
                         {/* Desktop version */}
                         <Hidden xlUp smDown>
-                          <div className={classes.titleDesktop}>{`Carrera ${Career} ${selected[0]} - ${
+                          <div
+                            className={classes.titleDesktop}
+                          >{`Carrera ${Career} ${selected[0]} - ${
                             selected[1]
                           }`}</div>
                           <div>
@@ -187,7 +200,9 @@ class Compare extends PureComponent {
                               variant="fab"
                               aria-label="Download"
                               className={classes.button}
-                              onClick={() => this.setState({ openDialog: true })}
+                              onClick={() =>
+                                this.setState({ openDialog: true })
+                              }
                             >
                               <FileDownload />
                             </Button>
@@ -196,7 +211,9 @@ class Compare extends PureComponent {
 
                         {/* Mobile version */}
                         <Hidden mdUp>
-                          <div className={classes.titleMobile}>{`Carrera ${Career} ${selected[0]} - ${
+                          <div
+                            className={classes.titleMobile}
+                          >{`Carrera ${Career} ${selected[0]} - ${
                             selected[1]
                           }`}</div>
                           <Button
@@ -215,7 +232,10 @@ class Compare extends PureComponent {
                   {compareStudents.students.map(data => (
                     <Fragment key={data.CodigoBanner}>
                       <ListItem button>
-                        <ListItemText primary={`${data.Nombres} ${data.Apellidos}`} secondary={data.CodigoBanner} />
+                        <ListItemText
+                          primary={`${data.Nombres} ${data.Apellidos}`}
+                          secondary={data.CodigoBanner}
+                        />
                       </ListItem>
                       <Divider />
                     </Fragment>

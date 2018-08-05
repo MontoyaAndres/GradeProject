@@ -1,5 +1,5 @@
-import React from 'react';
-import { Doughnut } from 'react-chartjs-2';
+import React from "react";
+import { Doughnut } from "react-chartjs-2";
 
 const DoughnutGraphic = ({ chartConfig, graphicBy }) => (
   <Doughnut
@@ -12,11 +12,11 @@ const DoughnutGraphic = ({ chartConfig, graphicBy }) => (
       },
       legend: {
         display: true,
-        position: 'top'
+        position: "top"
       },
       animation: {
         duration: 600,
-        easing: 'easeInOutQuart'
+        easing: "easeInOutQuart"
       },
       tooltips: {
         callbacks: {

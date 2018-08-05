@@ -1,14 +1,14 @@
-import React, { Fragment } from 'react';
-import { Query } from 'react-apollo';
-import { withStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import FormLabel from '@material-ui/core/FormLabel';
+import React, { Fragment } from "react";
+import { Query } from "react-apollo";
+import { withStyles } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
+import FormLabel from "@material-ui/core/FormLabel";
 
-import Layout from '../components/Global';
-import Loading from '../components/Global/Loading';
+import Layout from "../components/Global";
+import Loading from "../components/Global/Loading";
 
-import { QueryStudentInformation } from '../graphql/query';
+import { QueryStudentInformation } from "../graphql/query";
 
 const styles = theme => ({
   paper: {
@@ -16,54 +16,54 @@ const styles = theme => ({
   },
   title: {
     backgroundColor: theme.palette.primary.main,
-    color: 'white',
+    color: "white",
     padding: theme.spacing.unit
   },
   FormLabel: {
-    fontWeight: '500',
+    fontWeight: "500",
     fontSize: 18
   }
 });
 
 const Headers = [
-  'Código banner',
-  'Periodo',
-  'Nombre',
-  'Apellido',
-  'Genero',
-  'Edad',
-  'Numero de identificación',
-  'Tipo Doc Identidad',
-  'Nivel formación',
-  'Código programa',
-  'Descripción programa',
-  'Jornada',
-  'Area conocimiento',
-  'Núcleo básico conocimiento',
-  'IES',
-  'Snies',
-  'Rectoría',
-  'Código de sede',
-  'Sede',
-  'Centro regional',
-  'Código periodo académico',
-  'Periodo académico inscripción',
-  'Descripción de metodología',
-  'Tipo de estudiante agrupado',
-  'Lugar de residencia',
-  'Teléfono celular',
-  'Fecha de celular',
-  'Teléfono de residencia',
-  'Correo de estudiante 1',
-  'Correo de estudiante 2',
-  'Fecha de correo',
-  'Dirección',
-  'Departamento',
-  'Ciudad',
-  'Estado',
-  'Comentario',
-  'Situacion',
-  'Variable'
+  "Código banner",
+  "Periodo",
+  "Nombre",
+  "Apellido",
+  "Genero",
+  "Edad",
+  "Numero de identificación",
+  "Tipo Doc Identidad",
+  "Nivel formación",
+  "Código programa",
+  "Descripción programa",
+  "Jornada",
+  "Area conocimiento",
+  "Núcleo básico conocimiento",
+  "IES",
+  "Snies",
+  "Rectoría",
+  "Código de sede",
+  "Sede",
+  "Centro regional",
+  "Código periodo académico",
+  "Periodo académico inscripción",
+  "Descripción de metodología",
+  "Tipo de estudiante agrupado",
+  "Lugar de residencia",
+  "Teléfono celular",
+  "Fecha de celular",
+  "Teléfono de residencia",
+  "Correo de estudiante 1",
+  "Correo de estudiante 2",
+  "Fecha de correo",
+  "Dirección",
+  "Departamento",
+  "Ciudad",
+  "Estado",
+  "Comentario",
+  "Situacion",
+  "Variable"
 ];
 
 const StudentInformation = ({ classes, match: { url, params } }) => (
@@ -88,13 +88,19 @@ const StudentInformation = ({ classes, match: { url, params } }) => (
                     {index === 19 ? (
                       <Grid item xs={12} sm={6}>
                         <div>
-                          <FormLabel className={classes.FormLabel}>{header}:</FormLabel> <span>{values[index]}</span>
+                          <FormLabel className={classes.FormLabel}>
+                            {header}:
+                          </FormLabel>{" "}
+                          <span>{values[index]}</span>
                         </div>
                       </Grid>
                     ) : (
                       <Grid item xs={12} sm={6}>
                         <div>
-                          <FormLabel className={classes.FormLabel}>{header}:</FormLabel> <span>{values[index]}</span>
+                          <FormLabel className={classes.FormLabel}>
+                            {header}:
+                          </FormLabel>{" "}
+                          <span>{values[index]}</span>
                         </div>
                       </Grid>
                     )}

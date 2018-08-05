@@ -1,5 +1,5 @@
-import React from 'react';
-import { Bar } from 'react-chartjs-2';
+import React from "react";
+import { Bar } from "react-chartjs-2";
 
 const BarGraphic = ({ chartConfig, graphicBy }) => (
   <Bar
@@ -12,11 +12,11 @@ const BarGraphic = ({ chartConfig, graphicBy }) => (
       },
       legend: {
         display: false,
-        position: 'bottom'
+        position: "bottom"
       },
       animation: {
         duration: 600,
-        easing: 'easeInOutQuart'
+        easing: "easeInOutQuart"
       },
       tooltips: {
         callbacks: {

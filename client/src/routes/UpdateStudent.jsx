@@ -1,19 +1,23 @@
-import React from 'react';
-import { Query, graphql } from 'react-apollo';
-import gql from 'graphql-tag';
-import { Formik, Form } from 'formik';
-import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
+import React from "react";
+import { Query, graphql } from "react-apollo";
+import gql from "graphql-tag";
+import { Formik, Form } from "formik";
+import { withStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
 
-import FormLeft from '../components/UpdateStudent/FormLeft';
-import FormRight from '../components/UpdateStudent/FormRight';
+import FormLeft from "../components/UpdateStudent/FormLeft";
+import FormRight from "../components/UpdateStudent/FormRight";
 
-import Layout from '../components/Global';
-import Loading from '../components/Global/Loading';
-import SelectData from '../utils/SelectData';
-import { StudentByParams, QueryStudentInformation, studentDistinct } from '../graphql/query';
+import Layout from "../components/Global";
+import Loading from "../components/Global/Loading";
+import SelectData from "../utils/SelectData";
+import {
+  StudentByParams,
+  QueryStudentInformation,
+  studentDistinct
+} from "../graphql/query";
 
 const styles = theme => ({
   paper: {
@@ -107,7 +111,12 @@ const updateStudentMutation = gql`
   }
 `;
 
-const UpdateStudent = ({ classes, mutate, history, match: { url, params } }) => (
+const UpdateStudent = ({
+  classes,
+  mutate,
+  history,
+  match: { url, params }
+}) => (
   <Layout url={url}>
     <Query query={QueryStudentInformation} variables={{ id: params._id }}>
       {({ loading, data: { Student } }) => {
@@ -128,7 +137,7 @@ const UpdateStudent = ({ classes, mutate, history, match: { url, params } }) => 
                   {
                     query: studentDistinct,
                     variables: {
-                      param: 'TipoSemestre'
+                      param: "TipoSemestre"
                     }
                   },
                   {
@@ -140,7 +149,7 @@ const UpdateStudent = ({ classes, mutate, history, match: { url, params } }) => 
                   {
                     query: StudentByParams,
                     variables: {
-                      Search: '',
+                      Search: "",
                       Variable: values.Student.Variable,
                       Situacion: values.Student.Situacion,
                       CodigoPrograma: values.Student.CodigoPrograma,
@@ -153,10 +162,13 @@ const UpdateStudent = ({ classes, mutate, history, match: { url, params } }) => 
               history.push(`/carrera/${values.Student.CodigoPrograma}`);
             }}
             render={props => {
-              const dataVariable = Object.getOwnPropertyNames(SelectData.VariableSituacion);
+              const dataVariable = Object.getOwnPropertyNames(
+                SelectData.VariableSituacion
+              );
               // if variable is wrong it will send an empty array, by default variable will show "ACADÉMICO"
               const dataSituacion =
-                SelectData.VariableSituacion[props.values.Student.Variable] === undefined
+                SelectData.VariableSituacion[props.values.Student.Variable] ===
+                undefined
                   ? SelectData.VariableSituacion[dataVariable[0]]
                   : SelectData.VariableSituacion[props.values.Student.Variable];
 
@@ -204,4 +216,6 @@ const UpdateStudent = ({ classes, mutate, history, match: { url, params } }) => 
   </Layout>
 );
 
-export default graphql(updateStudentMutation)(withStyles(styles)(UpdateStudent));
+export default graphql(updateStudentMutation)(
+  withStyles(styles)(UpdateStudent)
+);

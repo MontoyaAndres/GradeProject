@@ -1,5 +1,5 @@
-import React, { Fragment } from 'react';
-import Menu from './Menu/index';
+import React, { Fragment } from "react";
+import Menu from "./Menu/index";
 
 const Layout = ({ children, url }) => (
   <Fragment>

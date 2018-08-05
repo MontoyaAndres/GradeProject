@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-import bcrypt from 'bcrypt';
+import mongoose from "mongoose";
+import bcrypt from "bcrypt";
 
 const userSchema = new mongoose.Schema({
   email: {
@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
 });
 
 // eslint-disable-next-line
-userSchema.pre('save', async function (next) {
+userSchema.pre("save", async function(next) {
   try {
     const salt = await bcrypt.genSalt(10);
     const passwordHash = await bcrypt.hash(this.password, salt);
@@ -26,6 +26,6 @@ userSchema.pre('save', async function (next) {
   }
 });
 
-const User = mongoose.model('user', userSchema);
+const User = mongoose.model("user", userSchema);
 
 export default User;

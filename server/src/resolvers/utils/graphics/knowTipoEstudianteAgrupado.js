@@ -1,7 +1,13 @@
 export default function knowTipoEstudianteAgrupado(values) {
-  const CONTINUO = values.filter(value => value.TipoEstudianteAgrupado === 'CONTINUO').length;
-  const PRIMERA_VEZ = values.filter(value => value.TipoEstudianteAgrupado === 'PRIMERA VEZ').length;
-  const NINGUNO = values.filter(value => value.TipoEstudianteAgrupado === 'NINGUNO').length;
+  const CONTINUO = values.filter(
+    value => value.TipoEstudianteAgrupado === "CONTINUO"
+  ).length;
+  const PRIMERA_VEZ = values.filter(
+    value => value.TipoEstudianteAgrupado === "PRIMERA VEZ"
+  ).length;
+  const NINGUNO = values.filter(
+    value => value.TipoEstudianteAgrupado === "NINGUNO"
+  ).length;
 
   const SUM_VALUES = CONTINUO + PRIMERA_VEZ + NINGUNO;
 
@@ -10,7 +16,7 @@ export default function knowTipoEstudianteAgrupado(values) {
       ok: true,
       values: {
         CONTINUO: Math.round((CONTINUO / SUM_VALUES) * 100),
-        'PRIMERA VEZ': Math.round((PRIMERA_VEZ / SUM_VALUES) * 100),
+        "PRIMERA VEZ": Math.round((PRIMERA_VEZ / SUM_VALUES) * 100),
         NINGUNO: Math.round((NINGUNO / SUM_VALUES) * 100)
       }
     };
@@ -18,6 +24,6 @@ export default function knowTipoEstudianteAgrupado(values) {
 
   return {
     ok: false,
-    errors: [{ path: 'graphics', message: 'No se encontraron datos.' }]
+    errors: [{ path: "graphics", message: "No se encontraron datos." }]
   };
 }

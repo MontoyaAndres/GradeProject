@@ -1,18 +1,18 @@
-import React from 'react';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
-import decode from 'jwt-decode';
-import Loadable from 'react-loadable';
+import React from "react";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import decode from "jwt-decode";
+import Loadable from "react-loadable";
 
-import withRoot from '../utils/withRoot';
-import Logout from '../components/Global/Menu/Logout.jsx';
-import Error404 from './Error404';
-import LoadingRoute from './LoadingRoute';
+import withRoot from "../utils/withRoot";
+import Logout from "../components/Global/Menu/Logout.jsx";
+import Error404 from "./Error404";
+import LoadingRoute from "./LoadingRoute";
 
-import SelectData from '../utils/SelectData';
+import SelectData from "../utils/SelectData";
 
 function isAuthenticated() {
-  const token = localStorage.getItem('token');
-  const refreshToken = localStorage.getItem('refreshToken');
+  const token = localStorage.getItem("token");
+  const refreshToken = localStorage.getItem("refreshToken");
   try {
     decode(token);
     const { exp } = decode(refreshToken);
@@ -26,7 +26,7 @@ function isAuthenticated() {
 }
 
 function isExactCareer(url) {
-  const URL = url.split('/')[2];
+  const URL = url.split("/")[2];
   const findURL = SelectData.Carreras.find(carrera => carrera === URL);
   // To see if the url exists in the array
   if (findURL === URL) {
@@ -36,13 +36,24 @@ function isExactCareer(url) {
 }
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
-  <Route {...rest} render={props => (isAuthenticated() ? <Component {...props} /> : <Logout />)} />
+  <Route
+    {...rest}
+    render={props =>
+      isAuthenticated() ? <Component {...props} /> : <Logout />
+    }
+  />
 );
 
 const IsLogin = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
-    render={props => (isAuthenticated() ? <Redirect to={{ pathname: '/' }} /> : <Component {...props} />)}
+    render={props =>
+      isAuthenticated() ? (
+        <Redirect to={{ pathname: "/" }} />
+      ) : (
+        <Component {...props} />
+      )
+    }
   />
 );
 
@@ -50,53 +61,57 @@ const ExactCareer = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
     render={props =>
-      isExactCareer(props.match.url) ? <PrivateRoute {...props} component={Component} /> : <Error404 />
+      isExactCareer(props.match.url) ? (
+        <PrivateRoute {...props} component={Component} />
+      ) : (
+        <Error404 />
+      )
     }
   />
 );
 
 const AsyncHome = Loadable({
-  loader: () => import('./Home'),
+  loader: () => import("./Home"),
   loading: () => <LoadingRoute />
 });
 
 const AsyncCareer = Loadable({
-  loader: () => import('./Career'),
+  loader: () => import("./Career"),
   loading: () => <LoadingRoute />
 });
 
 const AsyncStudentInformation = Loadable({
-  loader: () => import('./StudentInformation'),
+  loader: () => import("./StudentInformation"),
   loading: () => <LoadingRoute />
 });
 
 const AsyncUpdateStudent = Loadable({
-  loader: () => import('./UpdateStudent'),
+  loader: () => import("./UpdateStudent"),
   loading: () => <LoadingRoute />
 });
 
 const AsyncGraphics = Loadable({
-  loader: () => import('./Graphics'),
+  loader: () => import("./Graphics"),
   loading: () => <LoadingRoute />
 });
 
 const AsyncHelp = Loadable({
-  loader: () => import('./Help'),
+  loader: () => import("./Help"),
   loading: () => <LoadingRoute />
 });
 
 const AsyncConfiguration = Loadable({
-  loader: () => import('./Configuration'),
+  loader: () => import("./Configuration"),
   loading: () => <LoadingRoute />
 });
 
 const AsyncLogin = Loadable({
-  loader: () => import('./Login'),
+  loader: () => import("./Login"),
   loading: () => <LoadingRoute />
 });
 
 const AsyncResetPassword = Loadable({
-  loader: () => import('./ResetPassword'),
+  loader: () => import("./ResetPassword"),
   loading: () => <LoadingRoute />
 });
 
@@ -105,11 +120,19 @@ const Router = () => (
     <Switch>
       <PrivateRoute exact path="/" component={AsyncHome} />
       <ExactCareer exact path="/carrera/:Career" component={AsyncCareer} />
-      <PrivateRoute exact path="/estudiante/:_id" component={AsyncStudentInformation} />
+      <PrivateRoute
+        exact
+        path="/estudiante/:_id"
+        component={AsyncStudentInformation}
+      />
       <PrivateRoute exact path="/editar/:_id" component={AsyncUpdateStudent} />
       <PrivateRoute exact path="/graficas" component={AsyncGraphics} />
       <PrivateRoute exact path="/ayuda" component={AsyncHelp} />
-      <PrivateRoute exact path="/configuracion" component={AsyncConfiguration} />
+      <PrivateRoute
+        exact
+        path="/configuracion"
+        component={AsyncConfiguration}
+      />
       <IsLogin exact path="/login" component={AsyncLogin} />
       <IsLogin exact path="/reset/:token?" component={AsyncResetPassword} />
       <Route component={Error404} />

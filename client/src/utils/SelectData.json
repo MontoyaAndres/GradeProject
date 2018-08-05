@@ -12,11 +12,7 @@
     "TECNOLOGÍA",
     "NO NIVEL FORMACIÓN"
   ],
-  "Genero": [
-    "MASCULINO",
-    "FEMENINO",
-    "NO GENERO"
-  ],
+  "Genero": ["MASCULINO", "FEMENINO", "NO GENERO"],
   "CodigoPrograma": [
     "ADFU",
     "ADM",
@@ -63,12 +59,7 @@
     "TECNOLOGÍA EN ELECTRÓNICA",
     "NO DESCRIPCIÓN"
   ],
-  "Jornada": [
-    "DISTANCIA",
-    "MAÑANA",
-    "NOCHE",
-    "NO JORNADA"
-  ],
+  "Jornada": ["DISTANCIA", "MAÑANA", "NOCHE", "NO JORNADA"],
   "AreaConocimiento": [
     "CIENCIAS DE LA EDUCACIÓN",
     "CIENCIAS SOCIALES Y HUMANAS",
@@ -89,19 +80,8 @@
     "SOCIOLOGÍA TRABAJO SOCIAL Y AFINES",
     "NO NÚCLEO BÁSICO"
   ],
-  "Rectoria": [
-    "R CUNDINAMARCA",
-    "RECTORÍA CUNDINAMARCA"
-  ],
-  "CodigoSede": [
-    "APU",
-    "GIR",
-    "MES",
-    "PAN",
-    "SIL",
-    "MEL",
-    "NO CÓDIGO DE SEDE"
-  ],
+  "Rectoria": ["R CUNDINAMARCA", "RECTORÍA CUNDINAMARCA"],
+  "CodigoSede": ["APU", "GIR", "MES", "PAN", "SIL", "MEL", "NO CÓDIGO DE SEDE"],
   "Sede": [
     "SUMAPAZ (PANDI)",
     "CP SUMAPAZ",
@@ -121,26 +101,15 @@
     "CT MELGAR",
     "NO SEDE"
   ],
-  "CentroRegional": [
-    "GIRARDOT",
-    "NO CENTRO REGIONAL"
-  ],
+  "CentroRegional": ["GIRARDOT", "NO CENTRO REGIONAL"],
   "DescripcionMetodologia": [
     "DISTANCIA (TRADICIONAL)",
     "DISTANCIA",
     "PRESENCIAL",
     "NO DESCRIPCIÓN"
   ],
-  "TipoEstudianteAgrupado": [
-    "CONTINUO",
-    "PRIMERA VEZ",
-    "NINGUNO"
-  ],
-  "Estado": [
-    "AUSENTISMO",
-    "DESERCIÓN",
-    "NO ESTADO"
-  ],
+  "TipoEstudianteAgrupado": ["CONTINUO", "PRIMERA VEZ", "NINGUNO"],
+  "Estado": ["AUSENTISMO", "DESERCIÓN", "NO ESTADO"],
   "VariableSituacion": {
     "ACADÉMICO": [
       "CAMBIO DE SEDE",
@@ -159,19 +128,14 @@
       "APLAZO DE SEMESTRE POR RECURSOS ECONÓMICO",
       "PROBLEMAS ECONÓMICOS"
     ],
-    "NO CONTACTO": [
-      "BUZON",
-      "NO SE ENCUENTRA INFORMACIÓN DEL ESTUDIANTE"
-    ],
+    "NO CONTACTO": ["BUZON", "NO SE ENCUENTRA INFORMACIÓN DEL ESTUDIANTE"],
     "NO PERTENECE A LA MATRIZ": [
       "ESTUDIANTE MATRICULADO",
       "NO HA ESTUDIADO EN UNIMINUTO",
       "PENDIENTE GRADO",
       "TÉRMINO DE ASIGNATURAS - PENDIENTE GRADO"
     ],
-    "NO SE REALIZÓ GESTIÓN POR PARTE DEL PROGRAMA": [
-      "NO SE REALIZÓ GESTIÓN"
-    ],
+    "NO SE REALIZÓ GESTIÓN POR PARTE DEL PROGRAMA": ["NO SE REALIZÓ GESTIÓN"],
     "PSICOSOCIAL": [
       "MOTIVOS PERSONALES",
       "CAMBIO DE CIUDAD",
@@ -181,9 +145,7 @@
       "LICENCIA DE MATERNIDAD",
       "PROBLEMAS DE SALUD"
     ],
-    "NO VARIABLE": [
-      "NO SITUACIÓN"
-    ]
+    "NO VARIABLE": ["NO SITUACIÓN"]
   },
   "Carreras": [
     "ADFU",

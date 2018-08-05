@@ -1,7 +1,7 @@
-import React, { PureComponent } from 'react';
-import Snackbar from '@material-ui/core/Snackbar';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
+import React, { PureComponent } from "react";
+import Snackbar from "@material-ui/core/Snackbar";
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@material-ui/icons/Close";
 
 class Successfully extends PureComponent {
   state = {
@@ -24,18 +24,23 @@ class Successfully extends PureComponent {
       <div>
         <Snackbar
           anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'left'
+            vertical: "bottom",
+            horizontal: "left"
           }}
           open={hide}
           autoHideDuration={4000}
           onClose={this.handleHide}
           ContentProps={{
-            'aria-describedby': 'message-id'
+            "aria-describedby": "message-id"
           }}
           message={<span id="message-id">{message}</span>}
           action={[
-            <IconButton key="close" aria-label="Close" color="inherit" onClick={this.handleHide}>
+            <IconButton
+              key="close"
+              aria-label="Close"
+              color="inherit"
+              onClick={this.handleHide}
+            >
               <CloseIcon />
             </IconButton>
           ]}

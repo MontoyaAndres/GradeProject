@@ -1,38 +1,38 @@
-import React, { PureComponent } from 'react';
-import { Query, graphql } from 'react-apollo';
-import gql from 'graphql-tag';
-import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Button from '@material-ui/core/Button';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import IconButton from '@material-ui/core/IconButton';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import FormLabel from '@material-ui/core/FormLabel';
-import ErrorIcon from '@material-ui/icons/Error';
-import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
-import Info from '@material-ui/icons/Info';
+import React, { PureComponent } from "react";
+import { Query, graphql } from "react-apollo";
+import gql from "graphql-tag";
+import { withStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import Button from "@material-ui/core/Button";
+import ExpansionPanel from "@material-ui/core/ExpansionPanel";
+import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
+import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
+import IconButton from "@material-ui/core/IconButton";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import FormLabel from "@material-ui/core/FormLabel";
+import ErrorIcon from "@material-ui/icons/Error";
+import DeleteIcon from "@material-ui/icons/Delete";
+import EditIcon from "@material-ui/icons/Edit";
+import Info from "@material-ui/icons/Info";
 
-import Successfully from '../Global/Successfully';
-import Loading from '../Global/Loading';
-import Seacher from './Searcher';
-import { StudentByParams } from '../../graphql/query';
+import Successfully from "../Global/Successfully";
+import Loading from "../Global/Loading";
+import Seacher from "./Searcher";
+import { StudentByParams } from "../../graphql/query";
 
 const styles = theme => ({
   root: {
-    width: '100%'
+    width: "100%"
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
-    flexBasis: '60%',
+    flexBasis: "60%",
     flexShrink: 0
   },
   secondaryHeading: {
@@ -40,13 +40,13 @@ const styles = theme => ({
     color: theme.palette.text.secondary
   },
   error: {
-    color: '#D8000C',
-    backgroundColor: '#FFBABA',
-    textAlign: 'center',
+    color: "#D8000C",
+    backgroundColor: "#FFBABA",
+    textAlign: "center",
     padding: theme.spacing.unit * 3
   },
   FormLabel: {
-    fontWeight: '500',
+    fontWeight: "500",
     fontSize: 18
   }
 });
@@ -62,7 +62,7 @@ class index extends PureComponent {
     deleted: false,
     studenIdDelete: 0,
     successDeleted: false,
-    searchStudent: '',
+    searchStudent: "",
     page: 0,
     hasMoreItems: true
   };
@@ -81,7 +81,7 @@ class index extends PureComponent {
       prevProps.Estado !== Estado ||
       prevProps.TipoSemestre !== TipoSemestre
     ) {
-      this.setState({ searchStudent: '' });
+      this.setState({ searchStudent: "" });
     }
   }
 
@@ -106,7 +106,11 @@ class index extends PureComponent {
             <Button onClick={() => this.handleDeleteStudent()} color="primary">
               Sí
             </Button>
-            <Button onClick={() => this.handleClose()} color="primary" autoFocus>
+            <Button
+              onClick={() => this.handleClose()}
+              color="primary"
+              autoFocus
+            >
               No
             </Button>
           </DialogActions>
@@ -121,7 +125,14 @@ class index extends PureComponent {
 
   handleDeleteStudent = async () => {
     const { studenIdDelete, searchStudent, page } = this.state;
-    const { Variable, Situacion, CodigoPrograma, Estado, TipoSemestre, mutate } = this.props;
+    const {
+      Variable,
+      Situacion,
+      CodigoPrograma,
+      Estado,
+      TipoSemestre,
+      mutate
+    } = this.props;
 
     await mutate({
       variables: { id: studenIdDelete },
@@ -154,13 +165,34 @@ class index extends PureComponent {
   };
 
   render() {
-    const { classes, Variable, Situacion, CodigoPrograma, Estado, TipoSemestre } = this.props;
-    const { page, hasMoreItems, deleted, successDeleted, searchStudent } = this.state;
+    const {
+      classes,
+      Variable,
+      Situacion,
+      CodigoPrograma,
+      Estado,
+      TipoSemestre
+    } = this.props;
+    const {
+      page,
+      hasMoreItems,
+      deleted,
+      successDeleted,
+      searchStudent
+    } = this.state;
 
     return (
       <Query
         query={StudentByParams}
-        variables={{ Search: searchStudent, Variable, Situacion, CodigoPrograma, Estado, TipoSemestre, page }}
+        variables={{
+          Search: searchStudent,
+          Variable,
+          Situacion,
+          CodigoPrograma,
+          Estado,
+          TipoSemestre,
+          page
+        }}
         fetchPolicy="network-only"
       >
         {({ loading, data, fetchMore }) => {
@@ -189,7 +221,10 @@ class index extends PureComponent {
               {deleted ? this.displayAlert() : null}
 
               {/* To show one alert which will show a message */}
-              <Successfully hide={successDeleted} message="Estudiante eliminado con exito!" />
+              <Successfully
+                hide={successDeleted}
+                message="Estudiante eliminado con exito!"
+              />
 
               {/* Button to find students */}
               <Seacher onHandleSearchStudent={this.handleSearchStudent} />
@@ -198,46 +233,84 @@ class index extends PureComponent {
                 <ExpansionPanel key={i}>
                   <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                     <span className={classes.heading}>{student.Apellidos}</span>
-                    <span className={classes.secondaryHeading}>{student.CodigoBanner}</span>
+                    <span className={classes.secondaryHeading}>
+                      {student.CodigoBanner}
+                    </span>
                   </ExpansionPanelSummary>
                   <ExpansionPanelDetails>
                     <Grid container>
                       <Grid item xs={12}>
-                        <Grid container wrap="nowrap" direction="column" justify="center" alignItems="center">
+                        <Grid
+                          container
+                          wrap="nowrap"
+                          direction="column"
+                          justify="center"
+                          alignItems="center"
+                        >
                           <Grid item xs>
                             <div>
-                              <FormLabel className={classes.FormLabel}>Código Banner:</FormLabel> {student.CodigoBanner}
+                              <FormLabel className={classes.FormLabel}>
+                                Código Banner:
+                              </FormLabel>{" "}
+                              {student.CodigoBanner}
                             </div>
                             <div>
-                              <FormLabel className={classes.FormLabel}>Nombre:</FormLabel> {student.Nombres}
+                              <FormLabel className={classes.FormLabel}>
+                                Nombre:
+                              </FormLabel>{" "}
+                              {student.Nombres}
                             </div>
                             <div>
-                              <FormLabel className={classes.FormLabel}>Apellidos:</FormLabel> {student.Apellidos}
+                              <FormLabel className={classes.FormLabel}>
+                                Apellidos:
+                              </FormLabel>{" "}
+                              {student.Apellidos}
                             </div>
                             <div>
-                              <FormLabel className={classes.FormLabel}>Comentario:</FormLabel> {student.Comentario}
+                              <FormLabel className={classes.FormLabel}>
+                                Comentario:
+                              </FormLabel>{" "}
+                              {student.Comentario}
                             </div>
                             <div>
-                              <FormLabel className={classes.FormLabel}>Situación:</FormLabel> {student.Situacion}
+                              <FormLabel className={classes.FormLabel}>
+                                Situación:
+                              </FormLabel>{" "}
+                              {student.Situacion}
                             </div>
                             <div>
-                              <FormLabel className={classes.FormLabel}>Variable:</FormLabel> {student.Variable}
+                              <FormLabel className={classes.FormLabel}>
+                                Variable:
+                              </FormLabel>{" "}
+                              {student.Variable}
                             </div>
                           </Grid>
                         </Grid>
-                        <div style={{ textAlign: 'center' }}>
+                        <div style={{ textAlign: "center" }}>
                           <IconButton
                             aria-label="Delete"
-                            onClick={() => this.setState({ deleted: true, studenIdDelete: student._id })}
+                            onClick={() =>
+                              this.setState({
+                                deleted: true,
+                                studenIdDelete: student._id
+                              })
+                            }
                           >
                             <DeleteIcon />
                           </IconButton>
-                          <IconButton aria-label="Update" onClick={() => this.handleRedirect(`/editar/${student._id}`)}>
+                          <IconButton
+                            aria-label="Update"
+                            onClick={() =>
+                              this.handleRedirect(`/editar/${student._id}`)
+                            }
+                          >
                             <EditIcon />
                           </IconButton>
                           <IconButton
                             aria-label="Information"
-                            onClick={() => this.handleRedirect(`/estudiante/${student._id}`)}
+                            onClick={() =>
+                              this.handleRedirect(`/estudiante/${student._id}`)
+                            }
                           >
                             <Info />
                           </IconButton>
@@ -249,7 +322,7 @@ class index extends PureComponent {
               ))}
 
               {hasMoreItems && (
-                <div style={{ textAlign: 'center', padding: 10 }}>
+                <div style={{ textAlign: "center", padding: 10 }}>
                   <Button
                     color="primary"
                     onClick={() => {
@@ -270,13 +343,19 @@ class index extends PureComponent {
                             return previousResult;
                           }
 
-                          if (fetchMoreResult.StudentByParams.student.length === data.StudentByParams.count) {
+                          if (
+                            fetchMoreResult.StudentByParams.student.length ===
+                            data.StudentByParams.count
+                          ) {
                             this.setState({ hasMoreItems: false });
                           }
 
                           return {
                             ...previousResult,
-                            StudentByParams: { ...previousResult.StudentByParams, ...fetchMoreResult.StudentByParams }
+                            StudentByParams: {
+                              ...previousResult.StudentByParams,
+                              ...fetchMoreResult.StudentByParams
+                            }
                           };
                         }
                       });

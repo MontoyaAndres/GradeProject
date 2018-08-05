@@ -25,6 +25,6 @@ export default function knowAge(values) {
 
   return {
     ok: true,
-    errors: [{ path: 'graphics', message: 'No se encontraron datos.' }]
+    errors: [{ path: "graphics", message: "No se encontraron datos." }]
   };
 }

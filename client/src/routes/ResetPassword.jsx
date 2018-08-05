@@ -1,5 +1,5 @@
-import React from 'react';
-import { SendEmail, SendToken } from '../components/ResetPassword';
+import React from "react";
+import { SendEmail, SendToken } from "../components/ResetPassword";
 
 const ResetPassword = ({ match: { params }, history }) => {
   if (params.token) {

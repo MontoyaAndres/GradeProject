@@ -1,9 +1,9 @@
-import mongoose from 'mongoose';
-import moment from 'moment';
+import mongoose from "mongoose";
+import moment from "moment";
 
 function replaceFecha(value) {
   const date = JSON.stringify(value);
-  return date.replace(/['"]+/g, '').split('T')[0];
+  return date.replace(/['"]+/g, "").split("T")[0];
 }
 
 const studentSchema = new mongoose.Schema({
@@ -14,22 +14,22 @@ const studentSchema = new mongoose.Schema({
   },
   TipoSemestre: {
     type: String,
-    default: '',
+    default: "",
     uppercase: true
   },
   Nombres: {
     type: String,
-    default: '',
+    default: "",
     uppercase: true
   },
   Apellidos: {
     type: String,
-    default: '',
+    default: "",
     uppercase: true
   },
   Genero: {
     type: String,
-    default: 'NO GENERO',
+    default: "NO GENERO",
     uppercase: true
   },
   Edad: {
@@ -42,37 +42,37 @@ const studentSchema = new mongoose.Schema({
   },
   TipoDocIdentidad: {
     type: String,
-    default: 'NO DOCUMENTO',
+    default: "NO DOCUMENTO",
     uppercase: true
   },
   NivelFormacion: {
     type: String,
-    default: 'NO NIVEL DE FORMACIÓN',
+    default: "NO NIVEL DE FORMACIÓN",
     uppercase: true
   },
   CodigoPrograma: {
     type: String,
-    default: 'NO CÓDIGO PROGRAMA',
+    default: "NO CÓDIGO PROGRAMA",
     uppercase: true
   },
   DescripcionPrograma: {
     type: String,
-    default: 'NO DESCRIPCIÓN',
+    default: "NO DESCRIPCIÓN",
     uppercase: true
   },
   Jornada: {
     type: String,
-    default: 'NO JORNADA',
+    default: "NO JORNADA",
     uppercase: true
   },
   AreaConocimiento: {
     type: String,
-    default: 'NO ÁREA CONOCIMIENTO',
+    default: "NO ÁREA CONOCIMIENTO",
     uppercase: true
   },
   NucleoBasicoConocimiento: {
     type: String,
-    default: 'NO NÚCLEO BÁSICO',
+    default: "NO NÚCLEO BÁSICO",
     uppercase: true
   },
   IES: {
@@ -85,22 +85,22 @@ const studentSchema = new mongoose.Schema({
   },
   Rectoria: {
     type: String,
-    default: 'R CUNDINAMARCA',
+    default: "R CUNDINAMARCA",
     uppercase: true
   },
   CodigoSede: {
     type: String,
-    default: 'NO CÓDIGO DE SEDE',
+    default: "NO CÓDIGO DE SEDE",
     uppercase: true
   },
   Sede: {
     type: String,
-    default: 'NO SEDE',
+    default: "NO SEDE",
     uppercase: true
   },
   CentroRegional: {
     type: String,
-    default: 'NO CENTRO REGIONAL',
+    default: "NO CENTRO REGIONAL",
     uppercase: true
   },
   CodigoPeriodoAcademico: {
@@ -113,12 +113,12 @@ const studentSchema = new mongoose.Schema({
   },
   DescripcionMetodologia: {
     type: String,
-    default: 'NO DESCRIPCIÓN',
+    default: "NO DESCRIPCIÓN",
     uppercase: true
   },
   TipoEstudianteAgrupado: {
     type: String,
-    default: 'NINGUNO',
+    default: "NINGUNO",
     uppercase: true
   },
   LugarResidencia: {
@@ -131,7 +131,7 @@ const studentSchema = new mongoose.Schema({
   },
   FechaCel: {
     type: mongoose.Schema.Types.Mixed,
-    default: moment(new Date(Date.now())).format('YYYY-MM-DD'),
+    default: moment(new Date(Date.now())).format("YYYY-MM-DD"),
     set: replaceFecha
   },
   TelRe: {
@@ -140,53 +140,53 @@ const studentSchema = new mongoose.Schema({
   },
   CorreoEstudiante1: {
     type: String,
-    default: 'NO CORREO'
+    default: "NO CORREO"
   },
   CorreoEstudiante2: {
     type: String,
-    default: 'NO CORREO'
+    default: "NO CORREO"
   },
   FechaCorreo: {
     type: mongoose.Schema.Types.Mixed,
-    default: moment(new Date(Date.now())).format('YYYY-MM-DD'),
+    default: moment(new Date(Date.now())).format("YYYY-MM-DD"),
     set: replaceFecha
   },
   Direccion: {
     type: String,
-    default: 'NO DIRECCION',
+    default: "NO DIRECCION",
     uppercase: true
   },
   Departamento: {
     type: String,
-    default: 'CUNDINAMARCA',
+    default: "CUNDINAMARCA",
     uppercase: true
   },
   Ciudad: {
     type: String,
-    default: 'NO CIUDAD',
+    default: "NO CIUDAD",
     uppercase: true
   },
   Estado: {
     type: String,
-    default: 'NO ESTADO',
+    default: "NO ESTADO",
     uppercase: true
   },
   Comentario: {
     type: String,
-    default: 'NO COMENTARIO'
+    default: "NO COMENTARIO"
   },
   Situacion: {
     type: String,
-    default: 'NO SITUACIÓN',
+    default: "NO SITUACIÓN",
     uppercase: true
   },
   Variable: {
     type: String,
-    default: 'NO VARIABLE',
+    default: "NO VARIABLE",
     uppercase: true
   }
 });
 
-const Student = mongoose.model('student', studentSchema);
+const Student = mongoose.model("student", studentSchema);
 
 export default Student;

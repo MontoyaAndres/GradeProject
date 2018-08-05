@@ -12,6 +12,6 @@ const createResolver = resolver => {
 
 export default createResolver((parent, args, { user }) => {
   if (!user || !user._id) {
-    throw new Error('No permitido.');
+    throw new Error("No permitido.");
   }
 });

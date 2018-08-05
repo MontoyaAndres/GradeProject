@@ -1,23 +1,23 @@
-import React, { PureComponent } from 'react';
-import { Mutation } from 'react-apollo';
-import gql from 'graphql-tag';
-import Dropzone from 'react-dropzone';
-import { Formik, Form } from 'formik';
-import * as Yup from 'yup';
-import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import Button from '@material-ui/core/Button';
+import React, { PureComponent } from "react";
+import { Mutation } from "react-apollo";
+import gql from "graphql-tag";
+import Dropzone from "react-dropzone";
+import { Formik, Form } from "formik";
+import * as Yup from "yup";
+import Grid from "@material-ui/core/Grid";
+import TextField from "@material-ui/core/TextField";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import Button from "@material-ui/core/Button";
 
-import Loading from '../Global/Loading';
-import normalizeErrors from '../../normalizeErrors';
+import Loading from "../Global/Loading";
+import normalizeErrors from "../../normalizeErrors";
 
 // query
-import { studentDistinct } from '../../graphql/query';
+import { studentDistinct } from "../../graphql/query";
 
 const uploadFileMutation = gql`
   mutation($file: Upload!, $period: String!) {
@@ -34,7 +34,7 @@ const uploadFileMutation = gql`
 
 class uploadFile extends PureComponent {
   state = {
-    fileName: '',
+    fileName: "",
     error: false
   };
 
@@ -62,12 +62,16 @@ class uploadFile extends PureComponent {
         >
           <DialogTitle id="alert-title">{errorTitle}</DialogTitle>
           <DialogContent>
-            <DialogContentText id="alert-description">{errorMessage}</DialogContentText>
+            <DialogContentText id="alert-description">
+              {errorMessage}
+            </DialogContentText>
             {values ? (
               <ul>
                 {values.map((value, index) => (
                   <li key={index}>
-                    <DialogContentText id="alert-description">{value}</DialogContentText>
+                    <DialogContentText id="alert-description">
+                      {value}
+                    </DialogContentText>
                   </li>
                 ))}
               </ul>
@@ -90,7 +94,9 @@ class uploadFile extends PureComponent {
     return (
       <Mutation
         mutation={uploadFileMutation}
-        refetchQueries={[{ query: studentDistinct, variables: { param: 'TipoSemestre' } }]}
+        refetchQueries={[
+          { query: studentDistinct, variables: { param: "TipoSemestre" } }
+        ]}
       >
         {(mutate, { data, loading }) => {
           // show server errors
@@ -101,13 +107,16 @@ class uploadFile extends PureComponent {
             if (values && values.length > 0) {
               // incorrect values
               return this.displayServerError({
-                errorTitle: 'Error con validación de datos.',
+                errorTitle: "Error con validación de datos.",
                 errorMessage: errorMsg,
                 values
               });
             }
             // period already saved
-            return this.displayServerError({ errorTitle: 'Error con archivo.', errorMessage: errorMsg });
+            return this.displayServerError({
+              errorTitle: "Error con archivo.",
+              errorMessage: errorMsg
+            });
           }
 
           return (
@@ -115,19 +124,30 @@ class uploadFile extends PureComponent {
               {loading && <Loading />}
 
               <Grid item xs={12}>
-                <Grid container direction="column" alignItems="center" justify="center" style={{ padding: 18 }}>
+                <Grid
+                  container
+                  direction="column"
+                  alignItems="center"
+                  justify="center"
+                  style={{ padding: 18 }}
+                >
                   <Formik
                     enableReinitialize
-                    initialValues={{ period: '', file: '' }}
+                    initialValues={{ period: "", file: "" }}
                     validationSchema={() =>
                       Yup.object().shape({
                         period: Yup.string()
                           .nullable()
-                          .matches(/^\d{4}-[1-2]$/, { message: 'Periodo incorrecto' })
-                          .required('El campo es obligatorio!')
+                          .matches(/^\d{4}-[1-2]$/, {
+                            message: "Periodo incorrecto"
+                          })
+                          .required("El campo es obligatorio!")
                       })
                     }
-                    onSubmit={({ period, file }, { setSubmitting, resetForm }) => {
+                    onSubmit={(
+                      { period, file },
+                      { setSubmitting, resetForm }
+                    ) => {
                       mutate({ variables: { file, period } }).then(response => {
                         if (response.data && response.data.uploadFile.errors) {
                           // If there are errors, it'll return the response and will change the state of error
@@ -148,7 +168,7 @@ class uploadFile extends PureComponent {
                             className="ignore"
                             onDrop={([file]) => {
                               if (file) {
-                                props.setFieldValue('file', file);
+                                props.setFieldValue("file", file);
                                 this.setState({ fileName: file.name });
                               }
                             }}
@@ -157,21 +177,27 @@ class uploadFile extends PureComponent {
                               <div
                                 style={{
                                   marginTop: 20,
-                                  border: '4px dashed #3f51b5',
-                                  position: 'relative',
-                                  backgroundColor: isDragActive ? 'rgba(63, 81, 181, 0.2)' : 'white'
+                                  border: "4px dashed #3f51b5",
+                                  position: "relative",
+                                  backgroundColor: isDragActive
+                                    ? "rgba(63, 81, 181, 0.2)"
+                                    : "white"
                                 }}
                               >
                                 <div
                                   style={{
                                     fontWeight: 100,
-                                    textTransform: 'uppercase',
-                                    color: '#3f51b5',
+                                    textTransform: "uppercase",
+                                    color: "#3f51b5",
                                     padding: 60,
-                                    textAlign: 'center'
+                                    textAlign: "center"
                                   }}
                                 >
-                                  <h3>{fileName === '' ? 'Arrastre un archivo o seleccione dando click' : fileName}</h3>
+                                  <h3>
+                                    {fileName === ""
+                                      ? "Arrastre un archivo o seleccione dando click"
+                                      : fileName}
+                                  </h3>
                                 </div>
                               </div>
                             )}
@@ -179,7 +205,9 @@ class uploadFile extends PureComponent {
                         </div>
                         <div>
                           <TextField
-                            error={Boolean(props.touched.period && props.errors.period)}
+                            error={Boolean(
+                              props.touched.period && props.errors.period
+                            )}
                             id="period"
                             name="period"
                             label="Ingrese periodo"
@@ -191,15 +219,22 @@ class uploadFile extends PureComponent {
                           />
                           <span
                             style={{
-                              color: 'red',
+                              color: "red",
                               fontSize: 14
                             }}
                           >
-                            {props.touched.period && props.errors.period ? props.errors.period : null}
+                            {props.touched.period && props.errors.period
+                              ? props.errors.period
+                              : null}
                           </span>
                         </div>
                         <div style={{ paddingTop: 10 }}>
-                          <Button type="submit" variant="contained" disabled={props.isSubmitting} color="primary">
+                          <Button
+                            type="submit"
+                            variant="contained"
+                            disabled={props.isSubmitting}
+                            color="primary"
+                          >
                             Enviar
                           </Button>
                         </div>

@@ -1,25 +1,25 @@
-import React, { PureComponent } from 'react';
-import { graphql } from 'react-apollo';
-import { withStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import Select from '@material-ui/core/Select';
-import Hidden from '@material-ui/core/Hidden';
-import ViewHeadline from '@material-ui/icons/ViewHeadline';
-import FileDownload from '@material-ui/icons/FileDownload';
+import React, { PureComponent } from "react";
+import { graphql } from "react-apollo";
+import { withStyles } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
+import FormControl from "@material-ui/core/FormControl";
+import InputLabel from "@material-ui/core/InputLabel";
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import Select from "@material-ui/core/Select";
+import Hidden from "@material-ui/core/Hidden";
+import ViewHeadline from "@material-ui/icons/ViewHeadline";
+import FileDownload from "@material-ui/icons/FileDownload";
 
-import Layout from '../components/Global';
-import GraphicsDesktop from '../components/GraphicsDesktop';
-import GraphicsMobile from '../components/GraphicsMobile';
-import SelectData from '../utils/SelectData';
-import { studentDistinct } from '../graphql/query';
-import { donwloadGraphic } from '../utils/api';
+import Layout from "../components/Global";
+import GraphicsDesktop from "../components/GraphicsDesktop";
+import GraphicsMobile from "../components/GraphicsMobile";
+import SelectData from "../utils/SelectData";
+import { studentDistinct } from "../graphql/query";
+import { donwloadGraphic } from "../utils/api";
 
 const styles = theme => ({
   select: {
@@ -30,14 +30,14 @@ const styles = theme => ({
     padding: theme.spacing.unit * 3
   },
   floatButton: {
-    position: 'fixed',
+    position: "fixed",
     bottom: theme.spacing.unit * 2,
     right: theme.spacing.unit * 2,
     padding: theme.spacing.unit * 2,
     zIndex: 1
   },
   floatButtonDownload: {
-    position: 'fixed',
+    position: "fixed",
     bottom: theme.spacing.unit * 2,
     left: theme.spacing.unit * 2,
     padding: theme.spacing.unit * 2,
@@ -45,47 +45,56 @@ const styles = theme => ({
   },
   formControlMobil: {
     paddingBottom: theme.spacing.unit * 2,
-    width: '100%'
+    width: "100%"
   }
 });
 
 const graphicByArray = [
-  'Género',
-  'Edad',
-  'Tipo Doc Identidad',
-  'Nivel Formación',
-  'Jornada',
-  'Código Sede',
-  'Descripción Metodología',
-  'Tipo Estudiante Agrupado',
-  'Estado',
-  'Variable',
-  'Situacion'
+  "Género",
+  "Edad",
+  "Tipo Doc Identidad",
+  "Nivel Formación",
+  "Jornada",
+  "Código Sede",
+  "Descripción Metodología",
+  "Tipo Estudiante Agrupado",
+  "Estado",
+  "Variable",
+  "Situacion"
 ];
 
 class Graphics extends PureComponent {
   state = {
-    CodigoPrograma: 'ADFU',
-    dataTipoSemestre: [''],
-    TipoSemestre: '',
-    graphicBy: 'Género',
-    isVariable: 'ACADÉMICO',
-    style: 'Pie',
+    CodigoPrograma: "ADFU",
+    dataTipoSemestre: [""],
+    TipoSemestre: "",
+    graphicBy: "Género",
+    isVariable: "ACADÉMICO",
+    style: "Pie",
     openDialogMobile: false
   };
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (prevState.TipoSemestre === '') {
+    if (prevState.TipoSemestre === "") {
       // To get the props of "TipoSemestre" before the component rendered
       if (nextProps.data && nextProps.data.StudentDistinct) {
-        return { dataTipoSemestre: nextProps.data.StudentDistinct, TipoSemestre: nextProps.data.StudentDistinct[0] };
+        return {
+          dataTipoSemestre: nextProps.data.StudentDistinct,
+          TipoSemestre: nextProps.data.StudentDistinct[0]
+        };
       }
     }
     return null;
   }
 
   downloadButton = () => {
-    const { CodigoPrograma, TipoSemestre, graphicBy, isVariable, style } = this.state;
+    const {
+      CodigoPrograma,
+      TipoSemestre,
+      graphicBy,
+      isVariable,
+      style
+    } = this.state;
     const { classes } = this.props;
 
     return (
@@ -93,7 +102,15 @@ class Graphics extends PureComponent {
         className={classes.floatButtonDownload}
         variant="fab"
         color="secondary"
-        onClick={() => donwloadGraphic(style, CodigoPrograma, TipoSemestre, graphicBy, isVariable)}
+        onClick={() =>
+          donwloadGraphic(
+            style,
+            CodigoPrograma,
+            TipoSemestre,
+            graphicBy,
+            isVariable
+          )
+        }
       >
         <FileDownload />
       </Button>
@@ -125,7 +142,9 @@ class Graphics extends PureComponent {
       style,
       openDialogMobile
     } = this.state;
-    const dataVariable = Object.getOwnPropertyNames(SelectData.VariableSituacion);
+    const dataVariable = Object.getOwnPropertyNames(
+      SelectData.VariableSituacion
+    );
 
     return (
       <Layout url={url}>
@@ -139,11 +158,13 @@ class Graphics extends PureComponent {
                 <Grid container justify="space-around">
                   <div>
                     <FormControl>
-                      <InputLabel htmlFor="CodigoPrograma">Código de programa</InputLabel>
+                      <InputLabel htmlFor="CodigoPrograma">
+                        Código de programa
+                      </InputLabel>
                       <Select
                         inputProps={{
-                          id: 'CodigoPrograma',
-                          name: 'CodigoPrograma'
+                          id: "CodigoPrograma",
+                          name: "CodigoPrograma"
                         }}
                         value={CodigoPrograma}
                         onChange={this.handleChange}
@@ -164,8 +185,8 @@ class Graphics extends PureComponent {
                       <InputLabel htmlFor="TipoSemestre">Periodo</InputLabel>
                       <Select
                         inputProps={{
-                          id: 'TipoSemestre',
-                          name: 'TipoSemestre'
+                          id: "TipoSemestre",
+                          name: "TipoSemestre"
                         }}
                         value={TipoSemestre}
                         onChange={this.handleChange}
@@ -186,8 +207,8 @@ class Graphics extends PureComponent {
                       <InputLabel htmlFor="graphicBy">Gráficar por</InputLabel>
                       <Select
                         inputProps={{
-                          id: 'graphicBy',
-                          name: 'graphicBy'
+                          id: "graphicBy",
+                          name: "graphicBy"
                         }}
                         value={graphicBy}
                         onChange={this.handleChange}
@@ -208,10 +229,10 @@ class Graphics extends PureComponent {
                       <InputLabel htmlFor="isVariable">Variable</InputLabel>
                       <Select
                         inputProps={{
-                          id: 'isVariable',
-                          name: 'isVariable'
+                          id: "isVariable",
+                          name: "isVariable"
                         }}
-                        disabled={graphicBy !== 'Situacion'}
+                        disabled={graphicBy !== "Situacion"}
                         value={isVariable}
                         onChange={this.handleChange}
                         className={classes.select}
@@ -231,19 +252,21 @@ class Graphics extends PureComponent {
                       <InputLabel htmlFor="style">Estilo</InputLabel>
                       <Select
                         inputProps={{
-                          id: 'style',
-                          name: 'style'
+                          id: "style",
+                          name: "style"
                         }}
                         value={style}
                         onChange={this.handleChange}
                         className={classes.select}
                         native
                       >
-                        {['Bar', 'Line', 'Pie', 'Doughnut'].map((data, index) => (
-                          <option value={data} key={index}>
-                            {data}
-                          </option>
-                        ))}
+                        {["Bar", "Line", "Pie", "Doughnut"].map(
+                          (data, index) => (
+                            <option value={data} key={index}>
+                              {data}
+                            </option>
+                          )
+                        )}
                       </Select>
                     </FormControl>
                   </div>
@@ -271,11 +294,13 @@ class Graphics extends PureComponent {
                     <Grid item xs={12}>
                       <div>
                         <FormControl className={classes.formControlMobil}>
-                          <InputLabel htmlFor="CodigoPrograma">Código de programa</InputLabel>
+                          <InputLabel htmlFor="CodigoPrograma">
+                            Código de programa
+                          </InputLabel>
                           <Select
                             inputProps={{
-                              id: 'CodigoPrograma',
-                              name: 'CodigoPrograma'
+                              id: "CodigoPrograma",
+                              name: "CodigoPrograma"
                             }}
                             value={CodigoPrograma}
                             onChange={this.handleChange}
@@ -293,11 +318,13 @@ class Graphics extends PureComponent {
 
                       <div>
                         <FormControl className={classes.formControlMobil}>
-                          <InputLabel htmlFor="TipoSemestre">Periodo</InputLabel>
+                          <InputLabel htmlFor="TipoSemestre">
+                            Periodo
+                          </InputLabel>
                           <Select
                             inputProps={{
-                              id: 'TipoSemestre',
-                              name: 'TipoSemestre'
+                              id: "TipoSemestre",
+                              name: "TipoSemestre"
                             }}
                             value={TipoSemestre}
                             onChange={this.handleChange}
@@ -315,11 +342,13 @@ class Graphics extends PureComponent {
 
                       <div>
                         <FormControl className={classes.formControlMobil}>
-                          <InputLabel htmlFor="graphicBy">Gráficar por</InputLabel>
+                          <InputLabel htmlFor="graphicBy">
+                            Gráficar por
+                          </InputLabel>
                           <Select
                             inputProps={{
-                              id: 'graphicBy',
-                              name: 'graphicBy'
+                              id: "graphicBy",
+                              name: "graphicBy"
                             }}
                             value={graphicBy}
                             onChange={this.handleChange}
@@ -340,10 +369,10 @@ class Graphics extends PureComponent {
                           <InputLabel htmlFor="isVariable">Variable</InputLabel>
                           <Select
                             inputProps={{
-                              id: 'isVariable',
-                              name: 'isVariable'
+                              id: "isVariable",
+                              name: "isVariable"
                             }}
-                            disabled={graphicBy !== 'Situacion'}
+                            disabled={graphicBy !== "Situacion"}
                             value={isVariable}
                             onChange={this.handleChange}
                             className={classes.select}
@@ -369,7 +398,12 @@ class Graphics extends PureComponent {
             </DialogActions>
           </Dialog>
 
-          <Button className={classes.floatButton} variant="fab" color="secondary" onClick={this.handleDialogMobile}>
+          <Button
+            className={classes.floatButton}
+            variant="fab"
+            color="secondary"
+            onClick={this.handleDialogMobile}
+          >
             <ViewHeadline />
           </Button>
 
@@ -391,7 +425,7 @@ class Graphics extends PureComponent {
 export default graphql(studentDistinct, {
   options: props => ({
     variables: {
-      param: 'TipoSemestre'
+      param: "TipoSemestre"
     }
   })
 })(withStyles(styles)(Graphics));

@@ -1,16 +1,16 @@
-import React, { PureComponent } from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import InputLabel from '@material-ui/core/InputLabel';
-import Select from '@material-ui/core/Select';
-import FormControl from '@material-ui/core/FormControl';
-import TextField from '@material-ui/core/TextField';
+import React, { PureComponent } from "react";
+import { withStyles } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
+import InputLabel from "@material-ui/core/InputLabel";
+import Select from "@material-ui/core/Select";
+import FormControl from "@material-ui/core/FormControl";
+import TextField from "@material-ui/core/TextField";
 
 const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: '97%'
+    width: "97%"
   }
 });
 
@@ -26,7 +26,15 @@ class FormRight extends PureComponent {
   }
 
   render() {
-    const { classes, dataSituacion, dataVariable, SelectData, values, handleBlur, handleChange } = this.props;
+    const {
+      classes,
+      dataSituacion,
+      dataVariable,
+      SelectData,
+      values,
+      handleBlur,
+      handleChange
+    } = this.props;
     return (
       <Grid container>
         <Grid item xs={12}>
@@ -37,8 +45,8 @@ class FormRight extends PureComponent {
                   <InputLabel htmlFor="Jornada">Jornada</InputLabel>
                   <Select
                     inputProps={{
-                      id: 'Jornada',
-                      name: 'Student.Jornada'
+                      id: "Jornada",
+                      name: "Student.Jornada"
                     }}
                     value={values.Student.Jornada}
                     onChange={handleChange}
@@ -47,7 +55,9 @@ class FormRight extends PureComponent {
                   >
                     {SelectData.Jornada.map((data, index) => (
                       <option value={data} key={index}>
-                        {data === values.Student.Jornada ? values.Student.Jornada : data}
+                        {data === values.Student.Jornada
+                          ? values.Student.Jornada
+                          : data}
                       </option>
                     ))}
                   </Select>
@@ -56,11 +66,13 @@ class FormRight extends PureComponent {
 
               <div style={{ padding: 10 }}>
                 <FormControl className={classes.textField}>
-                  <InputLabel htmlFor="AreaConocimiento">Area de conocimiento</InputLabel>
+                  <InputLabel htmlFor="AreaConocimiento">
+                    Area de conocimiento
+                  </InputLabel>
                   <Select
                     inputProps={{
-                      id: 'AreaConocimiento',
-                      name: 'Student.AreaConocimiento'
+                      id: "AreaConocimiento",
+                      name: "Student.AreaConocimiento"
                     }}
                     value={values.Student.AreaConocimiento}
                     onChange={handleChange}
@@ -69,7 +81,9 @@ class FormRight extends PureComponent {
                   >
                     {SelectData.AreaConocimiento.map((data, index) => (
                       <option value={data} key={index}>
-                        {data === values.Student.AreaConocimiento ? values.Student.AreaConocimiento : data}
+                        {data === values.Student.AreaConocimiento
+                          ? values.Student.AreaConocimiento
+                          : data}
                       </option>
                     ))}
                   </Select>
@@ -78,11 +92,13 @@ class FormRight extends PureComponent {
 
               <div style={{ padding: 10 }}>
                 <FormControl className={classes.textField}>
-                  <InputLabel htmlFor="NucleoBasicoConocimiento">Núcleo básico de conocimiento</InputLabel>
+                  <InputLabel htmlFor="NucleoBasicoConocimiento">
+                    Núcleo básico de conocimiento
+                  </InputLabel>
                   <Select
                     inputProps={{
-                      id: 'NucleoBasicoConocimiento',
-                      name: 'Student.NucleoBasicoConocimiento'
+                      id: "NucleoBasicoConocimiento",
+                      name: "Student.NucleoBasicoConocimiento"
                     }}
                     value={values.Student.NucleoBasicoConocimiento}
                     onChange={handleChange}
@@ -105,8 +121,8 @@ class FormRight extends PureComponent {
                   <InputLabel htmlFor="Rectoria">Rectoria</InputLabel>
                   <Select
                     inputProps={{
-                      id: 'Rectoria',
-                      name: 'Student.Rectoria'
+                      id: "Rectoria",
+                      name: "Student.Rectoria"
                     }}
                     value={values.Student.Rectoria}
                     onChange={handleChange}
@@ -115,7 +131,9 @@ class FormRight extends PureComponent {
                   >
                     {SelectData.Rectoria.map((data, index) => (
                       <option value={data} key={index}>
-                        {data === values.Student.Rectoria ? values.Student.Rectoria : data}
+                        {data === values.Student.Rectoria
+                          ? values.Student.Rectoria
+                          : data}
                       </option>
                     ))}
                   </Select>
@@ -153,8 +171,8 @@ class FormRight extends PureComponent {
                   <InputLabel htmlFor="CodigoSede">Código de sede</InputLabel>
                   <Select
                     inputProps={{
-                      id: 'CodigoSede',
-                      name: 'Student.CodigoSede'
+                      id: "CodigoSede",
+                      name: "Student.CodigoSede"
                     }}
                     value={values.Student.CodigoSede}
                     onChange={handleChange}
@@ -163,7 +181,9 @@ class FormRight extends PureComponent {
                   >
                     {SelectData.CodigoSede.map((data, index) => (
                       <option value={data} key={index}>
-                        {data === values.Student.CodigoSede ? values.Student.CodigoSede : data}
+                        {data === values.Student.CodigoSede
+                          ? values.Student.CodigoSede
+                          : data}
                       </option>
                     ))}
                   </Select>
@@ -188,8 +208,8 @@ class FormRight extends PureComponent {
                   <InputLabel htmlFor="Sede">Sede</InputLabel>
                   <Select
                     inputProps={{
-                      id: 'Sede',
-                      name: 'Student.Sede'
+                      id: "Sede",
+                      name: "Student.Sede"
                     }}
                     value={values.Student.Sede}
                     onChange={handleChange}
@@ -198,7 +218,9 @@ class FormRight extends PureComponent {
                   >
                     {SelectData.Sede.map((data, index) => (
                       <option value={data} key={index}>
-                        {data === values.Student.Sede ? values.Student.Sede : data}
+                        {data === values.Student.Sede
+                          ? values.Student.Sede
+                          : data}
                       </option>
                     ))}
                   </Select>
@@ -209,11 +231,13 @@ class FormRight extends PureComponent {
             <Grid item xs={12} sm={6}>
               <div style={{ padding: 10 }}>
                 <FormControl className={classes.textField}>
-                  <InputLabel htmlFor="CentroRegional">Centro regional</InputLabel>
+                  <InputLabel htmlFor="CentroRegional">
+                    Centro regional
+                  </InputLabel>
                   <Select
                     inputProps={{
-                      id: 'CentroRegional',
-                      name: 'Student.CentroRegional'
+                      id: "CentroRegional",
+                      name: "Student.CentroRegional"
                     }}
                     value={values.Student.CentroRegional}
                     onChange={handleChange}
@@ -222,7 +246,9 @@ class FormRight extends PureComponent {
                   >
                     {SelectData.CentroRegional.map((data, index) => (
                       <option value={data} key={index}>
-                        {data === values.Student.CentroRegional ? values.Student.CentroRegional : data}
+                        {data === values.Student.CentroRegional
+                          ? values.Student.CentroRegional
+                          : data}
                       </option>
                     ))}
                   </Select>
@@ -244,11 +270,13 @@ class FormRight extends PureComponent {
 
               <div style={{ padding: 10 }}>
                 <FormControl className={classes.textField}>
-                  <InputLabel htmlFor="DescripcionMetodologia">Descripción metodologia</InputLabel>
+                  <InputLabel htmlFor="DescripcionMetodologia">
+                    Descripción metodologia
+                  </InputLabel>
                   <Select
                     inputProps={{
-                      id: 'DescripcionMetodologia',
-                      name: 'Student.DescripcionMetodologia'
+                      id: "DescripcionMetodologia",
+                      name: "Student.DescripcionMetodologia"
                     }}
                     value={values.Student.DescripcionMetodologia}
                     onChange={handleChange}
@@ -257,7 +285,9 @@ class FormRight extends PureComponent {
                   >
                     {SelectData.DescripcionMetodologia.map((data, index) => (
                       <option value={data} key={index}>
-                        {data === values.Student.DescripcionMetodologia ? values.Student.DescripcionMetodologia : data}
+                        {data === values.Student.DescripcionMetodologia
+                          ? values.Student.DescripcionMetodologia
+                          : data}
                       </option>
                     ))}
                   </Select>
@@ -266,11 +296,13 @@ class FormRight extends PureComponent {
 
               <div style={{ padding: 10 }}>
                 <FormControl className={classes.textField}>
-                  <InputLabel htmlFor="TipoEstudianteAgrupado">Tipo de estudiante agrupado</InputLabel>
+                  <InputLabel htmlFor="TipoEstudianteAgrupado">
+                    Tipo de estudiante agrupado
+                  </InputLabel>
                   <Select
                     inputProps={{
-                      id: 'TipoEstudianteAgrupado',
-                      name: 'Student.TipoEstudianteAgrupado'
+                      id: "TipoEstudianteAgrupado",
+                      name: "Student.TipoEstudianteAgrupado"
                     }}
                     value={values.Student.TipoEstudianteAgrupado}
                     onChange={handleChange}
@@ -279,7 +311,9 @@ class FormRight extends PureComponent {
                   >
                     {SelectData.TipoEstudianteAgrupado.map((data, index) => (
                       <option value={data} key={index}>
-                        {data === values.Student.TipoEstudianteAgrupado ? values.Student.TipoEstudianteAgrupado : data}
+                        {data === values.Student.TipoEstudianteAgrupado
+                          ? values.Student.TipoEstudianteAgrupado
+                          : data}
                       </option>
                     ))}
                   </Select>
@@ -304,8 +338,8 @@ class FormRight extends PureComponent {
                   <InputLabel htmlFor="Estado">Estado</InputLabel>
                   <Select
                     inputProps={{
-                      id: 'Estado',
-                      name: 'Student.Estado'
+                      id: "Estado",
+                      name: "Student.Estado"
                     }}
                     value={values.Student.Estado}
                     onChange={handleChange}
@@ -314,7 +348,9 @@ class FormRight extends PureComponent {
                   >
                     {SelectData.Estado.map((data, index) => (
                       <option value={data} key={index}>
-                        {data === values.Student.Estado ? values.Student.Estado : data}
+                        {data === values.Student.Estado
+                          ? values.Student.Estado
+                          : data}
                       </option>
                     ))}
                   </Select>
@@ -339,8 +375,8 @@ class FormRight extends PureComponent {
                   <InputLabel htmlFor="Situacion">Situacion</InputLabel>
                   <Select
                     inputProps={{
-                      id: 'Situacion',
-                      name: 'Student.Situacion'
+                      id: "Situacion",
+                      name: "Student.Situacion"
                     }}
                     value={values.Student.Situacion}
                     onChange={handleChange}
@@ -349,7 +385,9 @@ class FormRight extends PureComponent {
                   >
                     {dataSituacion.map((data, index) => (
                       <option value={data} key={index}>
-                        {data === values.Student.Situacion ? values.Student.Situacion : data}
+                        {data === values.Student.Situacion
+                          ? values.Student.Situacion
+                          : data}
                       </option>
                     ))}
                   </Select>
@@ -361,8 +399,8 @@ class FormRight extends PureComponent {
                   <InputLabel htmlFor="Variable">Variable</InputLabel>
                   <Select
                     inputProps={{
-                      id: 'Variable',
-                      name: 'Student.Variable'
+                      id: "Variable",
+                      name: "Student.Variable"
                     }}
                     value={values.Student.Variable}
                     onChange={handleChange}
@@ -371,7 +409,9 @@ class FormRight extends PureComponent {
                   >
                     {dataVariable.map((data, index) => (
                       <option value={data} key={index}>
-                        {data === values.Student.Variable ? values.Student.Variable : data}
+                        {data === values.Student.Variable
+                          ? values.Student.Variable
+                          : data}
                       </option>
                     ))}
                   </Select>

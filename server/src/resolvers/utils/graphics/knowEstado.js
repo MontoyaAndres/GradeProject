@@ -1,7 +1,8 @@
 export default function knowEstado(values) {
-  const AUSENTISMO = values.filter(value => value.Estado === 'AUSENTISMO').length;
-  const DESERCION = values.filter(value => value.Estado === 'DESERCIÓN').length;
-  const NO_ESTADO = values.filter(value => value.Estado === 'NO ESTADO').length;
+  const AUSENTISMO = values.filter(value => value.Estado === "AUSENTISMO")
+    .length;
+  const DESERCION = values.filter(value => value.Estado === "DESERCIÓN").length;
+  const NO_ESTADO = values.filter(value => value.Estado === "NO ESTADO").length;
 
   const SUM_VALUES = AUSENTISMO + DESERCION + NO_ESTADO;
 
@@ -11,13 +12,13 @@ export default function knowEstado(values) {
       values: {
         AUSENTISMO: Math.round((AUSENTISMO / SUM_VALUES) * 100),
         DESERCIÓN: Math.round((DESERCION / SUM_VALUES) * 100),
-        'NO ESTADO': Math.round((NO_ESTADO / SUM_VALUES) * 100)
+        "NO ESTADO": Math.round((NO_ESTADO / SUM_VALUES) * 100)
       }
     };
   }
 
   return {
     ok: false,
-    errors: [{ path: 'graphics', message: 'No se encontraron datos.' }]
+    errors: [{ path: "graphics", message: "No se encontraron datos." }]
   };
 }

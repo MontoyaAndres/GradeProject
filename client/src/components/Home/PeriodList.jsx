@@ -1,32 +1,32 @@
-import React, { PureComponent } from 'react';
-import { Query, graphql } from 'react-apollo';
-import gql from 'graphql-tag';
-import { withStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import ListItemText from '@material-ui/core/ListItemText';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Button from '@material-ui/core/Button';
-import Select from '@material-ui/core/Select';
-import Checkbox from '@material-ui/core/Checkbox';
-import IconButton from '@material-ui/core/IconButton';
-import DeleteIcon from '@material-ui/icons/Delete';
-import FileDownload from '@material-ui/icons/FileDownload';
-import ViewHeadline from '@material-ui/icons/ViewHeadline';
+import React, { PureComponent } from "react";
+import { Query, graphql } from "react-apollo";
+import gql from "graphql-tag";
+import { withStyles } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+import ListItemText from "@material-ui/core/ListItemText";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import Button from "@material-ui/core/Button";
+import Select from "@material-ui/core/Select";
+import Checkbox from "@material-ui/core/Checkbox";
+import IconButton from "@material-ui/core/IconButton";
+import DeleteIcon from "@material-ui/icons/Delete";
+import FileDownload from "@material-ui/icons/FileDownload";
+import ViewHeadline from "@material-ui/icons/ViewHeadline";
 
-import Loading from '../Global/Loading';
-import Successfully from '../Global/Successfully';
-import { downloadFilePeriod } from '../../utils/api';
-import SelectData from '../../utils/SelectData';
+import Loading from "../Global/Loading";
+import Successfully from "../Global/Successfully";
+import { downloadFilePeriod } from "../../utils/api";
+import SelectData from "../../utils/SelectData";
 
 // Query
-import { studentDistinct } from '../../graphql/query';
+import { studentDistinct } from "../../graphql/query";
 
 const styles = theme => ({
   root: {
@@ -47,13 +47,13 @@ const deletePeriod = gql`
 
 class PeriodList extends PureComponent {
   state = {
-    career: 'ADFU',
+    career: "ADFU",
     checked: [],
     selected: [],
     openDialog: false,
     deleted: false,
     successDeleted: false,
-    valueDeleleted: ''
+    valueDeleleted: ""
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -91,7 +91,11 @@ class PeriodList extends PureComponent {
                   <Button
                     variant="contained"
                     onClick={() => downloadFilePeriod(career, valueDeleleted)}
-                    style={{ margin: 5, color: 'white', backgroundColor: 'blue' }}
+                    style={{
+                      margin: 5,
+                      color: "white",
+                      backgroundColor: "blue"
+                    }}
                   >
                     Descargar periodo
                     <FileDownload />
@@ -101,7 +105,11 @@ class PeriodList extends PureComponent {
                   <Button
                     variant="contained"
                     color="secondary"
-                    style={{ margin: 5, color: 'white', backgroundColor: 'red' }}
+                    style={{
+                      margin: 5,
+                      color: "white",
+                      backgroundColor: "red"
+                    }}
                     onClick={() => this.setState({ deleted: true })}
                   >
                     Eliminar periodo
@@ -142,7 +150,11 @@ class PeriodList extends PureComponent {
             <Button onClick={() => this.handleDeletePeriod()} color="primary">
               Sí
             </Button>
-            <Button onClick={() => this.handleClose()} color="primary" autoFocus>
+            <Button
+              onClick={() => this.handleClose()}
+              color="primary"
+              autoFocus
+            >
               No
             </Button>
           </DialogActions>
@@ -162,7 +174,9 @@ class PeriodList extends PureComponent {
     // delete the period and refetch the query "studentDistinct"
     mutate({
       variables: { period: valueDeleleted },
-      refetchQueries: [{ query: studentDistinct, variables: { param: 'TipoSemestre' } }]
+      refetchQueries: [
+        { query: studentDistinct, variables: { param: "TipoSemestre" } }
+      ]
     });
     this.setState({ deleted: false, openDialog: false, successDeleted: true });
   };
@@ -209,7 +223,7 @@ class PeriodList extends PureComponent {
     const { career, checked, deleted, openDialog, successDeleted } = this.state;
 
     return (
-      <Query query={studentDistinct} variables={{ param: 'TipoSemestre' }}>
+      <Query query={studentDistinct} variables={{ param: "TipoSemestre" }}>
         {({ loading, data: { StudentDistinct } }) => {
           if (loading) {
             return <Loading />;
@@ -224,18 +238,24 @@ class PeriodList extends PureComponent {
               {deleted ? this.displayAlert() : null}
 
               {/* Show alert when the period was deleted */}
-              <Successfully message="Periodo eliminado con exito!" hide={successDeleted} />
+              <Successfully
+                message="Periodo eliminado con exito!"
+                hide={successDeleted}
+              />
 
               <List>
                 {StudentDistinct.map((value, index) => (
                   <ListItem key={index} dense button>
-                    <Checkbox onChange={this.handleToggle(index, value)} checked={checked.indexOf(index) !== -1} />
+                    <Checkbox
+                      onChange={this.handleToggle(index, value)}
+                      checked={checked.indexOf(index) !== -1}
+                    />
                     <ListItemText style={{ fontSize: 18 }} primary={value} />
                     <ListItemSecondaryAction>
                       <Select
                         inputProps={{
-                          id: 'career',
-                          name: 'career'
+                          id: "career",
+                          name: "career"
                         }}
                         value={career}
                         onChange={this.handleChange}
@@ -249,7 +269,12 @@ class PeriodList extends PureComponent {
                       </Select>
                       <IconButton
                         aria-label="Open"
-                        onClick={() => this.setState({ openDialog: true, valueDeleleted: value })}
+                        onClick={() =>
+                          this.setState({
+                            openDialog: true,
+                            valueDeleleted: value
+                          })
+                        }
                       >
                         <ViewHeadline />
                       </IconButton>

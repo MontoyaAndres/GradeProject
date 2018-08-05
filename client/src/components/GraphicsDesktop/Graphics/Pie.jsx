@@ -1,5 +1,5 @@
-import React from 'react';
-import { Pie } from 'react-chartjs-2';
+import React from "react";
+import { Pie } from "react-chartjs-2";
 
 const PieGraphic = ({ chartConfig, graphicBy }) => (
   <Pie
@@ -12,11 +12,11 @@ const PieGraphic = ({ chartConfig, graphicBy }) => (
       },
       legend: {
         display: true,
-        position: 'top'
+        position: "top"
       },
       animation: {
         duration: 600,
-        easing: 'easeInOutQuart'
+        easing: "easeInOutQuart"
       },
       tooltips: {
         callbacks: {

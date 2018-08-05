@@ -1,28 +1,28 @@
-import React, { PureComponent } from 'react';
-import { Query, graphql } from 'react-apollo';
-import gql from 'graphql-tag';
-import { withStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TablePagination from '@material-ui/core/TablePagination';
-import TableRow from '@material-ui/core/TableRow';
-import TableHead from '@material-ui/core/TableHead';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
-import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
+import React, { PureComponent } from "react";
+import { Query, graphql } from "react-apollo";
+import gql from "graphql-tag";
+import { withStyles } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TablePagination from "@material-ui/core/TablePagination";
+import TableRow from "@material-ui/core/TableRow";
+import TableHead from "@material-ui/core/TableHead";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import Paper from "@material-ui/core/Paper";
+import Button from "@material-ui/core/Button";
+import DeleteIcon from "@material-ui/icons/Delete";
+import EditIcon from "@material-ui/icons/Edit";
 
-import Successfully from '../Global/Successfully';
-import Loading from '../Global/Loading';
-import Seacher from './Searcher';
-import { StudentByParams } from '../../graphql/query';
+import Successfully from "../Global/Successfully";
+import Loading from "../Global/Loading";
+import Seacher from "./Searcher";
+import { StudentByParams } from "../../graphql/query";
 
 const styles = theme => ({
   root: {
@@ -30,26 +30,26 @@ const styles = theme => ({
     margin: `${theme.spacing.unit * 2}px ${theme.spacing.unit}px`
   },
   tableWrapper: {
-    overflowX: 'auto'
+    overflowX: "auto"
   },
   table: {
     minWidth: 1020,
     margin: theme.spacing.unit
   },
   CodigoBanner: {
-    color: '#9c27b0',
-    cursor: 'pointer',
-    fontWeight: 'bold'
+    color: "#9c27b0",
+    cursor: "pointer",
+    fontWeight: "bold"
   },
   editButton: {
     margin: theme.spacing.unit
   },
   deleteButton: {
     margin: theme.spacing.unit,
-    backgroundColor: 'red',
-    color: 'white',
-    '&:hover': {
-      backgroundColor: '#C62828'
+    backgroundColor: "red",
+    color: "white",
+    "&:hover": {
+      backgroundColor: "#C62828"
     }
   }
 });
@@ -67,7 +67,7 @@ class index extends PureComponent {
     deleted: false,
     studenIdDelete: 0,
     successDeleted: false,
-    searchStudent: ''
+    searchStudent: ""
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -84,7 +84,7 @@ class index extends PureComponent {
       prevProps.Estado !== Estado ||
       prevProps.TipoSemestre !== TipoSemestre
     ) {
-      this.setState({ searchStudent: '' });
+      this.setState({ searchStudent: "" });
     }
   }
 
@@ -109,7 +109,11 @@ class index extends PureComponent {
             <Button onClick={() => this.handleDeleteStudent()} color="primary">
               Sí
             </Button>
-            <Button onClick={() => this.handleClose()} color="primary" autoFocus>
+            <Button
+              onClick={() => this.handleClose()}
+              color="primary"
+              autoFocus
+            >
               No
             </Button>
           </DialogActions>
@@ -137,7 +141,14 @@ class index extends PureComponent {
 
   handleDeleteStudent = async () => {
     const { studenIdDelete, searchStudent, page, rowsPerPage } = this.state;
-    const { Variable, Situacion, CodigoPrograma, Estado, TipoSemestre, mutate } = this.props;
+    const {
+      Variable,
+      Situacion,
+      CodigoPrograma,
+      Estado,
+      TipoSemestre,
+      mutate
+    } = this.props;
 
     await mutate({
       variables: { id: studenIdDelete },
@@ -166,8 +177,21 @@ class index extends PureComponent {
   };
 
   render() {
-    const { classes, Variable, Situacion, CodigoPrograma, Estado, TipoSemestre } = this.props;
-    const { rowsPerPage, page, deleted, successDeleted, searchStudent } = this.state;
+    const {
+      classes,
+      Variable,
+      Situacion,
+      CodigoPrograma,
+      Estado,
+      TipoSemestre
+    } = this.props;
+    const {
+      rowsPerPage,
+      page,
+      deleted,
+      successDeleted,
+      searchStudent
+    } = this.state;
 
     return (
       <Query
@@ -195,7 +219,10 @@ class index extends PureComponent {
               {deleted ? this.displayAlert() : null}
 
               {/* To show one alert which will show a message */}
-              <Successfully hide={successDeleted} message="Estudiante eliminado con exito!" />
+              <Successfully
+                hide={successDeleted}
+                message="Estudiante eliminado con exito!"
+              />
 
               <Paper className={classes.root}>
                 <div className={classes.tableWrapper}>
@@ -209,18 +236,27 @@ class index extends PureComponent {
                         <TableCell padding="none">Situación</TableCell>
                         <TableCell padding="none">Variable</TableCell>
                         <TableCell padding="none">
-                          <Seacher onHandleSearchStudent={this.handleSearchStudent} />
+                          <Seacher
+                            onHandleSearchStudent={this.handleSearchStudent}
+                          />
                         </TableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>
                       {data.StudentByParams.student
-                        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                        .slice(
+                          page * rowsPerPage,
+                          page * rowsPerPage + rowsPerPage
+                        )
                         .map((student, i) => (
                           <TableRow key={i} hover tabIndex={-1}>
                             <TableCell
                               className={classes.CodigoBanner}
-                              onClick={() => this.handleRedirect(`/estudiante/${student._id}`)}
+                              onClick={() =>
+                                this.handleRedirect(
+                                  `/estudiante/${student._id}`
+                                )
+                              }
                             >
                               {student.CodigoBanner}
                             </TableCell>
@@ -245,7 +281,9 @@ class index extends PureComponent {
                                 variant="fab"
                                 className={classes.editButton}
                                 color="secondary"
-                                onClick={() => this.handleRedirect(`/editar/${student._id}`)}
+                                onClick={() =>
+                                  this.handleRedirect(`/editar/${student._id}`)
+                                }
                               >
                                 <EditIcon />
                               </Button>
@@ -253,7 +291,12 @@ class index extends PureComponent {
                                 title="Eliminar estudiante"
                                 variant="fab"
                                 className={classes.deleteButton}
-                                onClick={() => this.setState({ deleted: true, studenIdDelete: student._id })}
+                                onClick={() =>
+                                  this.setState({
+                                    deleted: true,
+                                    studenIdDelete: student._id
+                                  })
+                                }
                               >
                                 <DeleteIcon />
                               </Button>
@@ -269,10 +312,10 @@ class index extends PureComponent {
                   rowsPerPage={rowsPerPage}
                   page={page}
                   backIconButtonProps={{
-                    'aria-label': 'Previous Page'
+                    "aria-label": "Previous Page"
                   }}
                   nextIconButtonProps={{
-                    'aria-label': 'Next Page'
+                    "aria-label": "Next Page"
                   }}
                   onChangePage={(e, pg) => {
                     fetchMore({
@@ -296,7 +339,10 @@ class index extends PureComponent {
 
                         return {
                           ...previousResult,
-                          StudentByParams: { ...previousResult.StudentByParams, ...fetchMoreResult.StudentByParams }
+                          StudentByParams: {
+                            ...previousResult.StudentByParams,
+                            ...fetchMoreResult.StudentByParams
+                          }
                         };
                       }
                     });

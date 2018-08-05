@@ -1,40 +1,49 @@
-import React, { PureComponent } from 'react';
-import { graphql } from 'react-apollo';
-import { withStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import InputLabel from '@material-ui/core/InputLabel';
-import Select from '@material-ui/core/Select';
-import FormControl from '@material-ui/core/FormControl';
-import TextField from '@material-ui/core/TextField';
+import React, { PureComponent } from "react";
+import { graphql } from "react-apollo";
+import { withStyles } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
+import InputLabel from "@material-ui/core/InputLabel";
+import Select from "@material-ui/core/Select";
+import FormControl from "@material-ui/core/FormControl";
+import TextField from "@material-ui/core/TextField";
 
-import { studentDistinct } from '../../graphql/query';
+import { studentDistinct } from "../../graphql/query";
 
 const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: '97%'
+    width: "97%"
   }
 });
 
 class FormLeft extends PureComponent {
   state = {
-    dataTipoSemestre: [''],
-    TipoSemestre: ''
+    dataTipoSemestre: [""],
+    TipoSemestre: ""
   };
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (prevState.TipoSemestre === '') {
+    if (prevState.TipoSemestre === "") {
       // To get the props of "TipoSemestre" before the component rendered
       if (nextProps.data && nextProps.data.StudentDistinct) {
-        return { dataTipoSemestre: nextProps.data.StudentDistinct, TipoSemestre: nextProps.data.StudentDistinct[0] };
+        return {
+          dataTipoSemestre: nextProps.data.StudentDistinct,
+          TipoSemestre: nextProps.data.StudentDistinct[0]
+        };
       }
     }
     return null;
   }
 
   render() {
-    const { classes, SelectData, values, handleBlur, handleChange } = this.props;
+    const {
+      classes,
+      SelectData,
+      values,
+      handleBlur,
+      handleChange
+    } = this.props;
     const { dataTipoSemestre, TipoSemestre } = this.state;
 
     return (
@@ -75,8 +84,8 @@ class FormLeft extends PureComponent {
                   <InputLabel htmlFor="Genero">Genero</InputLabel>
                   <Select
                     inputProps={{
-                      id: 'Genero',
-                      name: 'Student.Genero'
+                      id: "Genero",
+                      name: "Student.Genero"
                     }}
                     value={values.Student.Genero}
                     onChange={handleChange}
@@ -85,7 +94,9 @@ class FormLeft extends PureComponent {
                   >
                     {SelectData.Genero.map((data, index) => (
                       <option value={data} key={index}>
-                        {data === values.Student.Genero ? values.Student.Genero : data}
+                        {data === values.Student.Genero
+                          ? values.Student.Genero
+                          : data}
                       </option>
                     ))}
                   </Select>
@@ -108,11 +119,13 @@ class FormLeft extends PureComponent {
 
               <div style={{ padding: 10 }}>
                 <FormControl className={classes.textField}>
-                  <InputLabel htmlFor="TipoDocIdentidad">Tipo Doc Identidad</InputLabel>
+                  <InputLabel htmlFor="TipoDocIdentidad">
+                    Tipo Doc Identidad
+                  </InputLabel>
                   <Select
                     inputProps={{
-                      id: 'TipoDocIdentidad',
-                      name: 'Student.TipoDocIdentidad'
+                      id: "TipoDocIdentidad",
+                      name: "Student.TipoDocIdentidad"
                     }}
                     value={values.Student.TipoDocIdentidad}
                     onChange={handleChange}
@@ -121,7 +134,9 @@ class FormLeft extends PureComponent {
                   >
                     {SelectData.TipoDocIdentidad.map((data, index) => (
                       <option value={data} key={index}>
-                        {data === values.Student.TipoDocIdentidad ? values.Student.TipoDocIdentidad : data}
+                        {data === values.Student.TipoDocIdentidad
+                          ? values.Student.TipoDocIdentidad
+                          : data}
                       </option>
                     ))}
                   </Select>
@@ -186,11 +201,13 @@ class FormLeft extends PureComponent {
 
               <div style={{ padding: 10 }}>
                 <FormControl className={classes.textField}>
-                  <InputLabel htmlFor="NivelFormacion">Nivel de formación</InputLabel>
+                  <InputLabel htmlFor="NivelFormacion">
+                    Nivel de formación
+                  </InputLabel>
                   <Select
                     inputProps={{
-                      id: 'NivelFormacion',
-                      name: 'Student.NivelFormacion'
+                      id: "NivelFormacion",
+                      name: "Student.NivelFormacion"
                     }}
                     value={values.Student.NivelFormacion}
                     onChange={handleChange}
@@ -199,7 +216,9 @@ class FormLeft extends PureComponent {
                   >
                     {SelectData.NivelFormacion.map((data, index) => (
                       <option value={data} key={index}>
-                        {data === values.Student.NivelFormacion ? values.Student.NivelFormacion : data}
+                        {data === values.Student.NivelFormacion
+                          ? values.Student.NivelFormacion
+                          : data}
                       </option>
                     ))}
                   </Select>
@@ -253,8 +272,8 @@ class FormLeft extends PureComponent {
                   <InputLabel htmlFor="TipoSemestre">Periodo</InputLabel>
                   <Select
                     inputProps={{
-                      id: 'TipoSemestre',
-                      name: 'Student.TipoSemestre'
+                      id: "TipoSemestre",
+                      name: "Student.TipoSemestre"
                     }}
                     value={values.Student.TipoSemestre}
                     onChange={handleChange}
@@ -326,11 +345,13 @@ class FormLeft extends PureComponent {
 
               <div style={{ padding: 10 }}>
                 <FormControl className={classes.textField}>
-                  <InputLabel htmlFor="CodigoPrograma">Código programa</InputLabel>
+                  <InputLabel htmlFor="CodigoPrograma">
+                    Código programa
+                  </InputLabel>
                   <Select
                     inputProps={{
-                      id: 'CodigoPrograma',
-                      name: 'Student.CodigoPrograma'
+                      id: "CodigoPrograma",
+                      name: "Student.CodigoPrograma"
                     }}
                     value={values.Student.CodigoPrograma}
                     onChange={handleChange}
@@ -339,7 +360,9 @@ class FormLeft extends PureComponent {
                   >
                     {SelectData.CodigoPrograma.map((data, index) => (
                       <option value={data} key={index}>
-                        {data === values.Student.CodigoPrograma ? values.Student.CodigoPrograma : data}
+                        {data === values.Student.CodigoPrograma
+                          ? values.Student.CodigoPrograma
+                          : data}
                       </option>
                     ))}
                   </Select>
@@ -348,11 +371,13 @@ class FormLeft extends PureComponent {
 
               <div style={{ padding: 10 }}>
                 <FormControl className={classes.textField}>
-                  <InputLabel htmlFor="DescripcionPrograma">Descripción del programa</InputLabel>
+                  <InputLabel htmlFor="DescripcionPrograma">
+                    Descripción del programa
+                  </InputLabel>
                   <Select
                     inputProps={{
-                      id: 'DescripcionPrograma',
-                      name: 'Student.DescripcionPrograma'
+                      id: "DescripcionPrograma",
+                      name: "Student.DescripcionPrograma"
                     }}
                     value={values.Student.DescripcionPrograma}
                     onChange={handleChange}
@@ -361,7 +386,9 @@ class FormLeft extends PureComponent {
                   >
                     {SelectData.DescripcionPrograma.map((data, index) => (
                       <option value={data} key={index}>
-                        {data === values.Student.DescripcionPrograma ? values.Student.DescripcionPrograma : data}
+                        {data === values.Student.DescripcionPrograma
+                          ? values.Student.DescripcionPrograma
+                          : data}
                       </option>
                     ))}
                   </Select>
@@ -378,7 +405,7 @@ class FormLeft extends PureComponent {
 export default graphql(studentDistinct, {
   options: props => ({
     variables: {
-      param: 'TipoSemestre'
+      param: "TipoSemestre"
     }
   })
 })(withStyles(styles)(FormLeft));

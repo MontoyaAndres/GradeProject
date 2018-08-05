@@ -1,9 +1,18 @@
-export default async function knowSituacion(CodigoPrograma, TipoSemestre, isVariable, models) {
+export default async function knowSituacion(
+  CodigoPrograma,
+  TipoSemestre,
+  isVariable,
+  models
+) {
   if (isVariable) {
     const SITUACIONES = [];
     const counts = {};
 
-    await models.Student.find({ CodigoPrograma, TipoSemestre, Variable: isVariable }).then(values => {
+    await models.Student.find({
+      CodigoPrograma,
+      TipoSemestre,
+      Variable: isVariable
+    }).then(values => {
       // Saving situations on the "SITUACIONES" array
       values.filter(value => SITUACIONES.push(value.Situacion));
     });
@@ -28,12 +37,14 @@ export default async function knowSituacion(CodigoPrograma, TipoSemestre, isVari
 
     return {
       ok: true,
-      errors: [{ path: 'graphics', message: 'No se encontraron datos.' }]
+      errors: [{ path: "graphics", message: "No se encontraron datos." }]
     };
   }
 
   return {
     ok: false,
-    errors: [{ path: 'graphics', message: 'Especifique una variable para continuar.' }]
+    errors: [
+      { path: "graphics", message: "Especifique una variable para continuar." }
+    ]
   };
 }

@@ -1,25 +1,25 @@
-import React, { Fragment } from 'react';
-import { graphql, compose } from 'react-apollo';
-import * as Yup from 'yup';
-import gql from 'graphql-tag';
-import { withFormik, Form } from 'formik';
-import { Link } from 'react-router-dom';
-import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import React, { Fragment } from "react";
+import { graphql, compose } from "react-apollo";
+import * as Yup from "yup";
+import gql from "graphql-tag";
+import { withFormik, Form } from "formik";
+import { Link } from "react-router-dom";
+import { withStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 
-import normalizeErrors from '../normalizeErrors';
-import UniminutoLogin from '../img/uniminuto-login.svg';
+import normalizeErrors from "../normalizeErrors";
+import UniminutoLogin from "../img/uniminuto-login.svg";
 
 const styles = theme => ({
   root: {
     flexGrow: 1
   },
   container: {
-    position: 'absolute',
-    margin: 'auto',
+    position: "absolute",
+    margin: "auto",
     top: 0,
     right: 0,
     bottom: 0,
@@ -28,12 +28,12 @@ const styles = theme => ({
   paper: {
     padding: theme.spacing.unit * 2,
     margin: theme.spacing.unit * 2,
-    textAlign: 'center',
+    textAlign: "center",
     color: theme.palette.text.secondary
   },
   image: {
-    width: '100%',
-    height: 'auto',
+    width: "100%",
+    height: "auto",
     maxWidth: 400,
     maxHeight: 250
   },
@@ -41,19 +41,37 @@ const styles = theme => ({
     margin: theme.spacing.unit
   },
   error: {
-    color: 'red',
+    color: "red",
     fontSize: 14
   }
 });
 
-const Login = ({ classes, values, handleChange, handleBlur, handleSubmit, isSubmitting, touched, errors }) => (
+const Login = ({
+  classes,
+  values,
+  handleChange,
+  handleBlur,
+  handleSubmit,
+  isSubmitting,
+  touched,
+  errors
+}) => (
   <Fragment>
     <Grid container className={classes.root}>
       <Grid item xs={12} sm={6}>
-        <Grid container alignItems="center" justify="center" className={classes.container}>
+        <Grid
+          container
+          alignItems="center"
+          justify="center"
+          className={classes.container}
+        >
           <Paper className={classes.paper}>
             <Grid item xs={12}>
-              <img className={classes.image} src={UniminutoLogin} alt="Uniminuto" />
+              <img
+                className={classes.image}
+                src={UniminutoLogin}
+                alt="Uniminuto"
+              />
             </Grid>
             <Form onSubmit={handleSubmit}>
               <Grid item xs={12}>
@@ -69,7 +87,9 @@ const Login = ({ classes, values, handleChange, handleBlur, handleSubmit, isSubm
                   fullWidth
                   margin="normal"
                 />
-                <span className={classes.error}>{touched.email && errors.email ? errors.email : null}</span>
+                <span className={classes.error}>
+                  {touched.email && errors.email ? errors.email : null}
+                </span>
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -84,7 +104,9 @@ const Login = ({ classes, values, handleChange, handleBlur, handleSubmit, isSubm
                   fullWidth
                   margin="normal"
                 />
-                <span className={classes.error}>{touched.password && errors.password ? errors.password : null}</span>
+                <span className={classes.error}>
+                  {touched.password && errors.password ? errors.password : null}
+                </span>
               </Grid>
               <Button
                 type="submit"
@@ -96,7 +118,10 @@ const Login = ({ classes, values, handleChange, handleBlur, handleSubmit, isSubm
                 Entrar
               </Button>
               <Grid item xs={12} style={{ paddingTop: 10 }}>
-                <Link to="/reset" style={{ textDecoration: 'none', color: '#9E9E9E' }}>
+                <Link
+                  to="/reset"
+                  style={{ textDecoration: "none", color: "#9E9E9E" }}
+                >
                   ¿Ha Olvidado la contraseña?
                 </Link>
               </Grid>
@@ -125,19 +150,22 @@ const LoginMutation = gql`
 export default compose(
   graphql(LoginMutation),
   withFormik({
-    mapPropsToValues: () => ({ email: '', password: '' }),
+    mapPropsToValues: () => ({ email: "", password: "" }),
     validationSchema: Yup.object().shape({
       email: Yup.string()
         .nullable()
-        .email('Correo incorrecto')
-        .typeError('Campo incorrecto')
-        .required('El campo es obligatorio!'),
+        .email("Correo incorrecto")
+        .typeError("Campo incorrecto")
+        .required("El campo es obligatorio!"),
       password: Yup.string()
         .nullable()
-        .typeError('Campo incorrecto')
-        .required('El campo es obligatorio!')
+        .typeError("Campo incorrecto")
+        .required("El campo es obligatorio!")
     }),
-    handleSubmit: async (values, { props: { mutate, history }, setSubmitting, setErrors }) => {
+    handleSubmit: async (
+      values,
+      { props: { mutate, history }, setSubmitting, setErrors }
+    ) => {
       const response = await mutate({
         variables: { email: values.email, password: values.password }
       });
@@ -145,9 +173,9 @@ export default compose(
       const { ok, token, refreshToken, errors } = response.data.login;
       if (ok) {
         setSubmitting(false);
-        localStorage.setItem('token', token);
-        localStorage.setItem('refreshToken', refreshToken);
-        history.push('/');
+        localStorage.setItem("token", token);
+        localStorage.setItem("refreshToken", refreshToken);
+        history.push("/");
       } else {
         setSubmitting(false);
         setErrors(normalizeErrors(errors));

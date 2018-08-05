@@ -1,17 +1,17 @@
-import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Search from '@material-ui/icons/Search';
+import React from "react";
+import { withStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import Search from "@material-ui/icons/Search";
 
 const styles = theme => ({
   floatButton: {
-    position: 'fixed',
+    position: "fixed",
     bottom: theme.spacing.unit * 2,
     left: theme.spacing.unit * 2,
     padding: theme.spacing.unit * 2,
@@ -22,7 +22,7 @@ const styles = theme => ({
 class Searcher extends React.PureComponent {
   state = {
     open: false,
-    search: ''
+    search: ""
   };
 
   handleChange = e => {
@@ -33,7 +33,7 @@ class Searcher extends React.PureComponent {
   handleClick = () => {
     const { open } = this.state;
 
-    this.setState({ open: !open, search: '' });
+    this.setState({ open: !open, search: "" });
   };
 
   handleSeacherStudent = () => {
@@ -43,7 +43,7 @@ class Searcher extends React.PureComponent {
     // Passing the student (name, lastname, or ID)
     onHandleSearchStudent(search);
     // Resetting the state
-    this.setState({ open: !open, search: '' });
+    this.setState({ open: !open, search: "" });
   };
 
   render() {
@@ -52,15 +52,25 @@ class Searcher extends React.PureComponent {
 
     return (
       <div>
-        <Button className={classes.floatButton} variant="fab" color="secondary" onClick={this.handleClick}>
+        <Button
+          className={classes.floatButton}
+          variant="fab"
+          color="secondary"
+          onClick={this.handleClick}
+        >
           <Search />
         </Button>
 
-        <Dialog open={open} onClose={this.handleClick} aria-labelledby="form-dialog-title">
+        <Dialog
+          open={open}
+          onClose={this.handleClick}
+          aria-labelledby="form-dialog-title"
+        >
           <DialogTitle id="form-dialog-title">Buscar estudiante</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              Para encontrar un estudiante, por favor ingrese el Nombre, Apellido o ID de este.
+              Para encontrar un estudiante, por favor ingrese el Nombre,
+              Apellido o ID de este.
             </DialogContentText>
             <TextField
               autoFocus
