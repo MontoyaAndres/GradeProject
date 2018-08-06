@@ -120,9 +120,9 @@ const Login = ({
               <Grid item xs={12} style={{ paddingTop: 10 }}>
                 <Link
                   to="/reset"
-                  style={{ textDecoration: "none", color: "#9E9E9E" }}
+                  style={{ textDecoration: "none", color: "#13161c" }}
                 >
-                  ¿Ha Olvidado la contraseña?
+                  ¿Ha olvidado la contraseña?
                 </Link>
               </Grid>
             </Form>
