@@ -109,7 +109,7 @@ class Career extends PureComponent {
 
     return (
       <Layout url={url}>
-        <Hidden xlUp smDown>
+        <Hidden mdDown>
           {/* Desktop section */}
           <Paper className={classes.paper}>
             <Grid container>
@@ -208,7 +208,7 @@ class Career extends PureComponent {
           />
         </Hidden>
 
-        <Hidden mdUp>
+        <Hidden lgUp>
           {/* Mobile section */}
           <Dialog open={openDialogMobile} onClose={this.handleDialogMobile}>
             <DialogContent>

@@ -93,7 +93,7 @@ class Home extends PureComponent {
 
             <div>
               {/* Desktop button */}
-              <Hidden xlUp smDown>
+              <Hidden mdDown>
                 {hide ? (
                   <Fragment>
                     <Button
@@ -142,7 +142,7 @@ class Home extends PureComponent {
               </Hidden>
 
               {/* Mobile button */}
-              <Hidden mdUp>
+              <Hidden lgUp>
                 <Zoom
                   in
                   style={{

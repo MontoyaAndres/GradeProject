@@ -189,7 +189,7 @@ class Compare extends PureComponent {
                     <Grid item xs={12}>
                       <Grid container justify="space-around">
                         {/* Desktop version */}
-                        <Hidden xlUp smDown>
+                        <Hidden mdDown>
                           <div
                             className={classes.titleDesktop}
                           >{`Carrera ${Career} ${selected[0]} - ${
@@ -210,7 +210,7 @@ class Compare extends PureComponent {
                         </Hidden>
 
                         {/* Mobile version */}
-                        <Hidden mdUp>
+                        <Hidden lgUp>
                           <div
                             className={classes.titleMobile}
                           >{`Carrera ${Career} ${selected[0]} - ${

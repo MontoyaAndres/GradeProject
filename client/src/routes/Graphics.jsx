@@ -150,7 +150,7 @@ class Graphics extends PureComponent {
       <Layout url={url}>
         {this.downloadButton()}
 
-        <Hidden xlUp smDown>
+        <Hidden mdDown>
           {/* Desktop section */}
           <Paper className={classes.paper}>
             <Grid container>
@@ -284,7 +284,7 @@ class Graphics extends PureComponent {
           />
         </Hidden>
 
-        <Hidden mdUp>
+        <Hidden lgUp>
           {/* Mobile section */}
           <Dialog open={openDialogMobile} onClose={this.handleDialogMobile}>
             <DialogContent>
