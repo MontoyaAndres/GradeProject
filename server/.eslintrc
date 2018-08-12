@@ -1,6 +1,6 @@
 {
-  "extends": "airbnb-base",
-  "plugins": ["import"],
+  "extends": ["airbnb-base", "prettier"],
+  "plugins": ["import", "prettier"],
   "env": {
     "es6": true,
     "node": true

@@ -148,282 +148,288 @@ class Graphics extends PureComponent {
 
     return (
       <Layout url={url}>
-        {this.downloadButton()}
+        <div>
+          {this.downloadButton()}
 
-        <Hidden mdDown>
-          {/* Desktop section */}
-          <Paper className={classes.paper}>
-            <Grid container>
-              <Grid item xs={12}>
-                <Grid container justify="space-around">
-                  <div>
-                    <FormControl>
-                      <InputLabel htmlFor="CodigoPrograma">
-                        Código de programa
-                      </InputLabel>
-                      <Select
-                        inputProps={{
-                          id: "CodigoPrograma",
-                          name: "CodigoPrograma"
-                        }}
-                        value={CodigoPrograma}
-                        onChange={this.handleChange}
-                        className={classes.select}
-                        native
-                      >
-                        {SelectData.CodigoPrograma.map((data, index) => (
-                          <option value={data} key={index}>
-                            {data}
-                          </option>
-                        ))}
-                      </Select>
-                    </FormControl>
-                  </div>
-
-                  <div>
-                    <FormControl>
-                      <InputLabel htmlFor="TipoSemestre">Periodo</InputLabel>
-                      <Select
-                        inputProps={{
-                          id: "TipoSemestre",
-                          name: "TipoSemestre"
-                        }}
-                        value={TipoSemestre}
-                        onChange={this.handleChange}
-                        className={classes.select}
-                        native
-                      >
-                        {dataTipoSemestre.map((data, index) => (
-                          <option value={data} key={index}>
-                            {data}
-                          </option>
-                        ))}
-                      </Select>
-                    </FormControl>
-                  </div>
-
-                  <div>
-                    <FormControl>
-                      <InputLabel htmlFor="graphicBy">Gráficar por</InputLabel>
-                      <Select
-                        inputProps={{
-                          id: "graphicBy",
-                          name: "graphicBy"
-                        }}
-                        value={graphicBy}
-                        onChange={this.handleChange}
-                        className={classes.select}
-                        native
-                      >
-                        {graphicByArray.map((data, index) => (
-                          <option value={data} key={index}>
-                            {data}
-                          </option>
-                        ))}
-                      </Select>
-                    </FormControl>
-                  </div>
-
-                  <div>
-                    <FormControl>
-                      <InputLabel htmlFor="isVariable">Variable</InputLabel>
-                      <Select
-                        inputProps={{
-                          id: "isVariable",
-                          name: "isVariable"
-                        }}
-                        disabled={graphicBy !== "Situacion"}
-                        value={isVariable}
-                        onChange={this.handleChange}
-                        className={classes.select}
-                        native
-                      >
-                        {dataVariable.map((data, index) => (
-                          <option value={data} key={index}>
-                            {data}
-                          </option>
-                        ))}
-                      </Select>
-                    </FormControl>
-                  </div>
-
-                  <div>
-                    <FormControl>
-                      <InputLabel htmlFor="style">Estilo</InputLabel>
-                      <Select
-                        inputProps={{
-                          id: "style",
-                          name: "style"
-                        }}
-                        value={style}
-                        onChange={this.handleChange}
-                        className={classes.select}
-                        native
-                      >
-                        {["Bar", "Line", "Pie", "Doughnut"].map(
-                          (data, index) => (
+          <Hidden mdDown>
+            {/* Desktop section */}
+            <Paper className={classes.paper}>
+              <Grid container>
+                <Grid item xs={12}>
+                  <Grid container justify="space-around">
+                    <div>
+                      <FormControl>
+                        <InputLabel htmlFor="CodigoPrograma">
+                          Código de programa
+                        </InputLabel>
+                        <Select
+                          inputProps={{
+                            id: "CodigoPrograma",
+                            name: "CodigoPrograma"
+                          }}
+                          value={CodigoPrograma}
+                          onChange={this.handleChange}
+                          className={classes.select}
+                          native
+                        >
+                          {SelectData.CodigoPrograma.map((data, index) => (
                             <option value={data} key={index}>
                               {data}
                             </option>
-                          )
-                        )}
-                      </Select>
-                    </FormControl>
-                  </div>
-                </Grid>
-              </Grid>
-            </Grid>
-          </Paper>
+                          ))}
+                        </Select>
+                      </FormControl>
+                    </div>
 
-          <GraphicsDesktop
-            CodigoPrograma={CodigoPrograma}
-            TipoSemestre={TipoSemestre}
-            graphicBy={graphicBy}
-            isVariable={isVariable}
-            style={style}
-          />
-        </Hidden>
+                    <div>
+                      <FormControl>
+                        <InputLabel htmlFor="TipoSemestre">Periodo</InputLabel>
+                        <Select
+                          inputProps={{
+                            id: "TipoSemestre",
+                            name: "TipoSemestre"
+                          }}
+                          value={TipoSemestre}
+                          onChange={this.handleChange}
+                          className={classes.select}
+                          native
+                        >
+                          {dataTipoSemestre.map((data, index) => (
+                            <option value={data} key={index}>
+                              {data}
+                            </option>
+                          ))}
+                        </Select>
+                      </FormControl>
+                    </div>
 
-        <Hidden lgUp>
-          {/* Mobile section */}
-          <Dialog open={openDialogMobile} onClose={this.handleDialogMobile}>
-            <DialogContent>
-              <Grid container>
-                <Grid item xs={12}>
-                  <Grid container wrap="nowrap" direction="column">
-                    <Grid item xs={12}>
-                      <div>
-                        <FormControl className={classes.formControlMobil}>
-                          <InputLabel htmlFor="CodigoPrograma">
-                            Código de programa
-                          </InputLabel>
-                          <Select
-                            inputProps={{
-                              id: "CodigoPrograma",
-                              name: "CodigoPrograma"
-                            }}
-                            value={CodigoPrograma}
-                            onChange={this.handleChange}
-                            className={classes.select}
-                            native
-                          >
-                            {SelectData.CodigoPrograma.map((data, index) => (
+                    <div>
+                      <FormControl>
+                        <InputLabel htmlFor="graphicBy">
+                          Gráficar por
+                        </InputLabel>
+                        <Select
+                          inputProps={{
+                            id: "graphicBy",
+                            name: "graphicBy"
+                          }}
+                          value={graphicBy}
+                          onChange={this.handleChange}
+                          className={classes.select}
+                          native
+                        >
+                          {graphicByArray.map((data, index) => (
+                            <option value={data} key={index}>
+                              {data}
+                            </option>
+                          ))}
+                        </Select>
+                      </FormControl>
+                    </div>
+
+                    <div>
+                      <FormControl>
+                        <InputLabel htmlFor="isVariable">Variable</InputLabel>
+                        <Select
+                          inputProps={{
+                            id: "isVariable",
+                            name: "isVariable"
+                          }}
+                          disabled={graphicBy !== "Situacion"}
+                          value={isVariable}
+                          onChange={this.handleChange}
+                          className={classes.select}
+                          native
+                        >
+                          {dataVariable.map((data, index) => (
+                            <option value={data} key={index}>
+                              {data}
+                            </option>
+                          ))}
+                        </Select>
+                      </FormControl>
+                    </div>
+
+                    <div>
+                      <FormControl>
+                        <InputLabel htmlFor="style">Estilo</InputLabel>
+                        <Select
+                          inputProps={{
+                            id: "style",
+                            name: "style"
+                          }}
+                          value={style}
+                          onChange={this.handleChange}
+                          className={classes.select}
+                          native
+                        >
+                          {["Bar", "Line", "Pie", "Doughnut"].map(
+                            (data, index) => (
                               <option value={data} key={index}>
                                 {data}
                               </option>
-                            ))}
-                          </Select>
-                        </FormControl>
-                      </div>
-
-                      <div>
-                        <FormControl className={classes.formControlMobil}>
-                          <InputLabel htmlFor="TipoSemestre">
-                            Periodo
-                          </InputLabel>
-                          <Select
-                            inputProps={{
-                              id: "TipoSemestre",
-                              name: "TipoSemestre"
-                            }}
-                            value={TipoSemestre}
-                            onChange={this.handleChange}
-                            className={classes.select}
-                            native
-                          >
-                            {dataTipoSemestre.map((data, index) => (
-                              <option value={data} key={index}>
-                                {data}
-                              </option>
-                            ))}
-                          </Select>
-                        </FormControl>
-                      </div>
-
-                      <div>
-                        <FormControl className={classes.formControlMobil}>
-                          <InputLabel htmlFor="graphicBy">
-                            Gráficar por
-                          </InputLabel>
-                          <Select
-                            inputProps={{
-                              id: "graphicBy",
-                              name: "graphicBy"
-                            }}
-                            value={graphicBy}
-                            onChange={this.handleChange}
-                            className={classes.select}
-                            native
-                          >
-                            {graphicByArray.map((data, index) => (
-                              <option value={data} key={index}>
-                                {data}
-                              </option>
-                            ))}
-                          </Select>
-                        </FormControl>
-                      </div>
-
-                      <div>
-                        <FormControl className={classes.formControlMobil}>
-                          <InputLabel htmlFor="isVariable">Variable</InputLabel>
-                          <Select
-                            inputProps={{
-                              id: "isVariable",
-                              name: "isVariable"
-                            }}
-                            disabled={graphicBy !== "Situacion"}
-                            value={isVariable}
-                            onChange={this.handleChange}
-                            className={classes.select}
-                            native
-                          >
-                            {dataVariable.map((data, index) => (
-                              <option value={data} key={index}>
-                                {data}
-                              </option>
-                            ))}
-                          </Select>
-                        </FormControl>
-                      </div>
-                    </Grid>
+                            )
+                          )}
+                        </Select>
+                      </FormControl>
+                    </div>
                   </Grid>
                 </Grid>
               </Grid>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={this.handleDialogMobile} color="primary">
-                Cerrar
-              </Button>
-            </DialogActions>
-          </Dialog>
+            </Paper>
 
-          <Button
-            className={classes.floatButton}
-            variant="fab"
-            color="secondary"
-            onClick={this.handleDialogMobile}
-          >
-            <ViewHeadline />
-          </Button>
-
-          {/* When the dialog close, it'll pass the props */}
-          {!openDialogMobile ? (
-            <GraphicsMobile
+            <GraphicsDesktop
               CodigoPrograma={CodigoPrograma}
               TipoSemestre={TipoSemestre}
               graphicBy={graphicBy}
               isVariable={isVariable}
+              style={style}
             />
-          ) : null}
-        </Hidden>
+          </Hidden>
+
+          <Hidden lgUp>
+            {/* Mobile section */}
+            <Dialog open={openDialogMobile} onClose={this.handleDialogMobile}>
+              <DialogContent>
+                <Grid container>
+                  <Grid item xs={12}>
+                    <Grid container wrap="nowrap" direction="column">
+                      <Grid item xs={12}>
+                        <div>
+                          <FormControl className={classes.formControlMobil}>
+                            <InputLabel htmlFor="CodigoPrograma">
+                              Código de programa
+                            </InputLabel>
+                            <Select
+                              inputProps={{
+                                id: "CodigoPrograma",
+                                name: "CodigoPrograma"
+                              }}
+                              value={CodigoPrograma}
+                              onChange={this.handleChange}
+                              className={classes.select}
+                              native
+                            >
+                              {SelectData.CodigoPrograma.map((data, index) => (
+                                <option value={data} key={index}>
+                                  {data}
+                                </option>
+                              ))}
+                            </Select>
+                          </FormControl>
+                        </div>
+
+                        <div>
+                          <FormControl className={classes.formControlMobil}>
+                            <InputLabel htmlFor="TipoSemestre">
+                              Periodo
+                            </InputLabel>
+                            <Select
+                              inputProps={{
+                                id: "TipoSemestre",
+                                name: "TipoSemestre"
+                              }}
+                              value={TipoSemestre}
+                              onChange={this.handleChange}
+                              className={classes.select}
+                              native
+                            >
+                              {dataTipoSemestre.map((data, index) => (
+                                <option value={data} key={index}>
+                                  {data}
+                                </option>
+                              ))}
+                            </Select>
+                          </FormControl>
+                        </div>
+
+                        <div>
+                          <FormControl className={classes.formControlMobil}>
+                            <InputLabel htmlFor="graphicBy">
+                              Gráficar por
+                            </InputLabel>
+                            <Select
+                              inputProps={{
+                                id: "graphicBy",
+                                name: "graphicBy"
+                              }}
+                              value={graphicBy}
+                              onChange={this.handleChange}
+                              className={classes.select}
+                              native
+                            >
+                              {graphicByArray.map((data, index) => (
+                                <option value={data} key={index}>
+                                  {data}
+                                </option>
+                              ))}
+                            </Select>
+                          </FormControl>
+                        </div>
+
+                        <div>
+                          <FormControl className={classes.formControlMobil}>
+                            <InputLabel htmlFor="isVariable">
+                              Variable
+                            </InputLabel>
+                            <Select
+                              inputProps={{
+                                id: "isVariable",
+                                name: "isVariable"
+                              }}
+                              disabled={graphicBy !== "Situacion"}
+                              value={isVariable}
+                              onChange={this.handleChange}
+                              className={classes.select}
+                              native
+                            >
+                              {dataVariable.map((data, index) => (
+                                <option value={data} key={index}>
+                                  {data}
+                                </option>
+                              ))}
+                            </Select>
+                          </FormControl>
+                        </div>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={this.handleDialogMobile} color="primary">
+                  Cerrar
+                </Button>
+              </DialogActions>
+            </Dialog>
+
+            <Button
+              className={classes.floatButton}
+              variant="fab"
+              color="secondary"
+              onClick={this.handleDialogMobile}
+            >
+              <ViewHeadline />
+            </Button>
+
+            {/* When the dialog close, it'll pass the props */}
+            {!openDialogMobile ? (
+              <GraphicsMobile
+                CodigoPrograma={CodigoPrograma}
+                TipoSemestre={TipoSemestre}
+                graphicBy={graphicBy}
+                isVariable={isVariable}
+              />
+            ) : null}
+          </Hidden>
+        </div>
       </Layout>
     );
   }
 }
 
 export default graphql(studentDistinct, {
-  options: props => ({
+  options: () => ({
     variables: {
       param: "TipoSemestre"
     }

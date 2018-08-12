@@ -183,7 +183,8 @@ class index extends PureComponent {
       Situacion,
       CodigoPrograma,
       Estado,
-      TipoSemestre
+      TipoSemestre,
+      typeUser
     } = this.props;
     const {
       rowsPerPage,
@@ -287,19 +288,21 @@ class index extends PureComponent {
                               >
                                 <EditIcon />
                               </Button>
-                              <Button
-                                title="Eliminar estudiante"
-                                variant="fab"
-                                className={classes.deleteButton}
-                                onClick={() =>
-                                  this.setState({
-                                    deleted: true,
-                                    studenIdDelete: student._id
-                                  })
-                                }
-                              >
-                                <DeleteIcon />
-                              </Button>
+                              {typeUser === "admin" ? (
+                                <Button
+                                  title="Eliminar estudiante"
+                                  variant="fab"
+                                  className={classes.deleteButton}
+                                  onClick={() =>
+                                    this.setState({
+                                      deleted: true,
+                                      studenIdDelete: student._id
+                                    })
+                                  }
+                                >
+                                  <DeleteIcon />
+                                </Button>
+                              ) : null}
                             </TableCell>
                           </TableRow>
                         ))}

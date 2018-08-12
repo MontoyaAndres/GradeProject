@@ -3,9 +3,9 @@ import React from "react";
 import Layout from "../components/Global";
 import Index from "../components/Home";
 
-const Home = ({ match: { url } }) => (
+const Home = ({ match: { url }, typeUser }) => (
   <Layout url={url}>
-    <Index />
+    <Index typeUser={typeUser} />
   </Layout>
 );
 

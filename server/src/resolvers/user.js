@@ -2,13 +2,17 @@ import bcrypt from "bcrypt";
 
 import { tryLogin, createTokens } from "../utils/auth";
 import formatErrors from "../utils/formatErrors";
-import requiresAuth from "../utils/permissions";
+import { requiresAuth, requiresAdmin } from "../utils/permissions";
 
 export default {
   Query: {
     user: requiresAuth.createResolver(
       async (parent, args, { user: { _id }, userLoader }) =>
         userLoader.load(_id)
+    ),
+    listUsers: requiresAdmin.createResolver(
+      async (parent, args, { models, user: { _id } }) =>
+        models.User.find({ _id: { $ne: _id } })
     )
   },
   Mutation: {
@@ -70,6 +74,36 @@ export default {
             ok: false,
             errors: formatErrors(err, models)
           };
+        }
+      }
+    ),
+    createUser: requiresAdmin.createResolver(
+      (parent, { username, type, email, password }, { models }) => {
+        try {
+          return models.User.findOne({ email }).then(async user => {
+            if (user && user.email === email) {
+              return {
+                ok: false,
+                errors: [{ path: "email", message: "El correo ya existe." }]
+              };
+            }
+
+            await models.User.create({ username, type, email, password });
+            return {
+              ok: true
+            };
+          });
+        } catch (err) {
+          return false;
+        }
+      }
+    ),
+    deleteUser: requiresAdmin.createResolver(
+      async (parent, { _id }, { models, type }) => {
+        try {
+          return await models.User.findByIdAndRemove({ _id }).then(() => true);
+        } catch (err) {
+          return false;
         }
       }
     )

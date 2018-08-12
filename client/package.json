@@ -37,16 +37,19 @@
     "react-dropzone": "^4.2.11",
     "react-loadable": "^5.4.0",
     "react-router-dom": "^4.3.1",
+    "react-swipeable-views": "^0.12.16",
     "yup": "^0.25.1"
   },
   "devDependencies": {
     "babel-eslint": "latest",
     "eslint": "latest",
     "eslint-config-airbnb": "latest",
+    "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-import": "latest",
     "eslint-plugin-jsx-a11y": "latest",
+    "eslint-plugin-prettier": "^2.6.2",
     "eslint-plugin-react": "latest",
-    "prettier": "latest",
+    "prettier": "^1.14.2",
     "react-scripts": "1.1.4"
   }
 }

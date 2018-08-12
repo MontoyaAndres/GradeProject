@@ -1,4 +1,4 @@
-import requiresAuth from "../utils/permissions";
+import { requiresAuth, requiresAdmin } from "../utils/permissions";
 
 export default {
   Query: {
@@ -23,7 +23,7 @@ export default {
         let student = [];
 
         // How many students there
-        const count = models.Student.count({
+        const count = models.Student.countDocuments({
           CodigoPrograma,
           TipoSemestre,
           Situacion,
@@ -158,7 +158,7 @@ export default {
         }
       }
     ),
-    deleteStudent: requiresAuth.createResolver(
+    deleteStudent: requiresAdmin.createResolver(
       async (parent, { _id }, { models }) => {
         try {
           await models.Student.findByIdAndRemove({ _id });
@@ -168,7 +168,7 @@ export default {
         }
       }
     ),
-    deleteTipoSemestre: requiresAuth.createResolver(
+    deleteTipoSemestre: requiresAdmin.createResolver(
       async (parent, { TipoSemestre }, { models }) => {
         try {
           await models.Student.deleteMany({ TipoSemestre });

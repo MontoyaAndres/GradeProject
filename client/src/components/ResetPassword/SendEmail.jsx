@@ -39,6 +39,7 @@ const SendEmail = ({
   errors
 }) => (
   <Grid container className={classes.root}>
+    {console.log(values, errors)}
     <Grid item xs={12}>
       <Grid
         container
@@ -138,11 +139,11 @@ export default compose(
       if (ok) {
         setSubmitting(false);
         resetForm();
-        setFieldValue("sended", true);
+        setFieldValue("sended", true, false);
       } else {
         setSubmitting(false);
         setErrors(normalizeErrors(errors));
-        setFieldValue("sended", false);
+        setFieldValue("sended", false, false);
       }
     }
   })

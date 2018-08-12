@@ -171,7 +171,8 @@ class index extends PureComponent {
       Situacion,
       CodigoPrograma,
       Estado,
-      TipoSemestre
+      TipoSemestre,
+      typeUser
     } = this.props;
     const {
       page,
@@ -287,17 +288,19 @@ class index extends PureComponent {
                           </Grid>
                         </Grid>
                         <div style={{ textAlign: "center" }}>
-                          <IconButton
-                            aria-label="Delete"
-                            onClick={() =>
-                              this.setState({
-                                deleted: true,
-                                studenIdDelete: student._id
-                              })
-                            }
-                          >
-                            <DeleteIcon />
-                          </IconButton>
+                          {typeUser === "admin" ? (
+                            <IconButton
+                              aria-label="Delete"
+                              onClick={() =>
+                                this.setState({
+                                  deleted: true,
+                                  studenIdDelete: student._id
+                                })
+                              }
+                            >
+                              <DeleteIcon />
+                            </IconButton>
+                          ) : null}
                           <IconButton
                             aria-label="Update"
                             onClick={() =>

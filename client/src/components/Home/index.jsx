@@ -80,7 +80,7 @@ class Home extends PureComponent {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, typeUser } = this.props;
     const { hide, selected, Career, hasDataSelected } = this.state;
 
     return (
@@ -205,6 +205,7 @@ class Home extends PureComponent {
             <Compare selected={selected} Career={Career} />
           ) : (
             <PeriodList
+              typeUser={typeUser}
               onHandleSelectedAndCareer={this.handleSelectedAndCareer}
             />
           )}

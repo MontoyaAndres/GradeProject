@@ -1,4 +1,4 @@
-import requiresAuth from "../utils/permissions";
+import { requiresAuth } from "../utils/permissions";
 import {
   knowGenre,
   knowAge,

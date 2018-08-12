@@ -3,7 +3,7 @@ import excel from "convert-excel-to-json";
 import { GraphQLUpload } from "apollo-upload-server";
 
 import { uploadFile } from "./utils/uploadFile";
-import requiresAuth from "../utils/permissions";
+import { requiresAuth } from "../utils/permissions";
 
 const UPLOAD_ROUTE = `${__dirname}/../files`;
 

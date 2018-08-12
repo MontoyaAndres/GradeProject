@@ -49,7 +49,7 @@ export default `
   type Query {
     Student(_id: ID!): Student
     StudentByParams(Search: String, Variable: String, Situacion: String, CodigoPrograma: String, Estado: String, TipoSemestre: String, page: Int = 0, rowsPerPage: Int = 10): StudentResponse
-    StudentDistinct(Param: String!): [String]
+    StudentDistinct(Param: String): [String]
   }
 
   type Mutation {

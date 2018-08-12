@@ -10,8 +10,16 @@ const createResolver = resolver => {
   return baseResolver;
 };
 
-export default createResolver((parent, args, { user }) => {
+export const requiresAuth = createResolver((parent, args, { user }) => {
   if (!user || !user._id) {
     throw new Error("No permitido.");
   }
 });
+
+export const requiresAdmin = requiresAuth.createResolver(
+  (parent, args, { user }) => {
+    if (user.type !== "admin") {
+      throw new Error("No permitido.");
+    }
+  }
+);

@@ -1,14 +1,20 @@
 {
-  "extends": "airbnb",
-  "plugins": ["react", "jsx-a11y", "import"],
+  "extends": ["airbnb", "prettier", "prettier/react"],
+  "plugins": ["react", "jsx-a11y", "import", "prettier"],
   "rules": {
-    "react/jsx-filename-extension": false,
-    "react/prop-types": false,
-    "jsx-a11y/anchor-is-valid": false,
+    "react/jsx-filename-extension": 0,
+    "react/prop-types": 0,
+    "jsx-a11y/anchor-is-valid": 0,
     "strict": [2, "global"],
     "quotes": 0,
     "comma-dangle": 0,
-    "function-paren-newline": 0
+    "function-paren-newline": 0,
+    "react/no-array-index-key": 0,
+    "consistent-return": 0,
+    "react/no-did-update-set-state": 0,
+    "no-underscore-dangle": 0,
+    "no-nested-ternary": 0,
+    "no-unused-vars": 0
   },
   "globals": {
     "document": true,

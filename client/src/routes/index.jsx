@@ -4,17 +4,21 @@ import decode from "jwt-decode";
 import Loadable from "react-loadable";
 
 import withRoot from "../utils/withRoot";
-import Logout from "../components/Global/Menu/Logout.jsx";
+import Logout from "../components/Global/Menu/Logout";
 import Error404 from "./Error404";
 import LoadingRoute from "./LoadingRoute";
 
 import SelectData from "../utils/SelectData";
+// This variable will save the user type
+let typeUser = "";
 
 function isAuthenticated() {
-  const token = localStorage.getItem("token");
-  const refreshToken = localStorage.getItem("refreshToken");
   try {
-    decode(token);
+    const token = localStorage.getItem("token");
+    const refreshToken = localStorage.getItem("refreshToken");
+    const { user } = decode(token);
+    // If is a common user, it'll save the type
+    typeUser = user.type;
     const { exp } = decode(refreshToken);
     if (Date.now() / 1000 > exp) {
       return false;
@@ -23,6 +27,25 @@ function isAuthenticated() {
     return false;
   }
   return true;
+}
+
+function isAdmin() {
+  try {
+    const token = localStorage.getItem("token");
+    const refreshToken = localStorage.getItem("refreshToken");
+    const { user } = decode(token);
+    // If is a admin user, it'll save the type
+    typeUser = user.type;
+    const { exp } = decode(refreshToken);
+    if (Date.now() / 1000 > exp) {
+      return false;
+    }
+    if (user.type === "admin") {
+      return true;
+    }
+  } catch (err) {
+    return false;
+  }
 }
 
 function isExactCareer(url) {
@@ -39,7 +62,20 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
     render={props =>
-      isAuthenticated() ? <Component {...props} /> : <Logout />
+      isAuthenticated() ? (
+        <Component typeUser={typeUser} {...props} />
+      ) : (
+        <Logout />
+      )
+    }
+  />
+);
+
+const PrivateRouteAdmin = ({ component: Component, ...rest }) => (
+  <Route
+    {...rest}
+    render={props =>
+      isAdmin() ? <Component {...props} /> : <Redirect to={{ pathname: "/" }} />
     }
   />
 );
@@ -105,6 +141,11 @@ const AsyncConfiguration = Loadable({
   loading: () => <LoadingRoute />
 });
 
+const AsyncCreateUser = Loadable({
+  loader: () => import("./CreateUser"),
+  loading: () => <LoadingRoute />
+});
+
 const AsyncLogin = Loadable({
   loader: () => import("./Login"),
   loading: () => <LoadingRoute />
@@ -133,6 +174,7 @@ const Router = () => (
         path="/configuracion"
         component={AsyncConfiguration}
       />
+      <PrivateRouteAdmin exact path="/usuario" component={AsyncCreateUser} />
       <IsLogin exact path="/login" component={AsyncLogin} />
       <IsLogin exact path="/reset/:token?" component={AsyncResetPassword} />
       <Route component={Error404} />

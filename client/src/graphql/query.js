@@ -7,7 +7,7 @@ const StudentByParams = gql`
     $Situacion: String!
     $CodigoPrograma: String!
     $Estado: String!
-    $TipoSemestre: String!
+    $TipoSemestre: String
     $page: Int
     $rowsPerPage: Int
   ) {
@@ -45,7 +45,7 @@ const userQuery = gql`
 `;
 
 const studentDistinct = gql`
-  query StudentDistinct($param: String!) {
+  query StudentDistinct($param: String) {
     StudentDistinct(Param: $param)
   }
 `;
@@ -95,4 +95,21 @@ const QueryStudentInformation = gql`
   }
 `;
 
-export { StudentByParams, userQuery, studentDistinct, QueryStudentInformation };
+const ListUsersQuery = gql`
+  query listUsers {
+    listUsers {
+      _id
+      username
+      email
+      type
+    }
+  }
+`;
+
+export {
+  StudentByParams,
+  userQuery,
+  studentDistinct,
+  QueryStudentInformation,
+  ListUsersQuery
+};

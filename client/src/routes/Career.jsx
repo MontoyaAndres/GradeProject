@@ -90,7 +90,8 @@ class Career extends PureComponent {
     const {
       classes,
       history,
-      match: { url, params }
+      match: { url, params },
+      typeUser
     } = this.props;
     const {
       Variable,
@@ -109,242 +110,248 @@ class Career extends PureComponent {
 
     return (
       <Layout url={url}>
-        <Hidden mdDown>
-          {/* Desktop section */}
-          <Paper className={classes.paper}>
-            <Grid container>
-              <Grid item xs={12}>
-                <Grid container justify="space-around">
-                  <FormControl>
-                    <InputLabel htmlFor="Variable">Variable</InputLabel>
-                    <Select
-                      inputProps={{
-                        id: "Variable",
-                        name: "Variable"
-                      }}
-                      value={Variable}
-                      onChange={this.handleChange}
-                      className={classes.select}
-                      native
-                    >
-                      {dataVariable.map((data, index) => (
-                        <option value={data} key={index}>
-                          {data}
-                        </option>
-                      ))}
-                    </Select>
-                  </FormControl>
-
-                  <FormControl>
-                    <InputLabel htmlFor="Situacion">Situacion</InputLabel>
-                    <Select
-                      inputProps={{
-                        id: "Situacion",
-                        name: "Situacion"
-                      }}
-                      value={Situacion}
-                      onChange={this.handleChange}
-                      className={classes.select}
-                      native
-                    >
-                      {dataSituacion.map((data, index) => (
-                        <option value={data} key={index}>
-                          {data}
-                        </option>
-                      ))}
-                    </Select>
-                  </FormControl>
-
-                  <FormControl>
-                    <InputLabel htmlFor="Estado">Estado</InputLabel>
-                    <Select
-                      inputProps={{
-                        id: "Estado",
-                        name: "Estado"
-                      }}
-                      value={Estado}
-                      onChange={this.handleChange}
-                      className={classes.select}
-                      native
-                    >
-                      {SelectData.Estado.map((data, index) => (
-                        <option value={data} key={index}>
-                          {data}
-                        </option>
-                      ))}
-                    </Select>
-                  </FormControl>
-
-                  <FormControl>
-                    <InputLabel htmlFor="TipoSemestre">Periodo</InputLabel>
-                    <Select
-                      inputProps={{
-                        id: "TipoSemestre",
-                        name: "TipoSemestre"
-                      }}
-                      value={TipoSemestre}
-                      onChange={this.handleChange}
-                      className={classes.select}
-                      native
-                    >
-                      {dataTipoSemestre.map((period, index) => (
-                        <option value={period} key={index}>
-                          {period}
-                        </option>
-                      ))}
-                    </Select>
-                  </FormControl>
-                </Grid>
-              </Grid>
-            </Grid>
-          </Paper>
-          <CareerDesktop
-            Variable={Variable}
-            Situacion={Situacion}
-            CodigoPrograma={CodigoPrograma}
-            Estado={Estado}
-            TipoSemestre={TipoSemestre}
-            history={history}
-          />
-        </Hidden>
-
-        <Hidden lgUp>
-          {/* Mobile section */}
-          <Dialog open={openDialogMobile} onClose={this.handleDialogMobile}>
-            <DialogContent>
+        <div>
+          <Hidden mdDown>
+            {/* Desktop section */}
+            <Paper className={classes.paper}>
               <Grid container>
                 <Grid item xs={12}>
-                  <Grid container wrap="nowrap" direction="column">
-                    <Grid item xs={12}>
-                      <div>
-                        <FormControl className={classes.formControlMobil}>
-                          <InputLabel htmlFor="Variable">Variable</InputLabel>
-                          <Select
-                            inputProps={{
-                              id: "Variable",
-                              name: "Variable"
-                            }}
-                            value={Variable}
-                            onChange={this.handleChange}
-                            className={classes.select}
-                            native
-                          >
-                            {dataVariable.map((data, index) => (
-                              <option value={data} key={index}>
-                                {data}
-                              </option>
-                            ))}
-                          </Select>
-                        </FormControl>
-                      </div>
+                  <Grid container justify="space-around">
+                    <FormControl>
+                      <InputLabel htmlFor="Variable">Variable</InputLabel>
+                      <Select
+                        inputProps={{
+                          id: "Variable",
+                          name: "Variable"
+                        }}
+                        value={Variable}
+                        onChange={this.handleChange}
+                        className={classes.select}
+                        native
+                      >
+                        {dataVariable.map((data, index) => (
+                          <option value={data} key={index}>
+                            {data}
+                          </option>
+                        ))}
+                      </Select>
+                    </FormControl>
 
-                      <div>
-                        <FormControl className={classes.formControlMobil}>
-                          <InputLabel htmlFor="Situacion">Situacion</InputLabel>
-                          <Select
-                            inputProps={{
-                              id: "Situacion",
-                              name: "Situacion"
-                            }}
-                            value={Situacion}
-                            onChange={this.handleChange}
-                            className={classes.select}
-                            native
-                          >
-                            {dataSituacion.map((data, index) => (
-                              <option value={data} key={index}>
-                                {data}
-                              </option>
-                            ))}
-                          </Select>
-                        </FormControl>
-                      </div>
+                    <FormControl>
+                      <InputLabel htmlFor="Situacion">Situacion</InputLabel>
+                      <Select
+                        inputProps={{
+                          id: "Situacion",
+                          name: "Situacion"
+                        }}
+                        value={Situacion}
+                        onChange={this.handleChange}
+                        className={classes.select}
+                        native
+                      >
+                        {dataSituacion.map((data, index) => (
+                          <option value={data} key={index}>
+                            {data}
+                          </option>
+                        ))}
+                      </Select>
+                    </FormControl>
 
-                      <div>
-                        <FormControl className={classes.formControlMobil}>
-                          <InputLabel htmlFor="Estado">Estado</InputLabel>
-                          <Select
-                            inputProps={{
-                              id: "Estado",
-                              name: "Estado"
-                            }}
-                            value={Estado}
-                            onChange={this.handleChange}
-                            className={classes.select}
-                            native
-                          >
-                            {SelectData.Estado.map((data, index) => (
-                              <option value={data} key={index}>
-                                {data}
-                              </option>
-                            ))}
-                          </Select>
-                        </FormControl>
-                      </div>
+                    <FormControl>
+                      <InputLabel htmlFor="Estado">Estado</InputLabel>
+                      <Select
+                        inputProps={{
+                          id: "Estado",
+                          name: "Estado"
+                        }}
+                        value={Estado}
+                        onChange={this.handleChange}
+                        className={classes.select}
+                        native
+                      >
+                        {SelectData.Estado.map((data, index) => (
+                          <option value={data} key={index}>
+                            {data}
+                          </option>
+                        ))}
+                      </Select>
+                    </FormControl>
 
-                      <div>
-                        <FormControl className={classes.formControlMobil}>
-                          <InputLabel htmlFor="TipoSemestre">
-                            Periodo
-                          </InputLabel>
-                          <Select
-                            inputProps={{
-                              id: "TipoSemestre",
-                              name: "TipoSemestre"
-                            }}
-                            value={TipoSemestre}
-                            onChange={this.handleChange}
-                            className={classes.select}
-                            native
-                          >
-                            {dataTipoSemestre.map((period, index) => (
-                              <option value={period} key={index}>
-                                {period}
-                              </option>
-                            ))}
-                          </Select>
-                        </FormControl>
-                      </div>
-                    </Grid>
+                    <FormControl>
+                      <InputLabel htmlFor="TipoSemestre">Periodo</InputLabel>
+                      <Select
+                        inputProps={{
+                          id: "TipoSemestre",
+                          name: "TipoSemestre"
+                        }}
+                        value={TipoSemestre}
+                        onChange={this.handleChange}
+                        className={classes.select}
+                        native
+                      >
+                        {dataTipoSemestre.map((period, index) => (
+                          <option value={period} key={index}>
+                            {period}
+                          </option>
+                        ))}
+                      </Select>
+                    </FormControl>
                   </Grid>
                 </Grid>
               </Grid>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={this.handleDialogMobile} color="primary">
-                Cerrar
-              </Button>
-            </DialogActions>
-          </Dialog>
-
-          <Button
-            className={classes.floatButton}
-            variant="fab"
-            color="secondary"
-            onClick={this.handleDialogMobile}
-          >
-            <ViewHeadline />
-          </Button>
-
-          {/* When the dialog close, it'll pass the props */}
-          {!openDialogMobile ? (
-            <CareerMobile
+            </Paper>
+            <CareerDesktop
               Variable={Variable}
               Situacion={Situacion}
               CodigoPrograma={CodigoPrograma}
               Estado={Estado}
               TipoSemestre={TipoSemestre}
               history={history}
+              typeUser={typeUser}
             />
-          ) : null}
-        </Hidden>
+          </Hidden>
+
+          <Hidden lgUp>
+            {/* Mobile section */}
+            <Dialog open={openDialogMobile} onClose={this.handleDialogMobile}>
+              <DialogContent>
+                <Grid container>
+                  <Grid item xs={12}>
+                    <Grid container wrap="nowrap" direction="column">
+                      <Grid item xs={12}>
+                        <div>
+                          <FormControl className={classes.formControlMobil}>
+                            <InputLabel htmlFor="Variable">Variable</InputLabel>
+                            <Select
+                              inputProps={{
+                                id: "Variable",
+                                name: "Variable"
+                              }}
+                              value={Variable}
+                              onChange={this.handleChange}
+                              className={classes.select}
+                              native
+                            >
+                              {dataVariable.map((data, index) => (
+                                <option value={data} key={index}>
+                                  {data}
+                                </option>
+                              ))}
+                            </Select>
+                          </FormControl>
+                        </div>
+
+                        <div>
+                          <FormControl className={classes.formControlMobil}>
+                            <InputLabel htmlFor="Situacion">
+                              Situacion
+                            </InputLabel>
+                            <Select
+                              inputProps={{
+                                id: "Situacion",
+                                name: "Situacion"
+                              }}
+                              value={Situacion}
+                              onChange={this.handleChange}
+                              className={classes.select}
+                              native
+                            >
+                              {dataSituacion.map((data, index) => (
+                                <option value={data} key={index}>
+                                  {data}
+                                </option>
+                              ))}
+                            </Select>
+                          </FormControl>
+                        </div>
+
+                        <div>
+                          <FormControl className={classes.formControlMobil}>
+                            <InputLabel htmlFor="Estado">Estado</InputLabel>
+                            <Select
+                              inputProps={{
+                                id: "Estado",
+                                name: "Estado"
+                              }}
+                              value={Estado}
+                              onChange={this.handleChange}
+                              className={classes.select}
+                              native
+                            >
+                              {SelectData.Estado.map((data, index) => (
+                                <option value={data} key={index}>
+                                  {data}
+                                </option>
+                              ))}
+                            </Select>
+                          </FormControl>
+                        </div>
+
+                        <div>
+                          <FormControl className={classes.formControlMobil}>
+                            <InputLabel htmlFor="TipoSemestre">
+                              Periodo
+                            </InputLabel>
+                            <Select
+                              inputProps={{
+                                id: "TipoSemestre",
+                                name: "TipoSemestre"
+                              }}
+                              value={TipoSemestre}
+                              onChange={this.handleChange}
+                              className={classes.select}
+                              native
+                            >
+                              {dataTipoSemestre.map((period, index) => (
+                                <option value={period} key={index}>
+                                  {period}
+                                </option>
+                              ))}
+                            </Select>
+                          </FormControl>
+                        </div>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={this.handleDialogMobile} color="primary">
+                  Cerrar
+                </Button>
+              </DialogActions>
+            </Dialog>
+
+            <Button
+              className={classes.floatButton}
+              variant="fab"
+              color="secondary"
+              onClick={this.handleDialogMobile}
+            >
+              <ViewHeadline />
+            </Button>
+
+            {/* When the dialog close, it'll pass the props */}
+            {!openDialogMobile ? (
+              <CareerMobile
+                Variable={Variable}
+                Situacion={Situacion}
+                CodigoPrograma={CodigoPrograma}
+                Estado={Estado}
+                TipoSemestre={TipoSemestre}
+                history={history}
+                typeUser={typeUser}
+              />
+            ) : null}
+          </Hidden>
+        </div>
       </Layout>
     );
   }
 }
 
 export default graphql(studentDistinct, {
-  options: props => ({
+  options: () => ({
     variables: {
       param: "TipoSemestre"
     }

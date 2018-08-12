@@ -12,6 +12,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import Person from "@material-ui/icons/Person";
+import Build from "@material-ui/icons/Build";
 import Check from "@material-ui/icons/Check";
 
 import Carreras from "./Careers";
@@ -103,6 +104,10 @@ class index extends PureComponent {
     if (urlName[1] === "configuracion") {
       return <span className={classes.title}>Configuración</span>;
     }
+
+    if (urlName[1] === "usuario") {
+      return <span className={classes.title}>Crear usuario</span>;
+    }
   };
 
   handleMenuUser = event => {
@@ -117,10 +122,10 @@ class index extends PureComponent {
     this.setState({ openUser: null, logout: true });
   };
 
-  handleRedirect = () => {
+  handleRedirect = url => {
     const { history } = this.props;
     this.setState({ openUser: null });
-    history.push("/configuracion");
+    history.push(url);
   };
 
   render() {
@@ -166,8 +171,11 @@ class index extends PureComponent {
                 open={!!openUser}
                 onClose={this.handleClose}
               >
-                <MenuItem onClick={this.handleRedirect}>
-                  <Person style={{ paddingRight: 10 }} /> Configuración
+                <MenuItem onClick={() => this.handleRedirect("/usuario")}>
+                  <Person style={{ paddingRight: 10 }} /> Crear usuario
+                </MenuItem>
+                <MenuItem onClick={() => this.handleRedirect("/configuracion")}>
+                  <Build style={{ paddingRight: 10 }} /> Configuración
                 </MenuItem>
                 <MenuItem onClick={this.handleLogOut}>
                   <Check style={{ paddingRight: 10 }} /> Salir

@@ -75,6 +75,8 @@ class PeriodList extends PureComponent {
   // Show one dialog which will show if the user want to download or delete one period
   displayDialog = () => {
     const { openDialog, career, valueDeleleted } = this.state;
+    const { typeUser } = this.props;
+
     return (
       <Dialog
         open={openDialog}
@@ -101,21 +103,23 @@ class PeriodList extends PureComponent {
                     <FileDownload />
                   </Button>
                 </div>
-                <div>
-                  <Button
-                    variant="contained"
-                    color="secondary"
-                    style={{
-                      margin: 5,
-                      color: "white",
-                      backgroundColor: "red"
-                    }}
-                    onClick={() => this.setState({ deleted: true })}
-                  >
-                    Eliminar periodo
-                    <DeleteIcon />
-                  </Button>
-                </div>
+                {typeUser === "admin" ? (
+                  <div>
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      style={{
+                        margin: 5,
+                        color: "white",
+                        backgroundColor: "red"
+                      }}
+                      onClick={() => this.setState({ deleted: true })}
+                    >
+                      Eliminar periodo
+                      <DeleteIcon />
+                    </Button>
+                  </div>
+                ) : null}
               </Grid>
             </Grid>
           </Grid>
