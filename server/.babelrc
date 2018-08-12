@@ -9,6 +9,5 @@
       }
     ]
   ],
-  "plugins": ["transform-object-rest-spread"],
-  "ignore": ["src/files"]
+  "plugins": ["transform-object-rest-spread"]
 }
