@@ -62,7 +62,7 @@ class createUserForm extends PureComponent {
               </FormLabel>
             </div>
 
-            <div style={{ margin: "auto" }}>
+            <div style={{ margin: "auto", maxWidth: 600 }}>
               <Form onSubmit={handleSubmit}>
                 <TextField
                   error={Boolean(touched.username && errors.username)}

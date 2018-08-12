@@ -12,7 +12,7 @@ import Layout from "../components/Global";
 
 const styles = theme => ({
   paper: {
-    margin: theme.spacing.unit * 4
+    margin: theme.spacing.unit * 2
   },
   tab: {
     fontWeight: "bold"
