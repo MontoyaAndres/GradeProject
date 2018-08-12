@@ -129,7 +129,7 @@ class index extends PureComponent {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, typeUser } = this.props;
     const { open, openUser, logout, username } = this.state;
 
     return (
@@ -171,9 +171,11 @@ class index extends PureComponent {
                 open={!!openUser}
                 onClose={this.handleClose}
               >
-                <MenuItem onClick={() => this.handleRedirect("/usuario")}>
-                  <Person style={{ paddingRight: 10 }} /> Crear usuario
-                </MenuItem>
+                {typeUser === "admin" ? (
+                  <MenuItem onClick={() => this.handleRedirect("/usuario")}>
+                    <Person style={{ paddingRight: 10 }} /> Crear usuario
+                  </MenuItem>
+                ) : null}
                 <MenuItem onClick={() => this.handleRedirect("/configuracion")}>
                   <Build style={{ paddingRight: 10 }} /> Configuración
                 </MenuItem>

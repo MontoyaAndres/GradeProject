@@ -109,7 +109,7 @@ class Career extends PureComponent {
     const CodigoPrograma = params.Career;
 
     return (
-      <Layout url={url}>
+      <Layout url={url} typeUser={typeUser}>
         <div>
           <Hidden mdDown>
             {/* Desktop section */}

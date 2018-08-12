@@ -24,8 +24,8 @@ const styles = theme => ({
   }
 });
 
-const Configuration = ({ classes, history, match: { url } }) => (
-  <Layout url={url}>
+const Configuration = ({ classes, history, match: { url }, typeUser }) => (
+  <Layout url={url} typeUser={typeUser}>
     <Query query={userQuery}>
       {({ loading, data: { user } }) => {
         if (loading) {

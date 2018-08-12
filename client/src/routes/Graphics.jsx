@@ -131,7 +131,8 @@ class Graphics extends PureComponent {
   render() {
     const {
       classes,
-      match: { url }
+      match: { url },
+      typeUser
     } = this.props;
     const {
       CodigoPrograma,
@@ -147,7 +148,7 @@ class Graphics extends PureComponent {
     );
 
     return (
-      <Layout url={url}>
+      <Layout url={url} typeUser={typeUser}>
         <div>
           {this.downloadButton()}
 

@@ -39,7 +39,6 @@ const SendEmail = ({
   errors
 }) => (
   <Grid container className={classes.root}>
-    {console.log(values, errors)}
     <Grid item xs={12}>
       <Grid
         container

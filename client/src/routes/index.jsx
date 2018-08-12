@@ -75,7 +75,11 @@ const PrivateRouteAdmin = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
     render={props =>
-      isAdmin() ? <Component {...props} /> : <Redirect to={{ pathname: "/" }} />
+      isAdmin() ? (
+        <Component typeUser={typeUser} {...props} />
+      ) : (
+        <Redirect to={{ pathname: "/" }} />
+      )
     }
   />
 );

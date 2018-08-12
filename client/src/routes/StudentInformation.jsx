@@ -66,8 +66,8 @@ const Headers = [
   "Variable"
 ];
 
-const StudentInformation = ({ classes, match: { url, params } }) => (
-  <Layout url={url}>
+const StudentInformation = ({ classes, match: { url, params }, typeUser }) => (
+  <Layout url={url} typeUser={typeUser}>
     <Query query={QueryStudentInformation} variables={{ id: params._id }}>
       {({ loading, data: { Student } }) => {
         if (loading) {

@@ -7,8 +7,8 @@ import GitHub from "@material-ui/icons/Code";
 
 import Layout from "../components/Global";
 
-const Help = ({ match: { url } }) => (
-  <Layout url={url}>
+const Help = ({ match: { url }, typeUser }) => (
+  <Layout url={url} typeUser={typeUser}>
     <div style={{ textAlign: "center" }}>
       <div style={{ padding: "30px 0" }}>
         <h1>Manual de usuario (Versión de escritorio)</h1>

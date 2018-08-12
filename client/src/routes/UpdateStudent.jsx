@@ -115,9 +115,10 @@ const UpdateStudent = ({
   classes,
   mutate,
   history,
-  match: { url, params }
+  match: { url, params },
+  typeUser
 }) => (
-  <Layout url={url}>
+  <Layout url={url} typeUser={typeUser}>
     <Query query={QueryStudentInformation} variables={{ id: params._id }}>
       {({ loading, data: { Student } }) => {
         if (loading) {

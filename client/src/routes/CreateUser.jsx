@@ -35,12 +35,13 @@ class CreateUser extends PureComponent {
   render() {
     const {
       match: { url },
-      classes
+      classes,
+      typeUser
     } = this.props;
     const { value } = this.state;
 
     return (
-      <Layout url={url}>
+      <Layout url={url} typeUser={typeUser}>
         <Paper className={classes.paper}>
           <AppBar position="static" color="default">
             <Tabs
