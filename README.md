@@ -18,7 +18,7 @@ Este sistema cuenta con dos tipos de usurios, los cuales son los Administradores
 
 ![Alt text](https://i.imgur.com/aPkCRiP.png "USER WORKS")
 
-Y aprender a manejarlo leyendo:
+Aprende a manejarlo leyendo:
 
 [Manual de usuario (Versión de escritorio)](https://docs.google.com/document/d/1JQmSufvyk8H02z9-OY6WPfp0x8GGYOt4DIj55Y3WvEo/edit?usp=sharing)
 
