@@ -32,7 +32,7 @@ En este apartado únicamente se va a hablar acerca de como subir este software a
 
 Antes de subir a producción, este seguro que el dominio trabaja bajo HTTPS y HTTP2, para que el software pueda usar las funciones de una aplicación PWA y así mismo, las peticiones que se hagan a GraphQL se ejecuten rápidamente.
 
-Un ejemplo de este tipo de funcionamiento, podria hacer el procesos *pesado* y *forzoso* que se necesita para subir los Excels que se utilizan para almacenar la información de cada estudiante por periodo.
+Un ejemplo de este tipo de funcionamiento, podria hacer el procesos **pesado** y **forzoso** que se necesita para subir los Excels que se utilizan para almacenar la información de cada estudiante por periodo.
 
 ![Alt text](https://i.imgur.com/Y9pYber.png "UPLOAD EXCEL")
 
