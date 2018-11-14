@@ -4,6 +4,10 @@ Software para manejar archivos de excepción en ausentismo de la Uniminuto de Gi
 
 Aplicación web diseñada bajo NodeJS, GraphQL y MongoDB, siguiendo el concepto SPA (Single Page Application) con React y PWA (Progressive Web Application), los cuales ofrecen un ecosistema seguro, adaptado para móviles y sin problemas de rendimiento a la hora de manipular una gran cantidad de datos.
 
+Este funciona de la siguiente manera:
+
+![Alt text](https://i.imgur.com/qCy9N2D.png "INFORMATION FUNCTIONALITY")
+
 Puede probar este sistema aquí:
 
 > La siguiente URL es de prueba, la universidad Uniminuto usará otro domino para el manejo de datos. Para poder entrar, envie un correo a andresmontoyafcb@gmail.com para obtener los datos.
