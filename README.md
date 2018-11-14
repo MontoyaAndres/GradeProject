@@ -114,7 +114,7 @@ npm start
 
 ¿Cómo trabaja internamente la web subida en now.sh?
 
-![Alt text](https://i.imgur.com/ic6F9ve.png "PAGE WORKS")
+![Alt text](https://i.imgur.com/NNWbTv0.png "PAGE WORKS")
 
 ## Cronograma
 
