@@ -112,6 +112,10 @@ npm start
 
 > Si su sevidor funciona bajo GIT, procure que la carpeta files que crea el comando *Build* haya sido subida con exito.
 
+¿Cómo trabaja internamente la web subida en now.sh?
+
+![Alt text](https://i.imgur.com/ic6F9ve.png "PAGE WORKS")
+
 ## Cronograma
 
 https://docs.google.com/spreadsheets/d/1GhwYvmZus2zo12BZq1Y4yOzL_2oVIeFiUdy8mA4kGA0/edit?usp=sharing
