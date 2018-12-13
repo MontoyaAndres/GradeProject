@@ -3,7 +3,7 @@
 Software para manejar archivos de excepción en ausentismo de la Uniminuto de Girardot, enfocado a la administración, creación, edición, eliminación, graficación y comparación entre los datos de la base de datos.
 
 <p align="center">
-  <img src="https://im2.ezgif.com/tmp/ezgif-2-95a289a6c8d9.gif">
+  <img src="http://i.imgur.com/BxkA3AT.gif">
 </p>
 
 Aplicación web diseñada bajo NodeJS, GraphQL y MongoDB, siguiendo el concepto SPA (Single Page Application) con React y PWA (Progressive Web Application), los cuales ofrecen un ecosistema seguro, adaptado para móviles y sin problemas de rendimiento a la hora de manipular una gran cantidad de datos.
