@@ -47,7 +47,7 @@
     "eslint-config-prettier": "2.10.0",
     "eslint-plugin-import": "latest",
     "eslint-plugin-jsx-a11y": "latest",
-    "eslint-plugin-prettier": "2.7.0",
+    "eslint-plugin-prettier": "3.0.0",
     "eslint-plugin-react": "latest",
     "prettier": "1.15.3",
     "react-scripts": "1.1.5"
