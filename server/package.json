@@ -44,7 +44,7 @@
     "babel-cli": "latest",
     "babel-plugin-transform-object-rest-spread": "latest",
     "babel-preset-env": "latest",
-    "eslint": "4.19.1",
+    "eslint": "5.11.0",
     "eslint-config-airbnb": "16.1.0",
     "eslint-config-airbnb-base": "12.1.0",
     "eslint-config-prettier": "2.10.0",
